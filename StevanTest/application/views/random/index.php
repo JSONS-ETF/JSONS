@@ -1,0 +1,5 @@
+<?php foreach ($data as $item): ?>
+    <?php echo $item ?>
+    <br/>
+
+<?php endforeach ?>
