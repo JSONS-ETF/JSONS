@@ -1,0 +1,12 @@
+DROP TABLE NotAllowed;
+DROP TABLE Responses;
+DROP TABLE Questions;
+DROP TABLE Photos;
+DROP TABLE Messages;
+DROP TABLE Conversations;
+DROP TABLE Statuses;
+DROP TABLE Notifications;
+DROP TABLE Blocks;
+DROP TABLE Friendships;
+DROP TABLE Users;
+DROP TABLE Administrators;
