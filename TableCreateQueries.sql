@@ -1,9 +1,11 @@
 CREATE TABLE Administrators
 (
 ID int IDENTITY(1,1) PRIMARY KEY,
-Email varchar(64) NOT NULL,
-Username varchar(64) NOT NULL,
-Password varchar(64) NOT NULL
+Email varchar(64),
+Username varchar(64),
+Password varchar(64),
+AccessCode varchar(64),
+Activated bit
 );
 
 CREATE TABLE Users
