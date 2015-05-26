@@ -91,7 +91,6 @@ Class Admin extends CI_Model
                 'username' => $this->input->post('username'),
                 'password' => MD5($this->input->post('password')),
                 'activated' => 1
-                //'accesscode' => $this->input->post('accesscode')
             );
 
 

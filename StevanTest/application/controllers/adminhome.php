@@ -6,6 +6,7 @@ class AdminHome extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('admin','',TRUE);
+        $this->load->model('user','',TRUE);
     }
 
     function index()
@@ -16,6 +17,7 @@ class AdminHome extends CI_Controller {
 
             $data['username'] = $session_data['username'];
             $data['accesscode'] = $session_data['accesscode'];
+            $data['users'] = $this->user->listAll();
 
             $this->load->view('login/admin_home_view', $data);
         }
@@ -47,6 +49,12 @@ class AdminHome extends CI_Controller {
             redirect('adminlogin', 'refresh');
         }
 
+    }
+
+    function deleteUser($id)
+    {
+        $this->user->delete($id);
+        redirect('adminhome', 'refresh');
     }
 
     function logout()

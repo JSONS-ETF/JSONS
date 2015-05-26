@@ -4,9 +4,14 @@ Class User extends CI_Model
     public function __construct()
     {
         $this->load->database();
+        $this->load->model('friendship','',TRUE);
+        $this->load->model('notification','',TRUE);
+        $this->load->model('status','',TRUE);
+        $this->load->model('conversation','',TRUE);
+        $this->load->model('question','',TRUE);
     }
 
-    function login($username, $password)
+    public function login($username, $password)
     {
         $this->db->select('id, username, password');
         $this->db->from('users');
@@ -26,7 +31,7 @@ Class User extends CI_Model
         }
     }
 
-    function create()
+    public function create()
     {
         $this->load->helper('url');
 
@@ -48,5 +53,33 @@ Class User extends CI_Model
             return TRUE;
         }
         else return FALSE;
+    }
+
+    public function listAll()
+    {
+        $this->db->select('id, username');
+        $this->db->from('users');
+        $query = $this->db->get();
+
+        $ret = array();
+
+        foreach ($query->result() as $row)
+        {
+            array_push($ret, array('id' => $row->id, 'username' => $row->username));
+        }
+
+        return $ret;
+    }
+
+    public function delete($id)
+    {
+        $this->friendship->deleteByUser($id);
+        $this->notification->deleteByUser($id);
+        $this->status->deleteByUser($id);
+        $this->conversation->deleteByUser($id);
+        $this->question->deleteByUser($id);
+
+        $this->db->where('id', $id);
+        $this->db->delete('users');
     }
 }
