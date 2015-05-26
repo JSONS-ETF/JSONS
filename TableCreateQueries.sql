@@ -10,7 +10,6 @@ CREATE TABLE Administrators
 
 CREATE TABLE Users
 (
-<<<<<<< HEAD
 	ID int IDENTITY(1,1) PRIMARY KEY,
 	Email varchar(64) NOT NULL,
 	Username varchar(64) NOT NULL,
@@ -19,16 +18,6 @@ CREATE TABLE Users
 	LastName varchar(64) NOT NULL,
 	About varchar(256),
 	PhotoID int
-=======
-ID int IDENTITY(1,1) PRIMARY KEY,
-Email varchar(64) NOT NULL,
-Username varchar(64) NOT NULL,
-Password varchar(64) NOT NULL,
-FirstName varchar(64) NOT NULL,
-LastName varchar(64) NOT NULL,
-About varchar(256),
-PhotoID int
->>>>>>> origin/master
 );
 
 CREATE TABLE Friendships
@@ -63,37 +52,19 @@ CREATE TABLE Statuses
 
 CREATE TABLE Conversations
 (
-<<<<<<< HEAD
 	ID int IDENTITY(1,1) PRIMARY KEY,
 	User1ID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
-	User2ID int NOT NULL FOREIGN KEY REFERENCES Users(ID)
-=======
-ID int IDENTITY(1,1) PRIMARY KEY,
-User1ID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
-User2ID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
-Date varchar(10) NOT NULL,
-Time varchar(8) NOT NULL,
-TimeStamp DateTime2 NOT NULL
->>>>>>> origin/master
+	User2ID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
+	TimeStamp DateTime2 NOT NULL
 );
 
 CREATE TABLE Messages
 (
-<<<<<<< HEAD
 	ID int IDENTITY(1,1) PRIMARY KEY,
 	ConversationID int NOT NULL FOREIGN KEY REFERENCES Conversations(ID),
 	UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
 	Timestamp DateTime2 NOT NULL,
 	Text varchar(256) NOT NULL
-=======
-ID int IDENTITY(1,1) PRIMARY KEY,
-ConversationID int NOT NULL FOREIGN KEY REFERENCES Conversations(ID),
-Timestamp DateTime2 NOT NULL,
-Text varchar(256) NOT NULL,
-UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
-Date varchar(10) NOT NULL,
-Time varchar(8) NOT NULL
->>>>>>> origin/master
 );
 
 CREATE TABLE Photos
