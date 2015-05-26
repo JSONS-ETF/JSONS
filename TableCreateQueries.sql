@@ -16,7 +16,8 @@ Username varchar(64) NOT NULL,
 Password varchar(64) NOT NULL,
 FirstName varchar(64) NOT NULL,
 LastName varchar(64) NOT NULL,
-About varchar(256)
+About varchar(256),
+PhotoID int
 );
 
 CREATE TABLE Friendships
@@ -53,7 +54,10 @@ CREATE TABLE Conversations
 (
 ID int IDENTITY(1,1) PRIMARY KEY,
 User1ID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
-User2ID int NOT NULL FOREIGN KEY REFERENCES Users(ID)
+User2ID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
+Date varchar(10) NOT NULL,
+Time varchar(8) NOT NULL,
+TimeStamp DateTime2 NOT NULL
 );
 
 CREATE TABLE Messages
@@ -61,7 +65,10 @@ CREATE TABLE Messages
 ID int IDENTITY(1,1) PRIMARY KEY,
 ConversationID int NOT NULL FOREIGN KEY REFERENCES Conversations(ID),
 Timestamp DateTime2 NOT NULL,
-Text varchar(256) NOT NULL
+Text varchar(256) NOT NULL,
+UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
+Date varchar(10) NOT NULL,
+Time varchar(8) NOT NULL
 );
 
 CREATE TABLE Photos
