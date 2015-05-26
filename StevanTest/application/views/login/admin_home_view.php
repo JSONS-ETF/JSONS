@@ -14,12 +14,14 @@
     <?php foreach ($users as $user): ?>
         <tr>
             <td>
-                <?php echo $user['id'] ?>
+                <a <?php echo 'href=adminhome/editUser/'.$user['id'] ?>> <?php echo $user['id'] ?> </a>
             </td>
             <td>
-                <?php echo $user['username'] ?>
+                <a <?php echo 'href=adminhome/editUser/'.$user['id'] ?>> <?php echo $user['username'] ?> </a>
             </td>
-            <td><a <?php echo 'href=adminhome/deleteUser/'.$user['id'] ?>> Delete user</a></td>
+            <td>
+                <a <?php echo 'href=adminhome/deleteUser/'.$user['id'] ?>> Delete user </a>
+            </td>
         </tr>
     <?php endforeach ?>
 </table>

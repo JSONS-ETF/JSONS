@@ -28,6 +28,11 @@ class AdminHome extends CI_Controller {
         }
     }
 
+    function editUser($id)
+    {
+        $this->load->view('templates/header');
+    }
+
     function newadmin()
     {
         if($this->session->userdata('logged_in'))

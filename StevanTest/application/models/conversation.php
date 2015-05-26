@@ -9,6 +9,7 @@ Class Conversation extends CI_Model
 
     public function deleteByUser($id)
     {
+        $this->db->select('id, user1id, user2id');
         $this->db->where('User1ID', $id);
         $this->db->or_where('User2ID', $id);
         $this->db->from('Conversations');
@@ -17,7 +18,7 @@ Class Conversation extends CI_Model
 
         foreach ($query->result() as $row)
         {
-            $this->message->deleteByConversation($row['id']);
+            $this->message->deleteByConversation($row->id);
         }
 
         $this->db->where('User1ID', $id);

@@ -9,6 +9,7 @@ Class Question extends CI_Model
 
     public function deleteByUser($id)
     {
+        $this->db->select('id, user1id, user2id');
         $this->db->where('User1ID', $id);
         $this->db->or_where('User2ID', $id);
         $this->db->from('Questions');
@@ -17,7 +18,7 @@ Class Question extends CI_Model
 
         foreach ($query->result() as $row)
         {
-            $this->response->deleteByQuestion($row['id']);
+            $this->response->deleteByQuestion($row->id);
         }
 
         $this->db->where('User1ID', $id);
