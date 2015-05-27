@@ -11,7 +11,7 @@
  .clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
 
 .header, .content, .menu_nav, .fbg, .footer, form, ol, ol li, ul { margin:0; padding:0;}
-.header{border-bottom:1px solid #6c94b8;}
+.header{border-bottom:1px solid #6c94b8;background: #fffbf5;}
 /* header */
 .header_resize { margin:0 auto; padding:0; width:990px; background: #fffbf5;}
 
