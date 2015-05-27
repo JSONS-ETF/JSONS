@@ -3,25 +3,13 @@
 <head>
 <title>Questy - Profile</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="style.css" rel="stylesheet" type="text/css" />
+<link href="styleProfile.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
-  <div class="header">
-    <div class="header_resize">
-      <div class="menu_nav">
-        <ul>
-		      <li><a href="homepage.html"><img src="images/home.png"></a></li>
-          <li class="active"><a href="inbox.html"><img src="images/inbox.png"></a></li>
-          <li><a href="profile.html"><img src="images/profile.png"></a></li>
-          <li style="position:relative;left:620px;"><a href="logout.html"><img src="images/logout.png"></a></li>
-        </ul>
-      </div>
-      
-      
-    <div class="clr"></div>
-    </div>
-  </div>
+<?php
+  include ("header.php");
+?>
 
 <!--**********************************************************************************************************************************************************--> 
 
@@ -58,6 +46,8 @@
 
       </div>
 <!--*****************************************************sidebarend-->
+
+
 <!--*****************************************************mainbar-->
       <div class="mainbar">
         <div class="ask">
@@ -136,8 +126,12 @@
           </div>
         </div>
         </div>
+
+        </div>
         <!--*****************************************************mainbarend-->
-      </div>
+      
+
+      
   </div>
 
 </div>

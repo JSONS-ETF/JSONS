@@ -5,25 +5,10 @@ Released for free under a Creative Commons Attribution 3.0 License
 @charset "utf-8";
 body { margin:0; padding:0; width:100%; color:black; font:normal 12px/1.8em Arial, Helvetica, sans-serif;}
 html { padding:0; margin:0;}
-.clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
-
-.header, .content, .menu_nav, .fbg, .footer, form, ol, ol li, ul, .content .mainbar, .content .sidebar { margin:0; padding:0;}
-
-
-/* header */
-.header_resize { margin:0 auto; padding:0; width:990px; background: #fffbf5;}
-
-/* menu */
-.menu_nav { margin:0; padding:5px 0 5px 40px; float:left; }
-.menu_nav ul { list-style:none;}
-.menu_nav ul li { margin:0; padding:0 16px 0 0; float:left;}
-.menu_nav ul li a { display:block; margin:0; padding:20px; color:#52aec6; text-decoration:none; font-size:13px; text-transform:uppercase;}
-.menu_nav ul li a img{width:22px; height:22px;}
-.menu_nav ul li.active a, .menu_nav ul li a:hover { background:#80A8CC; border-radius: 1300px;}
-
-/* content */
 
 .content_resize { margin:0 auto; padding:0; width:990px;}
+
+/*proflie*/
 
 .content .sidebar { padding:0; float:left; width:300px; background:#80a8cc; margin-right: 20px;}
 .content .sidebar .user { margin:5px; padding:5px;text-align: center;position: relative;}
@@ -46,10 +31,10 @@ html { padding:0; margin:0;}
 .content .mainbar .ask textarea { resize:none;width:640px;font-family: Verdana; padding:10px;margin:0 0 10px 10px;height:50px;}
 .content .mainbar .ask input { color:white;font-family:Helvetica;font-size:16px; background: #6c94b8;padding:10px;width:150px;border-radius: 30px;border:0;float:right;clear:both; }
 
-.content .mainbar .questions { padding:15px 5px 15px 5px; display: table;width:655px; border:2px solid #e0dcd7; margin:15px 5px 15px 5px;}
+.content .mainbar .questions {background: #f2eee8; padding:15px 5px 15px 5px; display: table;width:655px; border:2px solid #e0dcd7; margin:15px 5px 15px 5px;}
 .content .mainbar .questions .picture{ height:100%;float:left;position: :relative;}
 .content .mainbar .questions .picture img{ height: 50px;width: 50px; border-radius: 150px;border:0;}
-.content .mainbar .questions .question {position: :relative;float:left;width:550px;height:100%;padding-top:10px;font-family: Helvetica; }
+.content .mainbar .questions .question {position: :relative;float:left;width:550px;height:100%;padding-top:10px;font-family: Helvetica;padding-left:10px; }
 .content .mainbar .questions .question .username { color:#57575f; font-size:15px; font-weight: bold; float:left; }
 .content .mainbar .questions .question .datetime { color:#b7b5b4; font-size:12px; float:right; }
 .content .mainbar .questions .question .text { color:#605e58; font-size:14px; float:left;text-align: left;clear:both;margin-top:10px; }
@@ -62,6 +47,14 @@ html { padding:0; margin:0;}
 .content .mainbar .questions .question .response .datetime2{border:0;padding:0;float:left;clear:both;}
 .content .mainbar .questions .question .response .text{margin:0 0 0 25px;}
 
-.content .mainbar img.fl { margin:4px 16px 4px 0; float:left;}
-.content .mainbar .article { margin:0; padding:16px 24px 24px 40px;}
-.content .mainbar img { padding:4px; border:1px solid #577c88;}
+/*proflie END*/
+
+/*conversations*/
+.content .sidebar .newconversation { margin:5px; padding:5px;text-align: center;position: relative;}
+.content .sidebar .newconversation img{height: 100px;width: 100px; border-radius: 150px; vertical-align: middle;margin-top:40px;}
+
+.content .sidebar .newconversation input{color:black;font-family:Helvetica;font-size:16px; padding:5px;width:250px;margin:20px auto;border-radius: 5px;}
+.content .sidebar .newconversation .button{color:white;font-family:Helvetica;font-size:16px; background: #6c94b8;padding:10px;width:150px;margin:20px auto;border-radius: 30px; }
+.content .sidebar .newconversation a{color:white;text-decoration: none; }
+
+/*conversations END*/
