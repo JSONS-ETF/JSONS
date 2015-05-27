@@ -15,27 +15,25 @@
 /* header */
 .header_resize { margin:0 auto; padding:0; width:990px; background: #fffbf5;border-bottom:1px solid #6c94b8;}
 
-.logo{	font-family:LogoFont;	font-size:70px;	color:#6C94B8  ;	height:72px;	line-height:72px;	width:230px;	text-align:center;	margin-right:20px;}
+.logo{	font-family:LogoFont; float:left;	font-size:70px;	color:#6C94B8  ;	height:72px;	line-height:72px;	width:230px;	text-align:center;	margin-right:20px;}
 
-/* menu */
-.menu_nav { margin:0; padding:5px 0 5px 40px; float:left; }
-.menu_nav ul { list-style:none;}
-.menu_nav ul li { margin:0; padding:0 16px 0 0; float:left;}
-.menu_nav ul li input { display:block; margin:0; padding:20px; color:#52aec6; text-decoration:none; font-size:13px; text-transform:uppercase;}
-.menu_nav ul li.active a, .menu_nav ul li a:hover { background:#80A8CC; border-radius: 1300px;}
+.login{ line-height:72px; position:relative; float:right;width:500px;height:72px; margin-right:30px;}
+.login input{margin-top:30px;font-family: Helvetica;font-size: 16px;padding: 5px;border-radius: 10px;border: 2px solid #E0DCD7;position: relative;}
+.button{ color:white;    font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;    width: 120px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;}
  </style>
 
  <div class="header">
     <div class="header_resize">
-    
-      <div class="menu_nav">
-        <ul>
-        <li><div class="logo">Questy</div></li>
-        <li style="margin-left:500px;"><input type="text" placeholder="Username:"></li>
-        <li><input type="text" placeholder="Password:"></li>
-        </ul>
+
+        <div class="logo">Questy</div>
+        <div class="login">
+        <input type="text" placeholder="Username:"/>
+        <input type="text" placeholder="Password:">
+        <input type="submit" class="button" value="Login">
+        </div>
+<div class="clr"></div>
       </div>
      
-    <div class="clr"></div>
+    
     </div>
   </div>

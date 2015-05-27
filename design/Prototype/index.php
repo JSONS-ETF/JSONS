@@ -20,14 +20,13 @@ Released for free under a Creative Commons Attribution 3.0 License
     <div class="content_resize">
 <!--*****************************************************mainbar-->
       <div class="mainbar">
+      <h2>Join Us</h2>
       	<table>
-      		<tr><td>Name:</td><td><input type="text"></td></tr>
-      		<tr><td>Surname:</td><td><input type="text"></td></tr>
-      		<tr><td>Email:</td><td><input type="email"></td></tr>
-      		<tr><td>Username:</td><td><input type="text"></td></tr>
-      		<tr><td>Password:</td><td><input type="password"></td></tr>
-      		<tr><td>Repeat Passwrod:</td><td><input type="password"></td></tr>
-      		<tr><td></td><td><input type="submit" value="Register"></td></tr>
+      		<tr><td><input type="text" placeholder="Name"></td><td><input type="text" placeholder="Surname"></td></tr>
+      		<tr><td colspan="2"><input type="text" placeholder="Email"></td></tr>
+      		<tr><td colspan="2"><input type="text" placeholder="Username"></tr>
+      		<tr><td><input type="password" placeholder="Password"></td><td><input type="password" placeholder="Repeat Password"></td></tr>
+      		<tr><td></td><td><input type="submit" class="button" value="Register"></td></tr>
       	</table>
       </div>
         <!--*****************************************************mainbarend-->
