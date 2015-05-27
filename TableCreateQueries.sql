@@ -71,7 +71,6 @@ CREATE TABLE Photos
 (
 	ID int IDENTITY(1,1) PRIMARY KEY,
 	UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
-	Content varbinary(max) NOT NULL,
 	NumCuddles int NOT NULL,
 	NumSlaps int NOT NULL,
 	Timestamp DateTime2 NOT NULL,
