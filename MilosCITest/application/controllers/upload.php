@@ -11,6 +11,7 @@ class upload  extends CI_Controller{
     {
         parent::__construct();
         $this->load->model('upload_model');
+        $this->load->library('upload');
         $this->load->helper(array('form', 'url'));
     }
 
@@ -19,8 +20,8 @@ class upload  extends CI_Controller{
         // if($this->session->userdata('logged_in'))
         //  {
         //     $session_data = $this->session->userdata('logged_in');
-        $data['idUser'] =1;// $session_data['id'];
-        $idUser=1;//$session_data['id'];
+        $data['idUser'] =2;// $session_data['id'];
+        $idUser=2;//$session_data['id'];
 
         $this->load->view('uploadView', $data);
         // }
@@ -36,23 +37,33 @@ class upload  extends CI_Controller{
         $description=$this->input->post("description");
         $idPhoto= $this->upload_model->newPhoto($idUser,$description);
 
-        $config['upload_path'] = '../photos/';
+        $path = 'photos/'.$idUser;
+        if (!file_exists($path)) {
+            mkdir($path);
+        }
+
+        $config['upload_path'] = $path;
         $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = '100';
-        $config['max_width'] = '1024';
-        $config['max_height'] = '768';
+        //$config['max_size'] = '100';
+        //$config['max_width'] = '1024';
+       // $config['max_height'] = '768';
         $config['file_name'] = $idPhoto;
+
 
         $this->load->library('upload', $config);
 
-        if (!$this->upload->do_upload()) {
-            $error = array('error' => $this->upload->display_errors());
+        $this->upload->initialize($config);
 
-            $this->load->view('upload_form', $error);
+        if (!$this->upload->do_upload()) {
+            //$data = array('error' => $this->upload->display_errors());
+            $data["idUser"]=$idUser;
+
+            $this->load->view('uploadView', $data);
         } else {
             $data = array('upload_data' => $this->upload->data());
+            $data["idUser"]=$idUser;
 
-            $this->load->view('upload_success', $data);
+            $this->load->view('uploadView', $data);
         }
     }
 }
