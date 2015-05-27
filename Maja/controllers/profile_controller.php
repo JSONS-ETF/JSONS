@@ -11,23 +11,61 @@ class Profile_controller extends CI_Controller {
 
         $data['prof'] = $this->profile_model->getAbout();
         $data['status'] = $this->profile_model->getStatus();
-        $data['question'] = $this->profile_model->sortByDate();
+        $data['question'] = $this->profile_model->getQuestion();
+        $data1['q'] =  $this->profile_model->getQuestion();
+       $data['s']= $this->profile_model->getStatuses();
+
+    //  $data['question']=array_merge($data1['q'],$data2['s']);
+    //    $data['question'].UNIX_TIMESTAMP(DateTime2);
+       // print_r(array_sort($people, 'age', SORT_DESC)); // Sort by oldest first
+
+            $this->load->view('pages/home',$data);
        $this->load->view('profile',$data );
     }
 
     function create($par){
 
        // $this->load->library('form_validation');
-$m = $this->input->post('Text');
-
+        $this->load->helper('date');
         $pd = array(
-            'ID' => '12' ,
+            'ID' => '34' ,
             'QuestionID' => $par,
-            'DateTime2' => '2015-05-20 00:00:00',
-            'Text' => 'npr ovo bude teskt zanima me da li ce da ubaci u bazu'
+            'DateTime2' => date('Y-m-d H:i:s'),
+            'Text' => $this->input->post('ans')
         );
 
-        $this->profile_model->add_record($pd);
+        $this->profile_model->addTable($pd);
         $this->index();
     }
+
+    function create_question(){
+        $this->load->helper('date');
+        $pd = array(
+            'ID' => '34' ,
+            'User1ID' => '2',
+            'User2ID' => '1',
+            'DateTime2' => date('Y-m-d H:i:s'),
+            'Text' =>$this->input->post('qest'),
+            'NumCuddles'=>'0',
+        'NumSlaps'=>'0',
+        'Obligatory'=>'0'
+        );
+        $this->profile_model->addQuestion($pd);
+        $this->index();
+
+    }
+
+    function create_status(){
+        $this->load->helper('date');
+        $pd = array(
+            'ID' => '34',
+            'DateTime2' => date('Y-m-d H:i:s'),
+            'Text' =>$this->input->post('qest'),
+           'UserID'=>'1'
+        );
+
+        $this->profile_model->addStatus($pd);
+        $this->index();
+    }
+
 }

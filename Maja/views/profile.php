@@ -36,11 +36,30 @@ Released for free under a Creative Commons Attribution 3.0 License
     </div>
 
 
-
     <div class="content">
         <div class="content_resize">
             <div class="mainbar">
                 <div class="article">
+<?php     $idCurr = 1;
+         $id = 1; ?>
+                    <form method="post" accept-charset="utf-8" action = <?php
+
+                    if($idCurr == $id){
+                    echo 'index.php/profile_controller/create_status/';}
+
+                    else echo 'index.php/profile_controller/create_question/'?> />
+
+                    <table>
+                            <tr><td><font color="#808080"> <textarea rows="2" cols="86" name='qest'><?php
+
+                                        if($idCurr == $id)  echo 'What'.'s on your mind?';
+                                                else echo 'Type a question...'
+                                        ?> </textarea></font></td></tr>
+
+                            <tr> <td><p align="right">
+                            <input type="submit" value="Post"/>
+                        </p></td></tr></table>
+                    </form>
                     <h2 align = "left"><?php
                         foreach ($status as $r){
                         echo '<span>'. $r->Text . '</span>';} ?> </h2><div class="clr"></div>
@@ -65,7 +84,9 @@ Released for free under a Creative Commons Attribution 3.0 License
 
                     <?php $last = 0; ?>
                     <?php foreach($question as $qu): ?>
-                        <?php if($last != $qu->QID):?>
+                        <?php
+                        if($qu)
+                        if($last != $qu->QID):?>
                   <div class="comment">
                         <a href="profileJohn.html"><img src="images/john.jpg" width="40" height="40" alt="user" class="userpic" /></a>
                         <p ><a href="profileJohn.html">
@@ -75,25 +96,24 @@ Released for free under a Creative Commons Attribution 3.0 License
                             <?php echo '<span>'.  $qu->QDate. '</span>'; ?></p>
                         <p> <?php echo '<h2>'.  $qu->QText. '</h2>'; ?></p>
                             <?php $last = $qu->QID; ?>
+
+                            <form method="post" accept-charset="utf-8" action = <?php  echo 'index.php/profile_controller/create/'.$qu->QID ?> />
                             <table>
-                                <tr><td><form>
+                            <?php
 
-                                            <input type="text" name="Text"></form></td></tr>
-                                <tr><td>
+                            if($idCurr == $id) {
+                                echo '<tr>' . '<td>' . ' <input type=' . 'text name=' . 'ans>' . '</td>' . '</tr>' .
+                                    '<tr>' . '<td>' . '<input type=' . 'submit' . ' value=' . 'Answer' . '>' . '</td>' . '</tr>';
+                            }
+
+                            else'';
+                            ?>
 
 
-                                        <a href=<?php echo 'create/'.$qu->QID; ?>>
-                                           <button> Answer</button> </a>
-
-                                    <td>
-
-
-                                </tr>
-
-                            </table>
+                            </table></form>
                       <?php endif; ?>
 
-                      <?php if($qu->RText!=  NULL):?>
+                      <?php if($qu) if($qu->RText!=  NULL):?>
                         <p><a href="profile.html"><?php echo '<span>'.  $r->Username; ?></a>
                             <?php echo 'answer:' .'<span>'.  $qu->RText.'</span>'; ?>
                             <font color="#97977E"><span>&nbsp;&bull;&nbsp;</span>
@@ -138,6 +158,22 @@ Released for free under a Creative Commons Attribution 3.0 License
                     &nbsp&nbsp <a href="profile.html">Jane Doe</a></b>: No,I hate fashionable people.
                 </div>
             </div>
+            <br/>
+            <h2>Statuses </h2>
+            <div  class="aut abs" style=" width:300px; height:100px; overflow: auto;">
+                <?php
+
+                $counter = 1; ?>
+<?php foreach ($s as $stat){
+    if($s){
+    echo '<p>'. $stat->Text .'&nbsp&nbsp' . $stat->DateTime2. '</p>';
+    $counter++;
+    }
+                    if($counter > 10) break;
+    } ?>
+            </div>
+
+
             <div class="clr"></div>
         </div>
     </div>

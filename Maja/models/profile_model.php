@@ -71,12 +71,12 @@ ORDER BY Q->DateTime2 ASC " */
         $q = $this->db->get();
 */
 
-        $this->db->select('questions.Text as QText, responses.Text as RText, questions.User2ID as User2ID, questions.DateTime2 as QDate, responses.DateTime2 as RDate, questions.NumSlaps as Slaps, questions.NumCuddles as Cuddles, users.FirstName as Name, users.Username as UsernameU2 ,users.LastName as Surname, questions.ID as QID, responses.QuestionID as RQID');
-        $this->db->from('questions');
+        $this->db->select('questions.Text as QText, responses.Text as RText, questions.User2ID as User2ID, questions.DateTime2 as QDate, responses.DateTime2 as RDate, questions.NumSlaps as Slaps, questions.NumCuddles as Cuddles, users.FirstName as Name, users.Username as UsernameU2 ,users.LastName as Surname, questions.ID as QID, responses.QuestionID as RQID, 2 as type');
+        $this->db->from('questions');   //type = 2
         $this->db->where('User1ID', $id);
-        $this->db->join('responses', 'questions.ID = responses.QuestionID');
+        $this->db->join('responses', 'questions.ID = responses.QuestionID', 'left outer');
         $this->db->join('users','questions.User2ID = users.ID' );
-        $this->db->order_by('questions.DateTime2', 'DESC');
+        $this->db->order_by('questions.DateTime2,responses.DateTime2', 'DESC');
         $q = $this->db->get();
 /*
  *
@@ -104,20 +104,57 @@ ON suppliers.supplier_id = orders.supplier_id;
 
     }
 
-    function add_record($pd){
+    function addTable($pd){
          $this->db->insert('responses',$pd);
  }
-/*
+
+    function addQuestion($pd){
+        $this->db->insert('questions',$pd);
+    }
+
+    function addStatus($pd){
+        $this->db->insert('statuses',$pd);
+    }
+
+    function sortStatusQuestion(){
+        $id = 1;
+        $this->db->select('questions.Text as QText, responses.Text as RText, questions.User2ID as User2ID, questions.DateTime2 as QDate, responses.DateTime2 as RDate, questions.NumSlaps as Slaps, questions.NumCuddles as Cuddles, users.FirstName as Name, users.Username as UsernameU2 ,users.LastName as Surname, questions.ID as QID, responses.QuestionID as RQID, 2 as type');
+        $this->db->from('questions');   //type = 2
+        $this->db->where('User1ID', $id);
+        $this->db->join('responses', 'questions.ID = responses.QuestionID');
+        $this->db->join('users','questions.User2ID = users.ID' );
+        $this->db->order_by('questions.DateTime2,responses.DateTime2', 'DESC');
+        $q1 = $this->db->get();
+        $join1 = $this->db->last_query();
+        $this->db->select('statuses.DateTime2, statuses.Text, 1 as type');       //type je 1 za status
+        $this->db->from('statuses');
+        $this->db->where('UserID', $id);
+        $this->db->order_by("DateTime2", "desc");
+        $q2 = $this->db->get();
+        $join2 = $this->db->last_query();
+        $union_query = $this->db->query($join1.' UNION '.$join2);
+        $q = $this->db->get();
+
+        if ($q->num_rows() > 0) {
+            foreach ($q->result() as $row) {
+                $data[] = $row;
+
+            }
+            return $data;
+        }
+    }
+
+
     function getStatuses()
     {
         $id = 1;
-
+/*
         $this->db->select('questions.Text as QText, responses.Text as RText, questions.User2ID as User2ID,statuses.DateTime2 as QDate, questions.DateTime2 as QDate, responses.DateTime2 as RDate, questions.NumSlaps as Slaps, questions.NumCuddles as Cuddles, users.FirstName as Name, users.Username as UsernameU2 ,users.LastName as Surname, questions.ID as QID, responses.QuestionID as RQID, 2 as type');
         $this->db->from('questions');
         $this->db->where('User1ID', $id);
         $this->db->join('responses', 'questions.ID = responses.QuestionID');
-        $this->db->join('users','questions.User2ID = users.ID' );
-        $this->db->join('statuses','statuses.UserID='.$id);
+        $this->db->join('users', 'questions.User2ID = users.ID');
+        $this->db->join('statuses', 'statuses.UserID=' . $id);
         $this->db->order_by('questions.DateTime2', 'DESC');
         $q = $this->db->get();
 
@@ -130,24 +167,22 @@ ON suppliers.supplier_id = orders.supplier_id;
             }
             return $data;
 
+        }*/
+        $this->db->select('statuses.DateTime2, statuses.Text, 1 as type');       //type je 1 za status
+        $this->db->from('statuses');
+        $this->db->where('UserID', $id);
+        $this->db->order_by("DateTime2", "desc");
+        $q = $this->db->get();
+
+
+        if ($q->num_rows() > 0) {
+            foreach ($q->result() as $row) {
+                $data[] = $row;
+
+            }
         }
-//    "SELECT* FROM questions   Q, (SELECT* responses FROM  ORDER BY responses->DateTime2 ASC) R WHERE Q->UserID = R->QuestionId ORDER BY Q->DateTime2 ASC"
+        return $data;
+    }
 
-  /*      $this->db->query("
-SELECT questions.Text AS QText, responses.Text AS RText, questions.User2ID AS User2ID, questions.DateTime2 AS QDate, responses.DateTime2 AS RDate, questions.NumSlaps AS Slaps, questions.NumCuddles AS Cuddles, users.FirstName AS Name, users.Username AS UsernameU2 ,users.LastName AS Surname, questions.ID AS QID, responses.QuestionID AS RQID
-FROM questions
-WHERE User1ID = $id
-JOIN responses ON questions.ID = responses.QuestionID
-JOIN users ON questions.User2ID = users.ID
-UNION ALL
-SELECT statuses.DateTime2 as QDate, statuses.Text as SText
-FROM  statuses
-WHERE statuses.UserID = $id
-
-ORDER  by QDate
-
-");
-*/
-    
 }
 
