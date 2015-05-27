@@ -41,7 +41,7 @@ Released for free under a Creative Commons Attribution 3.0 License
             <div class="mainbar">
                 <div class="article">
 <?php     $idCurr = 1;
-         $id = 1; ?>
+         $id = 3; ?>
                     <form method="post" accept-charset="utf-8" action = <?php
 
                     if($idCurr == $id){
@@ -53,7 +53,8 @@ Released for free under a Creative Commons Attribution 3.0 License
                             <tr><td><font color="#808080"> <textarea rows="2" cols="86" name='qest'><?php
 
                                         if($idCurr == $id)  echo 'What'.'s on your mind?';
-                                                else echo 'Type a question...'
+                                                else  echo 'Type a question...';
+
                                         ?> </textarea></font></td></tr>
 
                             <tr> <td><p align="right">
@@ -81,7 +82,7 @@ Released for free under a Creative Commons Attribution 3.0 License
                 <div class="article">
                     <h2><span>Questy</span> Questions</h2><div class="clr"></div>
 
-
+                <?php if(($friends) || ($idCurr == $id )):  ?>
                     <?php $last = 0; ?>
                     <?php foreach($question as $qu): ?>
                         <?php
@@ -97,7 +98,7 @@ Released for free under a Creative Commons Attribution 3.0 License
                         <p> <?php echo '<h2>'.  $qu->QText. '</h2>'; ?></p>
                             <?php $last = $qu->QID; ?>
 
-                            <form method="post" accept-charset="utf-8" action = <?php  echo 'index.php/profile_controller/create/'.$qu->QID ?> />
+                            <form method="post" accept-charset="utf-8" action = <?php  echo 'index.php/profile_controller/create/'.$qu->QID.'/'.$qu->RText; ?> />
                             <table>
                             <?php
 
@@ -111,7 +112,7 @@ Released for free under a Creative Commons Attribution 3.0 License
 
 
                             </table></form>
-                      <?php endif; ?>
+                      <?php endif ?>
 
                       <?php if($qu) if($qu->RText!=  NULL):?>
                         <p><a href="profile.html"><?php echo '<span>'.  $r->Username; ?></a>
@@ -124,7 +125,7 @@ Released for free under a Creative Commons Attribution 3.0 License
 
                     <?php endforeach; ?>
 
-
+<?php endif ?>
 
                 </div>
 

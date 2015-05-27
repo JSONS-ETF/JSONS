@@ -14,6 +14,7 @@ class Profile_controller extends CI_Controller {
         $data['question'] = $this->profile_model->getQuestion();
         $data1['q'] =  $this->profile_model->getQuestion();
        $data['s']= $this->profile_model->getStatuses();
+        $data['friends'] = $this->profile_model->isFriend();
 
     //  $data['question']=array_merge($data1['q'],$data2['s']);
     //    $data['question'].UNIX_TIMESTAMP(DateTime2);
@@ -23,8 +24,9 @@ class Profile_controller extends CI_Controller {
        $this->load->view('profile',$data );
     }
 
-    function create($par){
-
+    function create($par,$resp){
+        $id = 1;
+        $idCurr =5;
        // $this->load->library('form_validation');
         $this->load->helper('date');
         $pd = array(
@@ -34,7 +36,17 @@ class Profile_controller extends CI_Controller {
             'Text' => $this->input->post('ans')
         );
 
-        $this->profile_model->addTable($pd);
+        if($resp == NULL) {
+            $fr = array(
+                'ID' => '43' ,
+                'User1ID' => $id,
+                'User2ID' => $idCurr
+            );
+
+            $this->profile_model->addFriendship($fr);
+
+        }
+        $this->profile_model->addTableResponses($pd);
         $this->index();
     }
 

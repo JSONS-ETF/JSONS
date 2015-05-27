@@ -104,7 +104,7 @@ ON suppliers.supplier_id = orders.supplier_id;
 
     }
 
-    function addTable($pd){
+    function addTableResponses($pd){
          $this->db->insert('responses',$pd);
  }
 
@@ -114,6 +114,11 @@ ON suppliers.supplier_id = orders.supplier_id;
 
     function addStatus($pd){
         $this->db->insert('statuses',$pd);
+    }
+
+
+    function addFriendship($pd){
+        $this->db->insert('Friendships',$pd);
     }
 
     function sortStatusQuestion(){
@@ -184,5 +189,32 @@ ON suppliers.supplier_id = orders.supplier_id;
         return $data;
     }
 
+    function isFriend(){
+        $id=1;
+        $idCurrent =5;
+        $a1 = array('User1ID' => $id, 'User2ID' => $idCurrent);
+        $a2 = array('User2ID' => $id, 'User1ID' => $idCurrent);
+            $this->db->select('*');
+            $this->db->from('Friendships');
+            $this->db->where($a1);
+            $this->db->or_where($a2);
+        $q = $this->db->get();
+        //$data=NULL;
+// $this->db->where($array);
+
+// Produces: WHERE name = 'Joe' AND title = 'boss' AND status = 'active'
+
+        if ($q->num_rows() > 0) {
+            foreach ($q->result() as $m) {
+                $data[] = $m;
+            }
+            return $data;
+        }
+        return NULL;
+    }
+
+
+
 }
+
 
