@@ -100,29 +100,25 @@
           <h2 class="username">Milos Kotlar</h2>
           <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
         </div>
-        
-        <div class="sidebar">
+
         <div class="statuses">
           <img src="images/jane.jpg"/>
           <h2 class="username">Milos Kotlar</h2>
           <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
         </div>
 
-        <div class="sidebar">
         <div class="statuses">
           <img src="images/jane.jpg"/>
           <h2 class="username">Milos Kotlar</h2>
           <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
         </div>
 
-        <div class="sidebar">
         <div class="statuses">
           <img src="images/jane.jpg"/>
           <h2 class="username">Milos Kotlar</h2>
           <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
         </div>
 
-        <div class="sidebar">
         <div class="statuses">
           <img src="images/jane.jpg"/>
           <h2 class="username">Milos Kotlar</h2>

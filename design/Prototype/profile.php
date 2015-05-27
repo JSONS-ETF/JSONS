@@ -129,7 +129,30 @@
 
         </div>
         <!--*****************************************************mainbarend-->
-      
+           <div class="sidebarRight">
+      <h2 class="head">Status</h2>
+        <div class="statuses">
+          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
+        </div>
+
+        <div class="statuses">
+          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
+        </div>
+
+        <div class="statuses">
+          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
+        </div>
+
+        <div class="statuses">
+          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
+        </div>
+
+        <div class="statuses">
+          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
+        </div>
+ 
+
+      </div>
 
       
   </div>
