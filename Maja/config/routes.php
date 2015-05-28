@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-$route['default_controller'] = 'profile_controller';
+$route['default_controller'] =  'profileController/redirect';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
