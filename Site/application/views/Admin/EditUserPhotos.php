@@ -3,22 +3,26 @@
         <title>Simple Login with CodeIgniter - Private Area</title>
     </head>
     <body>
-        <h1><?php echo $user['username'] ?>'s conversations:</h1>
+        <h1><?php echo $user['username'] ?>'s photos:</h1>
         <table>
             <tr>
                 <td>Time:</td>
-                <td>Participant:</td>
+                <td>Description:</td>
+                <td>Photo</td>
             </tr>
-            <?php foreach ($conversations as $conversation): ?>
+            <?php foreach ($photos as $photo): ?>
             <tr>
                 <td>
-                    <?php echo $conversation['timestamp'] ?>
+                    <?php echo $photo['timestamp'] ?>
                 </td>
                 <td>
-                    <a href=<?php echo '../../AdminHome/editConversationMessages/'.$user['id'].'/'.$conversation['id'] ?>><?php echo $conversation['participant'] ?></a>
+                    <?php echo $photo['description'] ?>
                 </td>
                 <td>
-                    <a href=<?php echo '../../AdminHome/deleteConversation/'.$user['id'].'/'.$conversation['id'] ?>>Delete conversation</a>
+
+                </td>
+                <td>
+                    <a href=<?php echo '../../AdminHome/deletePhoto/'.$user['id'].'/'.$photo['id'] ?>>Delete photo</a>
                 </td>
             </tr>
             <?php endforeach ?>

@@ -9,6 +9,7 @@ Class User extends CI_Model
         $this->load->model('status','',TRUE);
         $this->load->model('conversation','',TRUE);
         $this->load->model('question','',TRUE);
+        $this->load->model('photo','',TRUE);
     }
 
     public function login($username, $password)
@@ -70,7 +71,7 @@ Class User extends CI_Model
                 'username' => $row->username,
                 'firstname' => $row->firstname,
                 'lastname' => $row->lastname,
-                'about' => $row->about,
+                'about' => $row->about
             );
         }
     }
@@ -102,6 +103,7 @@ Class User extends CI_Model
         $this->status->deleteByUser($id);
         $this->conversation->deleteByUser($id);
         $this->question->deleteByUser($id);
+        $this->photo->deleteByUser($id);
 
         $this->db->where('id', $id);
         $this->db->delete('users');

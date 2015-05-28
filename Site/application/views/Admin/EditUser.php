@@ -15,13 +15,13 @@
             <a href=<?php echo '../../AdminHome/editConversations/'.$user['id'] ?>>View conversations</a>
         </h2>
         <h2>
-            <a href="#">View photos</a>
+            <a href=<?php echo '../../AdminHome/editPhotos/'.$user['id'] ?>>View photos</a>
         </h2>
         <h2>
-            <a href="#">View questions</a>
+            <a href=<?php echo '../../AdminHome/editQuestions/'.$user['id'] ?>>View questions</a>
         </h2>
         <h2>
-            <a href="#">View responses</a>
+            <a href=<?php echo '../../AdminHome/editResponses/'.$user['id'] ?>>View responses</a>
         </h2>
 
         <h2>
