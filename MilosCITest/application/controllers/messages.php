@@ -6,11 +6,12 @@
  * Time: 1:23 AM
  */
 
-class chat extends CI_controller{
+class messages extends CI_controller{
 
     function __construct(){
         parent::__construct();
-        $this->load->model('chat_model');
+        $this->load->model('MessagesModel');
+        $this->load->helper('url');
     }
 
     public function index($idConversation,$guestUsername){
@@ -21,10 +22,12 @@ class chat extends CI_controller{
             $data['idUser'] =1;// $session_data['id'];
             $idUser=1;//$session_data['id'];
 
-            $data['messages'] = $this->chat_model->getMessages($idConversation);
+            $data['messages'] = $this->MessagesModel->getMessages($idConversation);
             $data['idConversation']=$idConversation;
             $data['guestUsername']=$guestUsername;
-            $this->load->view('chatView', $data);
+
+            $this->load->view('templates/header');
+            $this->load->view('conversations/MessagesView', $data);
        // }
       //  else
       //  {
@@ -38,14 +41,14 @@ class chat extends CI_controller{
         $message=$this->input->post("message");
         $idConversation=$this->input->post("idConversation");
         $idUser=$this->input->post("idUser");
-        $this->chat_model->sendMessage($idConversation,$message,$idUser);
+        $this->MessagesModel->sendMessage($idConversation,$message,$idUser);
     }
 
     public function checkMessage()
     {
         $idConversation=$this->input->post("idConversation");
         $diff=$this->input->post("diff");
-        $data['checkmessage'] = $this->chat_model->checkMessage($idConversation,$diff);
+        $data['checkmessage'] = $this->MessagesModel->checkMessage($idConversation,$diff);
         header('Content-type: text/plain');
         header('Content-type: application/json');
         echo json_encode($data['checkmessage']);

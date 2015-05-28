@@ -6,7 +6,7 @@
  * Time: 7:19 PM
  */
 
-class conversation_model extends CI_Model{
+class ConversationModel extends CI_Model{
     function __construct(){
         $this->load->database();
         parent::__construct();

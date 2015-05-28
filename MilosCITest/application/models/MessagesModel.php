@@ -6,7 +6,7 @@
  * Time: 12:51 AM
  */
 
-class chat_model extends CI_Model{
+class MessagesModel extends CI_Model{
     var $times=0;
     function __construct(){
         $this->load->database();

@@ -6,12 +6,13 @@
  * Time: 8:03 PM
  */
 
-class conversation extends CI_controller{
+class conversations extends CI_controller{
     function __construct(){
         parent::__construct();
-        $this->load->library('session');
+       // $this->load->library('session');
         $this->load->helper('url');
-        $this->load->model('conversation_model');
+        $this->load->model('ConversationModel');
+        $this->load->helper(array('form'));
     }
 
     public function index(){
@@ -21,8 +22,9 @@ class conversation extends CI_controller{
             $data['idUser'] =1; //$session_data['id'];
             $idUser=1;//$session_data['id'];
 
-            $data['conversations'] = $this->conversation_model->getConversation($idUser);
-            $this->load->view('conversationView', $data);
+            $data['conversations'] = $this->ConversationModel->getConversation($idUser);
+            $this->load->view('templates/header');
+            $this->load->view('conversations/ConversationView', $data);
      //   }
       //  else
      //   {
@@ -37,6 +39,6 @@ class conversation extends CI_controller{
         $idUser2=$this->input->post("idUser2");
         $idConversation=$this->conversation_model->newConversation($idUser1,$idUser2);
 
-        redirect('../index.php/conversation', 'refresh');
+        redirect('../index.php/conversations', 'refresh');
     }
 }
