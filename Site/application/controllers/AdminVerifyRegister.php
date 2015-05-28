@@ -19,11 +19,12 @@ class AdminVerifyRegister extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
         $this->form_validation->set_rules('accesscode', 'First name', 'trim|required');
 
-        if ($this->admin->activate())
+        /*if ($this->admin->activate())
         {
             redirect('AdminLogin', 'refresh');
         }
-        else redirect('AdminRegister', 'refresh');
+        else redirect('AdminRegister', 'refresh');*/
+        redirect('AdminLogin', 'refresh');
     }
 }
 

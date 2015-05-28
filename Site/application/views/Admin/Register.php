@@ -1,26 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-    <head>
-        <title>Register</title>
-    </head>
 
-    <body>
-        <h1>Register</h1>
+
+<div class="content">
+    <div class="content_resize">
         <?php echo validation_errors() ?>
         <?php echo form_open('AdminVerifyRegister'); ?>
-        <label for="email">Email:</label>
-        <input type="text" size="20" id="email" name="email"/>
-        <br/>
-        <label for="username">Username:</label>
-        <input type="text" size="20" id="username" name="username"/>
-        <br/>
-        <label for="password">Password:</label>
-        <input type="password" size="20" id="password" name="password"/>
-        <br/>
-        <label for="accesscode">Access Code:</label>
-        <input type="text" size="20" id="accesscode" name="accesscode"/>
-        <br/>
-        <input type="submit" value="Register"/>
+        <div class="mainbar">
+            <h2>Register</h2>
+            <table>
+                <tr><td colspan="2"> <input type="text" size="20" id="email" placeholder="Email" name="email"/></td></tr>
+                <tr><td colspan="2"><input type="text" size="20" id="username" placeholder="Username" name="username"/></tr>
+                <tr><td><input type="password" size="20" id="password" placeholder="Password" name="password"/></td><td><input type="text" size="20" id="accesscode" placeholder="Access Code" name="accesscode"/></td></tr>
+                <tr><td></td><td><input type="submit"  class="button" value="Register"/></td></tr>
+            </table>
+        </div>
         </form>
-    </body>
+    </div>
+</div>
+
+</body>
 </html>

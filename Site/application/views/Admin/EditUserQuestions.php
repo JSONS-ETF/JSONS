@@ -1,8 +1,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Simple Login with CodeIgniter - Private Area</title>
+        <link href="../../../styles/styleHomeAdmin.css" rel="stylesheet" type="text/css" />
+        <style Stylesheet="css/text">
+            .button{
+                margin:10px;
+            }
+            .mainbar{
+                min-width: 850px;;
+            }
+            td{
+                max-width: 110px;
+                overflow: hidden;
+            }
+        </style>
     </head>
     <body>
+
+    <div class="content">
+        <div class="content_resize">
+            <div class="mainbar">
         <h1><?php echo $user['username'] ?>'s questions:</h1>
         <table>
             <tr>
@@ -26,7 +43,7 @@
                     <?php echo $question['text'] ?>
                 </td>
                 <td>
-                    <a href=<?php echo '../../AdminHome/deleteQuestion/'.$user['id'].'/'.$question['id'] ?>>Delete question</a>
+                    <a href=<?php echo '../../AdminHome/deleteQuestion/'.$user['id'].'/'.$question['id'] ?>><div class="button">Delete question</div></a>
                 </td>
             </tr>
             <?php endforeach ?>
@@ -34,11 +51,13 @@
 
 
         <h2>
-            <a href=<?php echo '../../AdminHome/editUser/'.$user['id'] ?>>Back</a>
+            <a href=<?php echo '../../AdminHome/editUser/'.$user['id'] ?>><div class="button">Back</div></a>
         </h2>
 
-        <h2>
-            <a href="../../AdminHome/Logout">Logout</a>
-        </h2>
+            </div>
+
+        </div>
+
+    </div>
     </body>
 </html>

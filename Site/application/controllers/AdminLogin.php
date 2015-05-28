@@ -11,11 +11,16 @@ class AdminLogin extends CI_Controller
 
     function index()
     {
-        $this->load->helper(array('form'));
-
-        //$this->load->view('templates/header');
-        $this->load->view('Admin/Login');
-        //$this->load->view('templates/footer');
+        if($this->session->userdata('admin_logged_in'))
+        {
+            redirect('AdminHome', 'refresh');
+        }
+        else
+        {
+            $this->load->helper(array('form'));
+            $this->load->view('Admin/Login');
+            $this->load->view('Admin/Register');
+        }
     }
 }
 

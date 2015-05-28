@@ -11,11 +11,17 @@ class UserLogin extends CI_Controller
 
     function index()
     {
-        $this->load->helper(array('form'));
+        if($this->session->userdata('logged_in'))
+        {
+            redirect('UserHome', 'refresh');
+        }
+        else
+        {
+            $this->load->helper(array('form'));
 
-        $this->load->view('templates/header');
-        $this->load->view('login/login_view');
-        $this->load->view('templates/footer');
+            $this->load->view('User/Login');
+            $this->load->view('User/Register');
+        }
     }
 }
 

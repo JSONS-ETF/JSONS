@@ -8,18 +8,24 @@ class UserHome extends CI_Controller {
         $this->load->helper('url');
     }
 
+    function redirect()
+    {
+        redirect('UserHome', 'refresh');
+    }
+
     function index()
     {
         if($this->session->userdata('logged_in'))
         {
             $session_data = $this->session->userdata('logged_in');
+
             $data['username'] = $session_data['username'];
-            $this->load->view('login/home_view', $data);
+            $this->load->view('User/Home', $data);
         }
         else
         {
             //If no session, redirect to login page
-            redirect('login', 'refresh');
+            redirect('UserLogin', 'refresh');
         }
     }
 
@@ -27,7 +33,7 @@ class UserHome extends CI_Controller {
     {
         $this->session->unset_userdata('logged_in');
         session_destroy();
-        redirect('home', 'refresh');
+        redirect('UserHome', 'refresh');
     }
 }
 

@@ -24,9 +24,9 @@ class UserVerifyRegister extends CI_Controller
 
         if ($this->user->create())
         {
-            redirect('login', 'refresh');
+            redirect('UserLogin', 'refresh');
         }
-        else redirect('register', 'refresh');
+        else redirect('UserRegister', 'refresh');
 
         /*if($this->form_validation->run() == FALSE)
         {

@@ -21,12 +21,12 @@ class UserVerifyLogin extends CI_Controller {
         if($this->form_validation->run() == FALSE)
         {
             //Field validation failed.  User redirected to login page
-            $this->load->view('login/login_view');
+            $this->load->view('User/Login');
         }
         else
         {
             //Go to private area
-            redirect('home', 'refresh');
+            redirect('UserHome', 'refresh');
         }
 
     }

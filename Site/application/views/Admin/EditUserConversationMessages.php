@@ -1,9 +1,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Simple Login with CodeIgniter - Private Area</title>
+        <link href="../../../../styles/styleHomeAdmin.css" rel="stylesheet" type="text/css" />
+        <style Stylesheet="css/text">
+            .button{
+                margin:10px;
+            }
+            .mainbar{
+                min-width:710px
+            }
+            td{
+                max-width:150px;
+                overflow:hidden;
+            }
+        </style>
     </head>
     <body>
-        <h1><?php echo $user['username'] ?>'s conversation with <?php echo $conversation['participant'] ?>:</h1>
+
+    <div class="content">
+        <div class="content_resize">
+            <div class="mainbar">
+                <h2><?php echo $user['username'] ?>'s conversation with <?php echo $conversation['participant'] ?>:</h2>
+
         <table>
             <tr>
                 <td>Time:</td>
@@ -22,19 +40,22 @@
                     <?php echo $message['text'] ?>
                 </td>
                 <td>
-                    <a href=<?php echo '../../../AdminHome/deleteMessage/'.$user['id'].'/'.$conversation['id'].'/'.$message['id'] ?>>Delete message</a>
+                    <a href=<?php echo '../../../AdminHome/deleteMessage/'.$user['id'].'/'.$conversation['id'].'/'.$message['id'] ?>><div class="button">Delete message</div></a>
                 </td>
             </tr>
             <?php endforeach ?>
         </table>
 
+                <h2>
+                    <a href=<?php echo '../../../AdminHome/editConversations/'.$user['id'] ?>><div class="button">Back</div></a>
+                </h2>
 
-        <h2>
-            <a href=<?php echo '../../../AdminHome/editConversations/'.$user['id'] ?>>Back</a>
-        </h2>
+            </div>
 
-        <h2>
-            <a href="../../../AdminHome/Logout">Logout</a>
-        </h2>
+        </div>
+
+    </div>
+
+
     </body>
 </html>

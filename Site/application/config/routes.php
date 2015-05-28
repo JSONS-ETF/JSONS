@@ -55,7 +55,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;*/
 
 $route['AdminPanel'] = 'AdminHome';
-//$route['default_controller'] = 'AdminHome';
+$route['default_controller'] = 'UserHome/redirect';
 
 /*$route['random'] = 'random/index';
 

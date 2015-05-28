@@ -23,10 +23,12 @@ class AdminHome extends CI_Controller {
         {
             $session_data = $this->session->userdata('admin_logged_in');
 
+            $headerData['path'] = '../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['username'] = $session_data['username'];
             $data['accesscode'] = $session_data['accesscode'];
             $data['users'] = $this->user->listAll();
-
             $this->load->view('Admin/Home', $data);
         }
         else
@@ -53,6 +55,9 @@ class AdminHome extends CI_Controller {
     {
         if($this->session->userdata('admin_logged_in'))
         {
+            $headerData['path'] = '../../../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['user'] = $this->user->get($id);
             $this->load->view('Admin/EditUser', $data);
         }
@@ -67,6 +72,10 @@ class AdminHome extends CI_Controller {
     {
         if($this->session->userdata('admin_logged_in'))
         {
+
+            $headerData['path'] = '../../../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['user'] = $this->user->get($id);
             $data['notifications'] = $this->notification->getByUser($id);
             $this->load->view('Admin/EditUserNotifications', $data);
@@ -82,6 +91,9 @@ class AdminHome extends CI_Controller {
     {
         if($this->session->userdata('admin_logged_in'))
         {
+            $headerData['path'] = '../../../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['user'] = $this->user->get($id);
             $data['statuses'] = $this->status->getByUser($id);
             $this->load->view('Admin/EditUserStatuses', $data);
@@ -97,6 +109,9 @@ class AdminHome extends CI_Controller {
     {
         if($this->session->userdata('admin_logged_in'))
         {
+            $headerData['path'] = '../../../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['user'] = $this->user->get($id);
             $data['conversations'] = $this->conversation->getByUser($id);
             $this->load->view('Admin/EditUserConversations', $data);
@@ -112,6 +127,9 @@ class AdminHome extends CI_Controller {
     {
         if($this->session->userdata('admin_logged_in'))
         {
+            $headerData['path'] = '../../../../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['user'] = $this->user->get($userID);
             $data['conversation'] = $this->conversation->get($userID, $conversationID);
             $data['messages'] = $this->message->getByConversation($conversationID);
@@ -128,6 +146,9 @@ class AdminHome extends CI_Controller {
     {
         if($this->session->userdata('admin_logged_in'))
         {
+            $headerData['path'] = '../../../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['user'] = $this->user->get($id);
             $data['photos'] = $this->photo->getByUser($id);
             $this->load->view('Admin/EditUserPhotos', $data);
@@ -143,6 +164,9 @@ class AdminHome extends CI_Controller {
     {
         if($this->session->userdata('admin_logged_in'))
         {
+            $headerData['path'] = '../../../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['user'] = $this->user->get($id);
             $data['questions'] = $this->question->getByUser($id);
             $this->load->view('Admin/EditUserQuestions', $data);
@@ -158,6 +182,9 @@ class AdminHome extends CI_Controller {
     {
         if($this->session->userdata('admin_logged_in'))
         {
+            $headerData['path'] = '../../../../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['user'] = $this->user->get($userID);
             $data['question'] = $this->question->get($questionID);
             $data['responses'] = $this->response->getByQuestion($questionID);
@@ -174,6 +201,9 @@ class AdminHome extends CI_Controller {
     {
         if($this->session->userdata('admin_logged_in'))
         {
+            $headerData['path'] = '../../../';
+            $this->load->view('templates//HeaderAdmin',$headerData);
+
             $data['user'] = $this->user->get($id);
             $data['responses'] = $this->response->getByUser($id);
             $this->load->view('Admin/EditUserResponses', $data);
