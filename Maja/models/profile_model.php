@@ -121,44 +121,7 @@ array(
 
         }
 
-   /*   $q = $this->db->query(/*" SELECT*
-       FROM questions   Q
-        JOIN  responses R
-         ON Q->UserID = R->QuestionId
-ORDER BY Q->DateTime2 ASC " */
-    //    "SELECT* FROM questions   Q, (SELECT* responses FROM  ORDER BY responses->DateTime2 ASC) R WHERE Q->UserID = R->QuestionId ORDER BY Q->DateTime2 ASC"
-     // );
-/*
-        $this->db->select('*');
-        $this->db->from('questions');
-        $this->db->where('User1ID', $id);
-        $this->db->join('responses', 'questions.ID = responses.QuestionID');
-        //$this->db->join('users', 'users.ID = questions.User2ID');
-        $this->db->order_by('questions.DateTime2');
-        $q = $this->db->get();
-*/
-/*
-        $this->db->select('questions.Text as QText, responses.Text as RText, questions.User2ID as User2ID, questions.DateTime2 as QDate, responses.DateTime2 as RDate, questions.NumSlaps as Slaps, questions.NumCuddles as Cuddles, users.FirstName as Name, users.Username as UsernameU2 ,users.LastName as Surname, questions.ID as QID, responses.QuestionID as RQID, 2 as type');
-        $this->db->from('questions');   //type = 2
-        $this->db->where('User1ID', $id);
-        $this->db->join('responses', 'questions.ID = responses.QuestionID', 'left outer');
-        $this->db->join('users','questions.User2ID = users.ID' );
-        $this->db->order_by('questions.DateTime2,responses.DateTime2', 'DESC');
-        $q = $this->db->get();*/
-/*
- *
- *
- * SELECT suppliers.supplier_id, suppliers.supplier_name, orders.order_date
-FROM suppliers
-INNER JOIN orders
-ON suppliers.supplier_id = orders.supplier_id;
 
-        $this->db->select('*');
-        $this->db->from('questions');
-        $this->db->where('User1ID', $id);
-
-        $this->db->order_by("DateTime2", "desc");
-        $q = $this->db->get();*/
 
 
 

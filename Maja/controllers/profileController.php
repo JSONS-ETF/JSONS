@@ -6,11 +6,11 @@ class ProfileController extends CI_Controller {
         parent::__construct();
         $this->load->model('profile_model');
     }
-    function index($idCurr = 3)
+    function index($idCurr)
     {
        // $id = $sess_data['id'];
-        $id = 1;
-        if($idCurr == null) $idCurr = 2;
+        $id = 2;
+        $idCurr = 2;
         $data['id'] = $id; // ovo izvlacim iz sesije
         $data['idCurr'] = $idCurr;
 
@@ -34,7 +34,7 @@ class ProfileController extends CI_Controller {
        // $this->load->library('form_validation');
         $this->load->helper('date');
         $pd = array(
-            'ID' => '50' ,
+
             'QuestionID' => $par,
             'Timestamp' => date('Y-m-d H:i:s'),
             'Text' => $this->input->post('ans')
@@ -43,7 +43,7 @@ $resp = $this->profile_model->GetAns($par);
 
         if($resp == NULL) {
             $fr = array(
-                'ID' => '445' ,
+
                 'User1ID' => $id,
                 'User2ID' => $idCurr
             );
@@ -55,12 +55,12 @@ $resp = $this->profile_model->GetAns($par);
         redirect('profileController/index/'.$idCurr,'refresh');
     }
 
-    function create_question(){
+    function create_question($idCurr){
+        $id = 1;
         $this->load->helper('date');
         $pd = array(
-            'ID' => '44' ,
-            'User1ID' => '2',
-            'User2ID' => '1',
+            'User1ID' => $id,
+            'User2ID' => $$idCurr,
             'Timestamp' => date('Y-m-d H:i:s'),
             'Text' =>$this->input->post('qest'),
             'NumCuddles'=>'0',
@@ -68,7 +68,7 @@ $resp = $this->profile_model->GetAns($par);
         'Obligatory'=>'0'
         );
         $this->profile_model->addQuestion($pd);
-        $this->index();
+        redirect('profileController/index'.$id, 'refresh');
 
     }
 
@@ -77,14 +77,14 @@ $resp = $this->profile_model->GetAns($par);
         $id = 1;        /// iz sesije
         $this->load->helper('date');
         $pd = array(
-            'ID' => '385',
+
             'Timestamp' => date('Y-m-d H:i:s'),
             'Text' =>$this->input->post('qest'),
-           'UserID'=>'1'
+           'UserID'=>$id
         );
 
         $this->profile_model->addStatus($pd);
-        $this->index($id);
+        redirect('profileController/index/'.$id, 'refresh');
     }
 
     function redirect($idCurr)

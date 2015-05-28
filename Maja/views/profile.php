@@ -65,7 +65,7 @@ include ("header.php");
                 if($idCurr == $id){
                     echo '../../profileController/create_status/';}
 
-                else echo '../../profileController/create_question/'?> />
+                else echo '../../profileController/create_question/'.$idCurr?> />
                     <textarea name="qest" placeholder=<?php
 
                     if($idCurr == $id)  echo "What's on your mind?";
