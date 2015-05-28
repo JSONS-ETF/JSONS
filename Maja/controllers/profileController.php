@@ -27,11 +27,10 @@ class ProfileController extends CI_Controller {
        $this->load->view('profile',$data );
     }
 
-    function create($par,$resp,$idCurr){
+    function create($par,$idCurr){
 
-        $resp = 1;
         $id = 1;
-        $idCurr =2;
+
        // $this->load->library('form_validation');
         $this->load->helper('date');
         $pd = array(
@@ -40,10 +39,11 @@ class ProfileController extends CI_Controller {
             'Timestamp' => date('Y-m-d H:i:s'),
             'Text' => $this->input->post('ans')
         );
+$resp = $this->profile_model->GetAns($par);
 
         if($resp == NULL) {
             $fr = array(
-                'ID' => '43' ,
+                'ID' => '445' ,
                 'User1ID' => $id,
                 'User2ID' => $idCurr
             );
@@ -52,7 +52,7 @@ class ProfileController extends CI_Controller {
 
         }
         $this->profile_model->addTableResponses($pd);
-        $this->index();
+        redirect('profileController/index/'.$idCurr,'refresh');
     }
 
     function create_question(){

@@ -8,6 +8,22 @@ class Profile_model extends CI_Model
 
     }
 
+function GetAns($i){
+
+    $this->db->select('*');
+    $this->db->from('responses');
+    $this->db->where('responses.QuestionID', $i);
+    $q = $this->db->get();
+
+    if ($q->num_rows() > 0) {
+        foreach ($q->result() as $row) {
+            $data[] = $row;
+
+        }
+        return $data;
+    }
+}
+
     function getAbout($id)
     {
 

@@ -113,7 +113,7 @@ include ("header.php");
 
 
 
-            <form method="post" accept-charset="utf-8" action = <?php  echo 'index.php/profileController/create/'.$qu['ID'] .'/'.'1'; ?> />
+            <form method="post" accept-charset="utf-8" action = <?php  echo '../../profileController/create/'.$qu['ID'].'/'.$idCurr ?> />
             <table>
 
                 <?php if($idCurr == $id) {
