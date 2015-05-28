@@ -20,7 +20,8 @@ class UserHome extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
 
             $data['username'] = $session_data['username'];
-            $this->load->view('User/Home', $data);
+			redirect('conversations', 'refresh');
+            //$this->load->view('User/Home', $data);
         }
         else
         {

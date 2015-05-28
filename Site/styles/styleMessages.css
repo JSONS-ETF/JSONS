@@ -15,7 +15,7 @@ html { padding:0; margin:0;}
 
 .content .mainbar { margin:0; padding:0; min-height:500px;max-height:500px; overflow: auto; margin:auto; width:900px;text-align: left; margin-top:5px;border:2px solid #e0dcd7;}
 
-.content .mainbar .messagesleft { padding:5px 5px 5px 5px;max-width:700px; margin:5px 5px 5px 5px;font-family: Helvetica;}
+.content .mainbar .messagesleft {clear:both; padding:5px 5px 5px 5px;max-width:700px; margin:5px 5px 5px 5px;font-family: Helvetica;}
 
 .content .mainbar .messagesleft .message{background:#f2eee8; border:2px solid #e0dcd7;display: table;padding:10px; border-radius: 15px;}
 .content .mainbar .messagesleft .picture{float:left;position: :relative;margin-right:10px;}
@@ -23,7 +23,7 @@ html { padding:0; margin:0;}
 .content .mainbar .messagesleft .message .datetime { color:#b7b5b4; font-size:12px; float:right; clear:both;}
 .content .mainbar .messagesleft .message .text { color:#605e58; font-size:14px; float:left;text-align: left; }
 
-.content .mainbar .messagesright {float:right; padding:5px 5px 5px 5px;max-width:700px; margin:5px 5px 5px 5px;font-family: Helvetica;}
+.content .mainbar .messagesright {clear:both; float:right; padding:5px 5px 5px 5px;max-width:700px; margin:5px 5px 5px 5px;font-family: Helvetica;}
 
 .content .mainbar .messagesright .message{background:#f2eee8;border:2px solid #e0dcd7;display: table;padding:10px; border-radius: 15px;}
 .content .mainbar .messagesright .picture{float:right;position: :relative;margin-left:10px;}
