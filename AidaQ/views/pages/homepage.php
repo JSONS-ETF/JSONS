@@ -3,10 +3,7 @@
 <head>
 <title>Questy - Home</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
- <style>
-   <?php $s=true; include 'styleHomepage.css'; ?>
-</style>
-<!--<link href="styleHomepage.css" rel="stylesheet" type="text/css" />-->
+<link href="styleHomepage.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 

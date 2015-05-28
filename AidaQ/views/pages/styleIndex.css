@@ -1,0 +1,10 @@
+@charset "utf-8";
+body { margin:0; padding:0; width:100%; color:black; font:normal 12px/1.8em Arial, Helvetica, sans-serif;}
+html { padding:0; margin:0;}
+
+
+
+
+.content_resize { margin:0 auto; padding:0; width:990px;}
+
+.content .mainbar { margin:0; padding:0; min-height:500px;max-height:500px; overflow: auto; margin:auto; width:900px;text-align: left; margin-top:5px;border:2px solid #e0dcd7;}

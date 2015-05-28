@@ -64,6 +64,146 @@
           </div>
         </div>
         </div>
+		
+		    <div class="questions">
+        <div class="picture"><img src="images/jane.jpg"/></div>
+        <div class="question">
+          <div class="username">Maja Zivkovic <span style="font-weight:normal;">asks</span> Aida Mavric</div><div class="datetime">13:55 26.05.2015</div>
+          <div class="text">Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
+          
+          <div class="mark"><img src="images/cuddle.png"/><img src="images/slap.png"/></div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+        </div>
+        </div>
+
+		
+		
+		    <div class="questions">
+        <div class="picture"><img src="images/jane.jpg"/></div>
+        <div class="question">
+          <div class="username">Maja Zivkovic <span style="font-weight:normal;">asks</span> Aida Mavric</div><div class="datetime">13:55 26.05.2015</div>
+          <div class="text">Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
+          
+          <div class="mark"><img src="images/cuddle.png"/><img src="images/slap.png"/></div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+        </div>
+        </div>
+
+		
+		
+		    <div class="questions">
+        <div class="picture"><img src="images/jane.jpg"/></div>
+        <div class="question">
+          <div class="username">Maja Zivkovic <span style="font-weight:normal;">asks</span> Aida Mavric</div><div class="datetime">13:55 26.05.2015</div>
+          <div class="text">Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
+          
+          <div class="mark"><img src="images/cuddle.png"/><img src="images/slap.png"/></div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+        </div>
+        </div>
+
+		
+		    <div class="questions">
+        <div class="picture"><img src="images/jane.jpg"/></div>
+        <div class="question">
+          <div class="username">Maja Zivkovic <span style="font-weight:normal;">asks</span> Aida Mavric</div><div class="datetime">13:55 26.05.2015</div>
+          <div class="text">Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
+          
+          <div class="mark"><img src="images/cuddle.png"/><img src="images/slap.png"/></div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+        </div>
+        </div>
+
+		
+		    <div class="questions">
+        <div class="picture"><img src="images/jane.jpg"/></div>
+        <div class="question">
+          <div class="username">Maja Zivkovic <span style="font-weight:normal;">asks</span> Aida Mavric</div><div class="datetime">13:55 26.05.2015</div>
+          <div class="text">Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
+          
+          <div class="mark"><img src="images/cuddle.png"/><img src="images/slap.png"/></div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+        </div>
+        </div>
+
+		
+		    <div class="questions">
+        <div class="picture"><img src="images/jane.jpg"/></div>
+        <div class="question">
+          <div class="username">Maja Zivkovic <span style="font-weight:normal;">asks</span> Aida Mavric</div><div class="datetime">13:55 26.05.2015</div>
+          <div class="text">Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
+          
+          <div class="mark"><img src="images/cuddle.png"/><img src="images/slap.png"/></div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+          <div class="text">
+          Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+          </div>
+          </div>
+        </div>
+        </div>
+
 
 
         <div class="questions">

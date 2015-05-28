@@ -33,7 +33,7 @@ class Homepage extends CI_Controller
         
     }
     
-    function submit($id=1)
+   /* function submit($id=1)
     {
          if($this->input->post('cuddle'))
                $this->Newsfeed->cuddle($id);
@@ -43,7 +43,7 @@ class Homepage extends CI_Controller
        //$this->load->view('pages/home');
     }
     
- 
+ */
     
 
     

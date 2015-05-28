@@ -6,7 +6,7 @@ html { padding:0; margin:0;}
 
 .content .mainbar { margin:0; padding:0; float:left; width:670px;text-align: left; margin-top:20px;}
 
-.content .mainbar .questions {background: #f2eee8; padding:15px 5px 15px 5px; display: table;width:655px; border:2px solid #e0dcd7; margin:15px 5px 15px 5px;}
+.content .mainbar .questions {background: #f2eee8; padding:15px 5px 15px 5px; display: table; width:655px; border:2px solid #e0dcd7;}
 .content .mainbar .questions .picture{ height:100%;float:left;position: :relative;}
 .content .mainbar .questions .picture img{ height: 50px;width: 50px; border-radius: 150px;border:0;}
 .content .mainbar .questions .question {position: :relative;float:left;width:550px;height:100%;padding-top:10px;font-family: Helvetica;padding-left:10px; }

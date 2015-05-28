@@ -13,133 +13,79 @@
 <?php
   include ("header.php");
 ?>
-
+    
 <!--**********************************************************************************************************************************************************--> 
 
   <div class="content">
     <div class="content_resize">
 
 
+     <?php foreach($records as $row):   ?>
+       
+        <?php if ($row['type'] == 2): ?>
 <!--*****************************************************mainbar-->
       <div class="mainbar">
 
         <div class="questions">
         <div class="picture"><img src="images/jane.jpg"/></div>
         <div class="question">
-          <div class="username">Maja Zivkovic <span style="font-weight:normal;">asks</span> Aida Mavric</div><div class="datetime">13:55 26.05.2015</div>
-          <div class="text">Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
+          <div class="username"><?php $lid=$row['ID']; echo $row['Username1']; ?>
+              <span style="font-weight:normal;">asks</span> 
+              <?php echo $row['Username2']; ?></div>
+            <div class="datetime"><?php echo  date('d.m.Y H:i',strtotime($row['DateQ'])); ?></div>
+          <div class="text"><?php echo $row['TextQ']; ?></div>
           
-          <div class="mark"><img src="images/cuddle.png"/><img src="images/slap.png"/></div>
+          <div class="mark">
+        
+               <img src="images/cuddle.png"/><img src="images/slap.png"/>
+             
+          </div>
 
-          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
+           <?php if ($row['Answers']!=null): ?>
+             <?php foreach($row['Answers'] as $row2): ?>
+          <div class="response"><div class="datetime2"><img src="images/replay.png"/><?php echo  date('d.m.Y H:i',strtotime($row2['DateR'])); ?></div>
           <div class="text">
-          Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
+             <?php echo $row2['TextR']; ?>
           </div>
           </div>
-
-          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
-          <div class="text">
-          Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
-          </div>
-          </div>
-        </div>
-        </div>
-
-
-        <div class="questions">
-        <div class="picture"><img src="images/jane.jpg"/></div>
-        <div class="question">
-          <div class="username">Maja Zivkovic <span style="font-weight:normal;">asks</span> Aida Mavric</div><div class="datetime">13:55 26.05.2015</div>
-          <div class="text">Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
+          <?php endforeach;?>
+          <?php endif;?>
           
-          <div class="mark"><img src="images/cuddle.png"/><img src="images/slap.png"/></div>
-
-          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
-          <div class="text">
-          Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
-          </div>
-          </div>
-
-          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
-          <div class="text">
-          Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
-          </div>
-          </div>
-        </div>
-        </div>
-
-
-        <div class="questions">
-        <div class="picture"><img src="images/jane.jpg"/></div>
-        <div class="question">
-          <div class="username">Maja Zivkovic <span style="font-weight:normal;">asks</span> Aida Mavric</div><div class="datetime">13:55 26.05.2015</div>
-          <div class="text">Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
           
-          <div class="mark"><img src="images/cuddle.png"/><img src="images/slap.png"/></div>
-
-          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
-          <div class="text">
-          Fusce consequat facilisis tortor eget pretium. Ut consequat interdum turpis efficitur eleifend. Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
-          </div>
-          </div>
-
-          <div class="response"><div class="datetime2"><img src="images/replay.png"/>13:55 26.05.2015</div>
-          <div class="text">
-          Duis enim tellus, tincidunt sed orci placerat, pellentesque congue libero.
-          </div>
-          </div>
         </div>
         </div>
-
-        </div>
+      </div>
+     <?php endif; ?>
+    
         <!--*****************************************************mainbarend-->
       
 
+          
 <!--*****************************************************sidebar-->
-      <div class="sidebar">
-      <h2 class="head">Status</h2>
+    
+   
+    <?php if ($row['type'] == 1): ?>
+     <div class="sidebar">
+         <?php if($s==true):$s=false; ?>
+     
+                <h2 class="head">Status</h2>
+                
+            <?php endif; ?>
+      
         <div class="statuses">
           <img src="images/jane.jpg"/>
-          <h2 class="username">Milos Kotlar</h2>
-          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
+          <h2 class="username"><?php  echo $row['Username']; ?></h2>
+          <div class="status"><?php echo $row['TextS']; ?></div>
+          <div class="status"><?php echo date('d.m.Y H:i',strtotime($row['Date'])); ?></div>
+        
         </div>
         
-        <div class="sidebar">
-        <div class="statuses">
-          <img src="images/jane.jpg"/>
-          <h2 class="username">Milos Kotlar</h2>
-          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
-        </div>
-
-        <div class="sidebar">
-        <div class="statuses">
-          <img src="images/jane.jpg"/>
-          <h2 class="username">Milos Kotlar</h2>
-          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
-        </div>
-
-        <div class="sidebar">
-        <div class="statuses">
-          <img src="images/jane.jpg"/>
-          <h2 class="username">Milos Kotlar</h2>
-          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
-        </div>
-
-        <div class="sidebar">
-        <div class="statuses">
-          <img src="images/jane.jpg"/>
-          <h2 class="username">Milos Kotlar</h2>
-          <div class="status">"Fusce consequat facilisis tortor eget consequat facilisis pretium"</div>
-        </div>
- 
-
-      </div>
-<!--*****************************************************sidebarend-->
-
+     
+    <?php endif; ?>
       
-  </div>
-
-</div>
-
+       <?php endforeach;?>
+     </div>
+      
+  
 </body>
 </html>

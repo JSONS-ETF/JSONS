@@ -13,34 +13,69 @@ class Newsfeed extends CI_Model
     
     
     
-    function getQuestions($id=1)
+    
+     function getQuestions($id=1)
     {
-  
       $this->db->distinct();  
-      $this->db->select('questions.ID, questions.Timestamp as Date,questions.User1ID, questions.User2ID, questions.Text as TextQ, questions.NumCuddles as NumCuddlesQ, questions.NumSlaps as NumSlapsQ,  responses.Timestamp as DateR, responses.Text as TextR, u1.Username as Username1, u2.Username as Username2, 2 as type');
-      $this->db->from('questions','users as u1','users as u2','responses');
+      $this->db->select('questions.ID, questions.Timestamp as DateQ,questions.User1ID, questions.User2ID, questions.Text as TextQ, u1.Username as Username1, u2.Username as Username2, 2 as type');
+      $this->db->from('questions');
       
       $this->db->join('friendships','questions.User1ID = friendships.User2ID OR questions.User1ID = friendships.User1ID');
       $this->db->join('users as u1','questions.User1ID = u1.ID');
       $this->db->join('users as u2','questions.User2ID = u2.ID');
-         $this->db->join('responses','questions.ID=responses.QuestionID');
+      
   
      $this->db->where('friendships.User1ID =',$id);
       $this->db->or_where('friendships.User2ID =',$id);
      
-       $this->db->order_by('Date','desc');
-     // $this->db->limit(3);
-       $q=$this->db->get();
+       $this->db->order_by('DateQ','desc');
+       $this->db->limit(10);
+       $q1=$this->db->get();
 
-          foreach($q->result() as $row)
-           {
-           $data[]=$row;
+        $ret=array();
         
-           }
-  
-             return $data;
-     }
+     foreach($q1->result() as $row)
+    {
+     //$this->db->distinct();  
+      $this->db->select('responses.Timestamp as DateR, responses.Text as TextR');
+      $this->db->from('responses');
+      
+    //  $this->db->join('responses','responses.QuestionID=$row->ID','left');
+       $this->db->where('responses.QuestionID',$row->ID);
+       $this->db->order_by('responses.Timestamp','desc');
+       $this->db->limit(10);
+       $q2=$this->db->get();
+       
+       $answers=array();
+        
+        foreach($q2->result() as $row2)
+       {
+           array_push($answers,array(
+                   'ID'=> $row->ID,
+                   'TextR'=> $row2->TextR,
+                   'DateR'=> $row2->DateR ));
+                   
+                   
+        }
+         array_push($ret,array(
+             'ID'=>$row->ID,
+             'Username1'=>$row->Username1,
+             'Username2'=>$row->Username2,
+             'DateQ' =>$row->DateQ,
+             'TextQ'=>$row->TextQ,
+             'Answers'=>$answers,
+             'type' => 2
+             
+         ));
+      }
+        
+        return $ret;
+       }
+       
      
+     
+			 
+        
      
      
      
@@ -60,49 +95,26 @@ class Newsfeed extends CI_Model
       // $this->db->limit(3);
        $q=$this->db->get();
        
+       $result=array();
+       
           foreach($q->result() as $row)
            {
-               $data[]=$row;
+                  array_push($result,array(
+                        'Username'=>$row->Username,
+                         'TextS' =>$row->TextS,
+                         'Date' =>$row->Date,
+                         'type' =>1
+                      
+                      ));
      
            }
    
             
-       return $data; 
+       return $result; 
     }
     
-    
-     function getResponses($id=1)
-      {
-       $this->db->distinct();  
-      $this->db->select('responses.Timestamp as DateR, responses.Text as TextR, questions.User1ID, questions.User2ID, questions.Text as TextQ, u1.Username as Username1, u2.Username as Username2, 3 as type');
-      $this->db->from('questions','users as u1','users as u2','responses');
-      
-      $this->db->join('responses','questions.ID=responses.QuestionID');
-      $this->db->join('friendships','questions.User1ID = friendships.User2ID OR questions.User1ID = friendships.User1ID');
-      $this->db->join('users as u1','questions.User1ID = u1.ID');
-      $this->db->join('users as u2','questions.User2ID = u2.ID');
-  
-  
-     $this->db->where('friendships.User1ID =',$id);
-      $this->db->or_where('friendships.User2ID =',$id);
-     
-       $this->db->order_by('Date','desc');
-     // $this->db->limit(3);
-       $q=$this->db->get();
-      
-          foreach($q->result() as $row)
-           {
-               $data[]=$row;
-     
-           }
-      
-            
-       return $data; 
-      }
-       
-     
-      
-      function cuddle($id)
+   
+     /* function cuddle($id)
       {
          $this->db->where('ID', $id);
          $this->db->set('NumCuddles', 'NumCuddles+1', FALSE);
@@ -114,7 +126,7 @@ class Newsfeed extends CI_Model
          $this->db->where('ID', $id);
          $this->db->set('NumSlaps', 'NumSlaps+1', FALSE);
          $this->db->update('questions');  
-      }
+      }*/
       
       
     }
