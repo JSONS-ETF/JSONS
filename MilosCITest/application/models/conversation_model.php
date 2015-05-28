@@ -16,40 +16,40 @@ class conversation_model extends CI_Model{
         $this->db->select('*')->from('Conversations');
         $this->db->where('User1ID', $idUser);
         $this->db->or_where('User2ID', $idUser);
-        $this->db->order_by("Timestamp", "desc");
+        $this->db->order_by("TimeStamp", "DESC");
         $query = $this->db->get();
 
         $conversations=array();
 
         foreach ($query->result() as $row) {
-            if ($row->idUser1 == $idUser) {
+            if ($row->User1ID == $idUser) {
                 $this->db->select('*')->from('Users');
-                $this->db->where('ID', $row->idUser2);
+                $this->db->where('ID', $row->User2ID);
                 $queryUser = $this->db->get();
                 foreach ($queryUser->result() as $rowUser) {
                     $username=$rowUser->Username;
-                    $picture=$rowUser->picture;
+                    $picture=$rowUser->PhotoID;
                 }
-                $sql='SELECT message FROM messages WHERE idConversation='.$row->idConversation.' AND datetime = (SELECT MAX(datetime) FROM messages WHERE idConversation='.$row->idConversation.')';
+                $sql='SELECT Text FROM Messages WHERE ConversationID='.$row->ID.' AND Timestamp = (SELECT MAX(Timestamp) FROM Messages WHERE ConversationID='.$row->ID.')';
                 $queryMessage = $this->db->query($sql);
                 foreach ($queryMessage->result() as $rowMessage) {
-                    $message=$rowMessage->message;
+                    $message=$rowMessage->Text;
                 }
-                $conversations[$row->idConversation] = array('idUser' => $row->idUser2,'username'=>$username, 'picture'=>$picture, 'date' => $row->date, 'time' => $row->time, 'message'=>$message);
+                $conversations[$row->ID] = array('idUser' => $row->User2ID,'username'=>$username, 'picture'=>$picture, 'timestamp' => $row->TimeStamp, 'message'=>$message);
             } else {
-                $this->db->select('*')->from('users');
-                $this->db->where('idUser', $row->idUser1);
+                $this->db->select('*')->from('Users');
+                $this->db->where('ID', $row->User1ID);
                 $queryUser = $this->db->get();
                 foreach ($queryUser->result() as $rowUser) {
-                    $username=$rowUser->username;
-                    $picture=$rowUser->picture;
+                    $username=$rowUser->Username;
+                    $picture=$rowUser->PhotoID;
                 }
-                $sql='SELECT message FROM messages WHERE idConversation='.$row->idConversation.' AND datetime = (SELECT MAX(datetime) FROM messages WHERE idConversation='.$row->idConversation.')';
+                $sql='SELECT Text FROM Messages WHERE ConversationID='.$row->ID.' AND Timestamp = (SELECT MAX(Timestamp) FROM Messages WHERE ConversationID='.$row->ID.')';
                 $queryMessage = $this->db->query($sql);
                 foreach ($queryMessage->result() as $rowMessage) {
-                    $message=$rowMessage->message;
+                    $message=$rowMessage->Text;
                 }
-                $conversations[$row->idConversation] = array('idUser' => $row->idUser1,'username'=>$username, 'picture'=>$picture,  'date' => $row->date, 'time' => $row->time,'message'=>$message);
+                $conversations[$row->ID] = array('idUser' => $row->User1ID,'username'=>$username, 'picture'=>$picture,  'timestamp' => $row->TimeStamp ,'message'=>$message);
             }
         }
 
@@ -62,11 +62,18 @@ class conversation_model extends CI_Model{
 
         $this->db->trans_start();
 
-        $sql="INSERT INTO conversations SET idUser1=$idUser1, idUser2=$idUser2, date='$date', time='$time', datetime=now()";
-        $this->db->query($sql);
+      #  $sql="INSERT INTO conversations SET idUser1=$idUser1, idUser2=$idUser2, date='$date', time='$time', datetime=now()";
+     #   $this->db->query($sql);
 
-        $sql="SELECT MAX(idConversation) as idC FROM conversations";
-        $query =$this->db->query($sql);
+        $data = array(
+            'User1ID' => $idUser1 ,
+            'User2ID' =>  $idUser2 ,
+        );
+        $this->db->set('TimeStamp', 'GETDATE()', FALSE);
+        $this->db->insert('Conversations', $data);
+
+        $this->db->select('MAX(ID) as idC')->from('Conversations');
+        $query = $this->db->get();
 
         $idConversation=0;
         foreach ($query->result() as $row) {

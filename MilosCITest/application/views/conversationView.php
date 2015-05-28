@@ -73,17 +73,17 @@
         '<div class="username">' .
             $conversation['username'] .
             '<div class="date">' .
-            $conversation['date'] .
+            date('d.m.Y',strtotime($conversation['timestamp'])) .
             '</div>' .
             '<div class="time">' .
-            $conversation['time'] .
+            date('H:i',strtotime($conversation['timestamp'])) .
             '</div>' .
         '</div>' .
         '<div class="picture">' .
         '<img src='.$conversation['picture'].'/>' .
         '</div>' .
         '<div class="message">' .
-            substr ($conversation['message'] ,0, 150) .'...'.
+            substr ($conversation['message'] ,0, 40).
         '</div>' .
 
         '</div></a>';
