@@ -4,7 +4,7 @@
 <title>Questy - Home</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <style>
-   <?php $s=true; include 'styleHomepage.css'; ?>
+   <?php $s=true;$m=true; include 'styleHomepage.css'; ?>
 </style>
 <!--<link href="styleHomepage.css" rel="stylesheet" type="text/css" />-->
 </head>
@@ -24,38 +24,54 @@
        
         <?php if ($row['type'] == 2): ?>
 <!--*****************************************************mainbar-->
-      <div class="mainbar">
+          <?php if($m==true):$m=false; ?>
+          <div class="mainbar">
+         <?php endif; ?>
 
         <div class="questions">
-        <div class="picture"><img src="images/jane.jpg"/></div>
+        <div class="picture"><a href="<?php echo'../profileController/index/'.$row['User1ID']; ?>">
+                                <img src="../../images/jane.jpg"/></a>
         <div class="question">
-          <div class="username"><?php $lid=$row['ID']; echo $row['Username1']; ?>
+          <div class="username"> <a href="<?php echo'../profileController/index/'.$row['User1ID']; ?>">
+              <?php $lid=$row['ID']; echo $row['Username1']; ?></a>
               <span style="font-weight:normal;">asks</span> 
-              <?php echo $row['Username2']; ?></div>
+              <a href="<?php echo'../profileController/index/'.$row['User1ID']; ?>">
+             <?php echo $row['Username2']; ?></a></div>
+            
             <div class="datetime"><?php echo  date('d.m.Y H:i',strtotime($row['DateQ'])); ?></div>
           <div class="text"><?php echo $row['TextQ']; ?></div>
+         
+  
           
-          <div class="mark">
-        
-               <img src="images/cuddle.png"/><img src="images/slap.png"/>
-             
+          <div class="mark">    
+              <a href="../Homepage/cuddle/<?php echo $row['ID'] ?>"> 
+               <img src="../../images/cuddle.png"/></a>
+                 <b><?php echo $row['NumCuddles'];?></b>
+              
+              <a href="../Homepage/slap/<?php echo $row['ID'] ?>">
+                  <img src="../../images/slap.png"/></a>
+                  <b><?php echo $row['NumSlaps']; ?></b>
           </div>
 
            <?php if ($row['Answers']!=null): ?>
              <?php foreach($row['Answers'] as $row2): ?>
-          <div class="response"><div class="datetime2"><img src="images/replay.png"/><?php echo  date('d.m.Y H:i',strtotime($row2['DateR'])); ?></div>
+          <div class="response"><div class="datetime2"><img src="../../images/replay.png"/><?php echo  date('d.m.Y H:i',strtotime($row2['DateR'])); ?></div>
           <div class="text">
              <?php echo $row2['TextR']; ?>
           </div>
           </div>
-          <?php endforeach;?>
+          <?php endforeach;?><
           <?php endif;?>
           
           
         </div>
         </div>
       </div>
+          
      <?php endif; ?>
+          
+     
+      
     
         <!--*****************************************************mainbarend-->
       
@@ -65,18 +81,23 @@
     
    
     <?php if ($row['type'] == 1): ?>
+          </div>
      <div class="sidebar">
          <?php if($s==true):$s=false; ?>
      
-                <h2 class="head">Status</h2>
+         <h2 class="head"><b>Statuses</b></h2>
                 
             <?php endif; ?>
       
         <div class="statuses">
-          <img src="images/jane.jpg"/>
-          <h2 class="username"><?php  echo $row['Username']; ?></h2>
-          <div class="status"><?php echo $row['TextS']; ?></div>
-          <div class="status"><?php echo date('d.m.Y H:i',strtotime($row['Date'])); ?></div>
+            
+             <img src="../../images/jane.jpg"/>
+          <h2 class="username">
+              <a href="<?php echo'../profileController/index/'.$row['UserID']; ?>">
+                  <?php  echo $row['Username']; ?></a></h2>
+
+          <div class="status"><b><?php echo $row['TextS']; ?></b></div>
+          <div class="statusd"><?php echo date('d.m.Y H:i',strtotime($row['Date'])); ?></div>
         
         </div>
         
@@ -85,6 +106,7 @@
       
        <?php endforeach;?>
      </div>
+
       
   
 </body>

@@ -17,7 +17,7 @@ class Newsfeed extends CI_Model
      function getQuestions($id=1)
     {
       $this->db->distinct();  
-      $this->db->select('questions.ID, questions.Timestamp as DateQ,questions.User1ID, questions.User2ID, questions.Text as TextQ, u1.Username as Username1, u2.Username as Username2, 2 as type');
+      $this->db->select('questions.ID, questions.Timestamp as DateQ,questions.User1ID, questions.User2ID, questions.Text as TextQ,questions.NumCuddles,questions.NumSlaps, u1.Username as Username1, u2.Username as Username2, 2 as type');
       $this->db->from('questions');
       
       $this->db->join('friendships','questions.User1ID = friendships.User2ID OR questions.User1ID = friendships.User1ID');
@@ -61,9 +61,13 @@ class Newsfeed extends CI_Model
              'ID'=>$row->ID,
              'Username1'=>$row->Username1,
              'Username2'=>$row->Username2,
+             'User1ID'=>$row->User1ID,
+             'User2ID'=>$row->User2ID,
              'DateQ' =>$row->DateQ,
              'TextQ'=>$row->TextQ,
              'Answers'=>$answers,
+             'NumCuddles' => $row->NumCuddles,
+             'NumSlaps'=>$row->NumSlaps,
              'type' => 2
              
          ));
@@ -92,7 +96,7 @@ class Newsfeed extends CI_Model
       $this->db->or_where('friendships.User2ID =',$id);
      
        $this->db->order_by('Date','desc');
-      // $this->db->limit(3);
+      $this->db->limit(10);
        $q=$this->db->get();
        
        $result=array();
@@ -103,6 +107,7 @@ class Newsfeed extends CI_Model
                         'Username'=>$row->Username,
                          'TextS' =>$row->TextS,
                          'Date' =>$row->Date,
+                         'UserID'=>$row->UserID,
                          'type' =>1
                       
                       ));
@@ -114,19 +119,21 @@ class Newsfeed extends CI_Model
     }
     
    
-     /* function cuddle($id)
+       function cuddle($id)
       {
-         $this->db->where('ID', $id);
-         $this->db->set('NumCuddles', 'NumCuddles+1', FALSE);
+         $this->db->set('questions.NumCuddles', 'NumCuddles+1', FALSE);
+         $this->db->where('questions.ID', $id);
          $this->db->update('questions');  
+         
       }
       
       function slap($id)
       {
-         $this->db->where('ID', $id);
+        
          $this->db->set('NumSlaps', 'NumSlaps+1', FALSE);
+          $this->db->where('ID', $id);
          $this->db->update('questions');  
-      }*/
+      }
       
       
     }

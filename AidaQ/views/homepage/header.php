@@ -1,12 +1,12 @@
  <style Stylesheet="text/css">
  @font-face {
   font-family: 'LogoFont';
-  src: url('fonts/logofont.eot'); /* IE9 Compat Modes */
-  src: url('fonts/logofont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('fonts/logofont.woff2') format('woff2'), /* Super Modern Browsers */
-       url('fonts/logofont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('fonts/logofont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/logofont.svg#svgFontName') format('svg'); /* Legacy iOS */
+  src: url('../../fonts/logofont.eot'); /* IE9 Compat Modes */
+  src: url('../../fonts/logofont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../../fonts/logofont.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../../fonts/logofont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../../fonts/logofont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../../fonts/logofont.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
  .clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
 
@@ -32,10 +32,10 @@
       <div class="menu_nav">
         <ul>
         <li><div class="logo">Questy</div></li>
-		      <li><a href="homepage.php"><img src="images/home.png"></a></li>
-          <li class="active"><a href="inbox.php"><img src="images/inbox.png"></a></li>
-          <li><a href="profile.php"><img src="images/profile.png"></a></li>
-          <li style="position:relative;left:370px;"><a href="logout.php"><img src="images/logout.png"></a></li>
+		      <li><a href="Homepage.php"><img src="../../images/home.png"></a></li>
+          <li class="active"><a href="home.php"><img src="../../images/inbox.png"></a></li>
+          <li><a href="profile.php"><img src="../../images/profile.png"></a></li>
+          <li style="position:relative;left:370px;"><a href="logout.php"><img src="../../images/logout.png"></a></li>
         </ul>
       </div>
      

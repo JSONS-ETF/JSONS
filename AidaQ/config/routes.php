@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['news/(:any)'] = 'views/news/view/$1';
 $route['news'] = 'news/view';
-$route['(:any)'] = 'pages/view/$1';
-$route['default_controller'] = 'pages/view';
+$route['(:any)'] = 'homepage/view/$1';
+$route['default_controller'] = 'homepage/view';
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -54,6 +54,6 @@ $route['default_controller'] = 'pages/view';
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Homepage';
+$route['default_controller'] = 'Homepage/redirect';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
