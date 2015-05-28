@@ -101,17 +101,17 @@
                     type: "POST",
                     dataType: 'json',
                     cache : false,
-                    data: {idConversation:<?php echo $idConversation; ?>,diff:diff,start:start},
-                    url: "<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>/www/questy/index.php/chat/checkMessage",
+                    data: {idConversation:<?php echo $idConversation; ?>,diff:diff},
+                    url: "<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>/www/JSONS_GIT/JSONS/MilosCITest/index.php/chat/checkMessage",
                     success: function(data) {
                        console.log(JSON.stringify(data));
 
-                        alert(JSON.stringify(data));
+                        //alert(JSON.stringify(data));
                         $.each(data,function(i,el)
                         {
                             if(jQuery.inArray( i, existing )==-1) {
                                 existing.push(i);
-                                if (el.UserID ==<?php echo $idUser;?>) {
+                                if (el.idUser ==<?php echo $idUser;?>) {
                                     $('#messagesWrapper').append(
                                         '<div class="message" alt="' + i + '" style="float:right;">' +
                                         '<div class="username">' +
@@ -167,7 +167,9 @@
                 end = new Date().getTime();
             }, 1000);
 
-        /*    $("#send").click(function(event) {
+
+
+            $("#send").click(function(event) {
                 while (lockCheck==1);
                 lockSend=1;
                 document.getElementById('send').disabled = true;
@@ -181,7 +183,7 @@
                 if (message!='') {
                     jQuery.ajax({
                         type: "POST",
-                        url: "<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>/www/questy/index.php/chat/sendMessage",
+                        url: "<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>/www/JSONS_GIT/JSONS/MilosCITest/index.php/chat/sendMessage", //PROMENI URL!!!!!!!!!!!!!!
                         dataType: 'json',
                         data: {message: message, idConversation: <?php echo $idConversation; ?>, idUser: idUser},
                         success: function (res) {
@@ -191,7 +193,7 @@
                 }
                 lockSend=0;
                 document.getElementById('send').disabled = false;
-            });*/
+            });
         });
     </script>
 
@@ -227,12 +229,19 @@
         }
     ?>
 </div>
-    <form method="POST" action="<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>/www/questy/index.php/chat/sendMessage">
-            <div id="typemessage"><textarea type="text" name="message" id="message" cols="30" rows="10"></textarea></div><br/>
+ <!--   <form method="POST" action="<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>/www/JSONS_GIT/JSONS/MilosCITest/index.php/chat/checkMessage">
+            <div id="typemessage"><textarea type="diff" name="diff" id="diff" cols="30" rows="10">5</textarea></div><br/>
             <input type="text" name="idConversation" id="idConversation" value="<?php echo $idConversation; ?>" hidden/>
             <input type="text" name="idUser" id="idUser" value="<?php echo $idUser; ?>" hidden/>
             <div id="sendmessage"><input id="send" type="submit" name="send" value="Send"></div>
-    </form>
+    </form> -->
+
+<form method="POST" >
+    <div id="typemessage"><textarea type="text" name="message" id="message" cols="30" rows="10"></textarea></div><br/>
+    <input type="text" name="idConversation" id="idConversation" value="<?php echo $idConversation; ?>" hidden/>
+    <input type="text" name="idUser" id="idUser" value="<?php echo $idUser; ?>" hidden/>
+    <div id="sendmessage"><input id="send" type="submit" name="send" value="Send"></div>
+</form>
 
 </body>
 </html>
