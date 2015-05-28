@@ -105,12 +105,13 @@
                     url: "<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>/www/questy/index.php/chat/checkMessage",
                     success: function(data) {
                        console.log(JSON.stringify(data));
-                       // alert(JSON.stringify(data));
+
+                        alert(JSON.stringify(data));
                         $.each(data,function(i,el)
                         {
                             if(jQuery.inArray( i, existing )==-1) {
                                 existing.push(i);
-                                if (el.idUser ==<?php echo $idUser;?>) {
+                                if (el.UserID ==<?php echo $idUser;?>) {
                                     $('#messagesWrapper').append(
                                         '<div class="message" alt="' + i + '" style="float:right;">' +
                                         '<div class="username">' +
@@ -120,10 +121,10 @@
                                         el.message +
                                         '</div>' +
                                         '<div class="date">' +
-                                        el.date +
+                                        el.timestamp +
                                         '</div>' +
                                         '<div class="time">' +
-                                        el.time +
+                                        el.timestamp +
                                         '</div>' +
                                         '</div>'
                                     );
@@ -137,10 +138,10 @@
                                         el.message +
                                         '</div>' +
                                         '<div class="date">' +
-                                        el.date +
+                                        el.timestamp+
                                         '</div>' +
                                         '<div class="time">' +
-                                        el.time +
+                                        el.timestamp +
                                         '</div>' +
                                         '</div>'
                                     );
@@ -166,7 +167,7 @@
                 end = new Date().getTime();
             }, 1000);
 
-            $("#send").click(function(event) {
+        /*    $("#send").click(function(event) {
                 while (lockCheck==1);
                 lockSend=1;
                 document.getElementById('send').disabled = true;
@@ -174,6 +175,7 @@
                 event.preventDefault();
                 var message = $("#message").val();
                 var idUser = $("#idUser").val();
+
                 document.getElementById('message').value = "";
                 document.getElementById("message").focus();
                 if (message!='') {
@@ -189,7 +191,7 @@
                 }
                 lockSend=0;
                 document.getElementById('send').disabled = false;
-            });
+            });*/
         });
     </script>
 
@@ -216,16 +218,16 @@
                 $message['message'] .
                 '</div>' .
                 '<div class="date">' .
-                $message['date'] .
+                date('d.m.Y',strtotime($message['timestamp'])) .
                 '</div>' .
                 '<div class="time">' .
-                $message['time'] .
+                date('H:i',strtotime($message['timestamp'])).
                 '</div>' .
                 '</div>';
         }
     ?>
 </div>
-    <form method="POST">
+    <form method="POST" action="<?php echo "http://" . $_SERVER['SERVER_NAME']; ?>/www/questy/index.php/chat/sendMessage">
             <div id="typemessage"><textarea type="text" name="message" id="message" cols="30" rows="10"></textarea></div><br/>
             <input type="text" name="idConversation" id="idConversation" value="<?php echo $idConversation; ?>" hidden/>
             <input type="text" name="idUser" id="idUser" value="<?php echo $idUser; ?>" hidden/>

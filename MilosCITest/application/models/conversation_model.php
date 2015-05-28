@@ -32,6 +32,7 @@ class conversation_model extends CI_Model{
                 }
                 $sql='SELECT Text FROM Messages WHERE ConversationID='.$row->ID.' AND Timestamp = (SELECT MAX(Timestamp) FROM Messages WHERE ConversationID='.$row->ID.')';
                 $queryMessage = $this->db->query($sql);
+                $message='';
                 foreach ($queryMessage->result() as $rowMessage) {
                     $message=$rowMessage->Text;
                 }
@@ -49,6 +50,7 @@ class conversation_model extends CI_Model{
                 foreach ($queryMessage->result() as $rowMessage) {
                     $message=$rowMessage->Text;
                 }
+                $message='';
                 $conversations[$row->ID] = array('idUser' => $row->User1ID,'username'=>$username, 'picture'=>$picture,  'timestamp' => $row->TimeStamp ,'message'=>$message);
             }
         }
@@ -57,13 +59,8 @@ class conversation_model extends CI_Model{
     }
 
     function newConversation($idUser1,$idUser2){
-        $date = date('d.m.Y');
-        $time = date('H:i');
 
         $this->db->trans_start();
-
-      #  $sql="INSERT INTO conversations SET idUser1=$idUser1, idUser2=$idUser2, date='$date', time='$time', datetime=now()";
-     #   $this->db->query($sql);
 
         $data = array(
             'User1ID' => $idUser1 ,
