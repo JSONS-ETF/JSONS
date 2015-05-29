@@ -14,10 +14,10 @@ class Newsfeed extends CI_Model
     
     
     
-     function getQuestions($id=1)
+     function getQuestions($id,$photoid)
     {
       $this->db->distinct();  
-      $this->db->select('questions.ID, questions.Timestamp as DateQ,questions.User1ID, questions.User2ID, questions.Text as TextQ,questions.NumCuddles,questions.NumSlaps, u1.Username as Username1, u2.Username as Username2, 2 as type');
+      $this->db->select('questions.ID, questions.Timestamp as DateQ,questions.User1ID, questions.User2ID, questions.Text as TextQ,questions.NumCuddles,questions.NumSlaps, u1.Username as Username1, u2.Username as Username2,u1.PhotoID as U1PhotoID, u2.PhotoID as U2PhotoID, 2 as type');
       $this->db->from('questions');
       
       $this->db->join('friendships','questions.User1ID = friendships.User2ID OR questions.User1ID = friendships.User1ID');
@@ -62,12 +62,15 @@ class Newsfeed extends CI_Model
              'Username1'=>$row->Username1,
              'Username2'=>$row->Username2,
              'User1ID'=>$row->User1ID,
+             'User1PhotoId'=>$row->U1PhotoID,
+             'User2PhotoId'=>$row->U2PhotoID,
              'User2ID'=>$row->User2ID,
              'DateQ' =>$row->DateQ,
              'TextQ'=>$row->TextQ,
              'Answers'=>$answers,
              'NumCuddles' => $row->NumCuddles,
              'NumSlaps'=>$row->NumSlaps,
+              'PhotoID' =>$photoid,
              'type' => 2
              
          ));
@@ -83,10 +86,10 @@ class Newsfeed extends CI_Model
      
      
      
-     function getStatuses($id=1)
+     function getStatuses($id,$photoid)
     {
       $this->db->distinct();  
-      $this->db->select('statuses.Timestamp as Date, statuses.UserID, statuses.Text as TextS,u.Username as Username, 1 as type');
+      $this->db->select('statuses.Timestamp as Date, statuses.UserID, statuses.Text as TextS,u.Username as Username, u.PhotoID as UPhotoID, 1 as type');
       $this->db->from('statuses','users as u');
       
       $this->db->join('friendships','statuses.UserID = friendships.User2ID OR statuses.UserID = friendships.User1ID');
@@ -108,6 +111,9 @@ class Newsfeed extends CI_Model
                          'TextS' =>$row->TextS,
                          'Date' =>$row->Date,
                          'UserID'=>$row->UserID,
+                         'PhotoID' =>$photoid,
+                         'UserPhotoId'=>$row->UPhotoID,
+
                          'type' =>1
                       
                       ));
@@ -117,23 +123,42 @@ class Newsfeed extends CI_Model
             
        return $result; 
     }
-    
-   
-       function cuddle($id)
-      {
-         $this->db->set('questions.NumCuddles', 'NumCuddles+1', FALSE);
-         $this->db->where('questions.ID', $id);
-         $this->db->update('questions');  
-         
-      }
+
+
+    function cuddle($id)
+    {
+        $this->db->trans_start();
+        $this->db->set('questions.NumCuddles', 'NumCuddles+1', FALSE);
+        $this->db->where('questions.ID', $id);
+        $this->db->update('questions');
+
+        $this->db->select('NumCuddles')->from('Questions');
+        $this->db->where('ID', $id);
+        $query = $this->db->get();
+        $cud=$query->row('NumCuddles');
+
+        $this->db->trans_complete();
+        return $cud;
+    }
+
+    function slap($id)
+    {
+        $this->db->trans_start();
+        $this->db->set('NumSlaps', 'NumSlaps+1', FALSE);
+        $this->db->where('ID', $id);
+        $this->db->update('questions');
+
+        $this->db->select('NumSlaps')->from('Questions');
+        $this->db->where('ID', $id);
+        $query = $this->db->get();
+        $cud=$query->row('NumSlaps');
+
+        $this->db->trans_complete();
+        return $cud;
+
+    }
       
-      function slap($id)
-      {
-        
-         $this->db->set('NumSlaps', 'NumSlaps+1', FALSE);
-          $this->db->where('ID', $id);
-         $this->db->update('questions');  
-      }
+
       
       
     }

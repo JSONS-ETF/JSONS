@@ -8,13 +8,54 @@
   <?php $s=true;$m=true;?>
 </style>
 <!--<link href="styleHomepage.css" rel="stylesheet" type="text/css" />-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".c").click(function(event) {
+                event.preventDefault();
+                var idQ = $(this).attr('id');
+               // alert(idQ);
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url();?>/Homepage/cuddle",
+                    data: {idQ: idQ},
+                    success: function (res) {
+                        // alert(res);
+                        document.getElementById(idQ+"C").innerHTML=res;
+                    }
+                });
+
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".s").click(function(event) {
+                event.preventDefault();
+                var idQ = $(this).attr('id');
+                //alert(idQ);
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url();?>/Homepage/slap",
+                    data: {idQ: idQ},
+                    success: function (res) {
+                        // alert(res);
+                        document.getElementById(idQ+"S").innerHTML=res;
+                    }
+                });
+
+            });
+        });
+    </script>
 </head>
+
+
+
+
 <body>
 
-<?php
-include ("header.php");
-?>
-    
 <!--**********************************************************************************************************************************************************--> 
 
   <div class="content">
@@ -31,7 +72,7 @@ include ("header.php");
 
         <div class="questions">
         <div class="picture"><a href="<?php echo'../index.php/profileController/index/'.$row['User1ID']; ?>">
-                                <img src=<?php echo 'photos/'.$row['User1ID'].'/'.idphoto.'.jpg'></a>
+                                <img src="<?php if($row['User1PhotoId']==null) $photo="null"; else $photo=$row['User1ID'].'/'.$row['User1PhotoId']; echo 'photos/'.$photo.'.jpg';?>" ></a>
         <div class="question">
           <div class="username"> <a href="<?php echo'../index.php/profileController/index/'.$row['User1ID']; ?>">
               <?php $lid=$row['ID']; echo $row['Username1']; ?></a>
@@ -41,17 +82,19 @@ include ("header.php");
             
             <div class="datetime"><?php echo  date('d.m.Y H:i',strtotime($row['DateQ'])); ?></div>
           <div class="text"><?php echo $row['TextQ']; ?></div>
-         
-  
-          
-          <div class="mark">    
-              <a href="../index.php/Homepage/cuddle/<?php echo $row['ID'] ?>"> 
-               <img src="../styles/images/cuddle.png"/></a>
-                 <b><?php echo $row['NumCuddles'];?></b>
-              <a href="../index.php/Homepage/slap/<?php echo $row['ID'] ?>">
-                  <img src="../styles/images/slap.png"/></a>
-                  <b><?php echo $row['NumSlaps']; ?></b>
-          </div>
+
+
+
+            <div class="mark">
+
+
+                <div class="c" id="<?php echo $row['ID']; ?>"><img src="../../../images/cuddle.png"/></div>
+                <div id="<?php echo $row['ID'] ; ?>C"> <b><?php echo $row['NumCuddles'] ; ?></b></div>
+
+                <div class="s" id="<?php echo $row['ID']; ?>">  <img src="../../../images/slap.png"/></div>
+                <div id="<?php echo $row['ID'] ; ?>S"> <b><?php echo $row['NumSlaps'] ; ?> </b></div>
+            </div>
+
 
            <?php if ($row['Answers']!=null): ?>
              <?php foreach($row['Answers'] as $row2): ?>
@@ -91,9 +134,9 @@ include ("header.php");
       
         <div class="statuses">
             
-             <img src="../styles/images/jane.jpg"/>
+             <img src="<?php if($row['UserPhotoId']==null) $photo="null";else $photo=$row['UserID'].'/'.$row['UserPhotoId']; echo 'photos/'. $photo.'.jpg';?>" >
           <h2 class="username">
-              <a href="<?php echo'../index.php/profileController/index/'.$row['UserID']; ?>">
+              <a href="<?php echo'../index.php/profileController/index/'.$row['UserID']; ?>" >
                   <?php  echo $row['Username']; ?></a></h2>
 
           <div class="status"><b><?php echo $row['TextS']; ?></b></div>
