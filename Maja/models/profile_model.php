@@ -150,20 +150,21 @@ return $zavrsni;
     function getStatuses($id)
     {
 
-        $this->db->select('statuses.Timestamp, statuses.Text, 1 as type');       //type je 1 za status
+        $this->db->select('statuses.Timestamp, statuses.Text');
         $this->db->from('statuses');
-        $this->db->where('UserID', $id);
+        $this->db->where('statuses.UserID', $id);
         $this->db->order_by("Timestamp", "desc");
         $q = $this->db->get();
 
-$data='';
+
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $row) {
                 $data[] = $row;
 
             }
+            return $data;
         }
-        return $data;
+
     }
 
     function isFriend($id,$idCurrent){
@@ -223,7 +224,9 @@ $data='';
         $this->db->update('questions');
     }
 
-
+    function addBlock($pd){
+$this->db->insert('Blocks',$pd);
+    }
 }
 
 

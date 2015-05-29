@@ -9,8 +9,8 @@ class ProfileController extends CI_Controller {
     function index($idCurr)
     {
        // $id = $sess_data['id'];
-        $id = 2;
-        $idCurr = 2;
+        $id = 5;
+ 
         $data['id'] = $id; // ovo izvlacim iz sesije
         $data['idCurr'] = $idCurr;
 
@@ -60,16 +60,28 @@ $resp = $this->profile_model->GetAns($par);
         $this->load->helper('date');
         $pd = array(
             'User1ID' => $id,
-            'User2ID' => $$idCurr,
+            'User2ID' => $idCurr,
             'Timestamp' => date('Y-m-d H:i:s'),
             'Text' =>$this->input->post('qest'),
             'NumCuddles'=>'0',
-        'NumSlaps'=>'0',
-        'Obligatory'=>'0'
+            'NumSlaps'=>'0'
+
         );
         $this->profile_model->addQuestion($pd);
-        redirect('profileController/index'.$id, 'refresh');
+        redirect('profileController/index/'.$idCurr, 'refresh');
 
+    }
+
+    function block($idCurr){
+$id = 5;
+        $fr = array(
+
+            'Blocker' => $id,
+            'Blockee' => $idCurr
+        );
+        $this->profile_model->addBlock($fr);
+
+        redirect('profileController/index/'.$idCurr,'refresh');
     }
 
     function create_status(){

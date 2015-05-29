@@ -13,7 +13,7 @@ include ("header.php");
 ?>
 
 <!--**********************************************************************************************************************************************************-->
-
+<pre><?php// print_r($question)?></pre>
 
 <div class="content">
     <div class="content_resize">
@@ -156,19 +156,24 @@ include ("header.php");
 
         </div>
         <!--*****************************************************mainbarend-->
+
+        <pre><?//php  print_r($s)?></pre>
         <div class="sidebarRight">
             <h2 class="head">Status</h2>
             <?php $counter = 1; ?>
             <?php if($s)foreach($s as $stat): ?>
                 <div class="statuses">
                     <div class="status"><?php if($stat){
-                            echo $stat->Text .'&nbsp&nbsp' .'</br>'. $stat->Timestamp;
+                            echo $stat->Text .'&nbsp&nbsp' .'</br>'. date('d.m.Y H:i',strtotime($stat->Timestamp));
                             $counter++;
                         }   ?></div>
                 </div>
 
             <?php endforeach ?>
-
+            <?php if($idCurr != $id) {
+                echo   '<form  align="center"method="post" accept-charset="utf-8" action = ../../profileController/block/'.$idCurr .'/>'. '<input class="buttonBlock" type=' . 'submit' . ' value=' . 'Block' . '>' . '</form>';
+            }
+            ?>
 
 
         </div>

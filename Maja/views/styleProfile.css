@@ -29,6 +29,8 @@ html { padding:0; margin:0;}
 
 .buttonB{color:white;font-family:Helvetica;font-size:14px; background: #6c94b8;padding:10px;width:100px;margin:20px auto;border-radius: 30px; }
 
+.buttonBlock{color:white;font-family:Helvetica;font-size:14px; background: #FF0000;padding:10px;width:80px;margin:20px auto;border-radius: 20px; }
+
 .content .mainbar .ask{display: table;margin-bottom:30px;}
 .content .mainbar .ask textarea { resize:none;width:640px;font-family: Verdana; padding:10px;margin:0 0 10px 10px;height:50px;}
 .content .mainbar .ask input { color:white;font-family:Helvetica;font-size:16px; background: #6c94b8;padding:10px;width:150px;border-radius: 30px;border:0;float:right;clear:both; }
