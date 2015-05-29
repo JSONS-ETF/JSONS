@@ -9,6 +9,7 @@
 class conversations extends CI_controller{
     function __construct(){
         parent::__construct();
+
         $this->load->library('session');
         $this->load->helper('url');
         $this->load->model('ConversationModel');
@@ -20,25 +21,41 @@ class conversations extends CI_controller{
         {
             $session_data = $this->session->userdata('logged_in');
             $data['idUser'] =$session_data['id'];
+            $data['username'] =$session_data['username'];
             $idUser=$session_data['id'];
 
             $data['conversations'] = $this->ConversationModel->getConversation($idUser);
+
             $this->load->view('templates/header');
             $this->load->view('conversations/ConversationView', $data);
         }
         else
         {
-            redirect('../index.php/login', 'refresh');
+            redirect('../index.php/UserLogin', 'refresh');
         }
-
-
     }
 
     public function newConversation(){
-        $idUser1=$this->input->post("idUser1");
-        $idUser2=$this->input->post("idUser2");
-        $idConversation=$this->conversation_model->newConversation($idUser1,$idUser2);
+        if($this->session->userdata('logged_in'))
+        {
+            $session_data = $this->session->userdata('logged_in');
+            $data['idUser'] =$session_data['id'];
+            $data['username'] =$session_data['username'];
+            $data['photo'] =$session_data['photo'];
+            $idUser=$session_data['id'];
 
-        redirect('../index.php/conversations', 'refresh');
+            $newUser=$this->input->post("newUser");
+            $idConversation=$this->ConversationModel->newConversation($idUser,$newUser);
+
+            if ($idConversation!=-1)
+                redirect('../index.php/messages/index/'.$idConversation, 'refresh');
+            else
+                redirect('../index.php/conversations','refresh');
+        }
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
+
     }
 }

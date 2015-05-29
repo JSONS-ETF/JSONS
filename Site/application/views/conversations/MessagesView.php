@@ -2,14 +2,13 @@
 <head>
     <title>Chat</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link href="../../../../styles/styleMessages.css" rel="stylesheet" type="text/css" />
+    <link href="../../../styles/styleMessages.css" rel="stylesheet" type="text/css" />
     <style>
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function() {
-
             var start=0;
             var end=0;
             var diff=0;
@@ -37,7 +36,7 @@
                     success: function(data) {
                        console.log(JSON.stringify(data));
 
-                       // alert(JSON.stringify(data));
+                        //alert(JSON.stringify(data));
                         $.each(data,function(i,el)
                         {
 
@@ -66,18 +65,16 @@
                                 }
                             }
 							var scrollHeight = $(".mainbar").prop('scrollHeight');
-                                var divHeight = $(".mainbar").height();
-                                var scrollerEndPoint = scrollHeight - divHeight;
+                            var divHeight = $(".mainbar").height();
+                            var scrollerEndPoint = scrollHeight - divHeight;
 
-                                var divScrollerTop =  $(".mainbar").scrollTop();
-                                if (flag==0){
-                                    divScrollerTop+=$(".messagesright").height()+20;}
-                                else{
-                                    divScrollerTop+=$(".messagesright").height()+20;}
+                            var divScrollerTop =  $(".mainbar").scrollTop();
+                            divScrollerTop+=$(".messagesright").height()+20;
+
                                 //alert(divScrollerTop+' '+scrollerEndPoint);
-                                if(divScrollerTop>=scrollerEndPoint-20){
-                                    $(".mainbar").scrollTop($(".mainbar")[0].scrollHeight);
-                                }
+                            if(divScrollerTop>=scrollerEndPoint-20){
+                                $(".mainbar").scrollTop($(".mainbar")[0].scrollHeight);
+                            }
                         });
 
                     }
@@ -105,7 +102,7 @@
                         type: "POST",
                         url: "<?php echo site_url();?>/messages/sendMessage",
                         dataType: 'json',
-                        data: {message: message, idConversation: <?php echo $idConversation; ?>, idUser: idUser},
+                        data: {message: message, idConversation: <?php echo $idConversation; ?>},
                         success: function (res) {
                             alert(res);
                         }
@@ -123,18 +120,8 @@
 
 <div class="content">
     <div class="content_resize">
-        <div class="username"><?php echo $guestUsername; ?></div>
+        <div class="username"><?php echo $info["username"]; ?></div>
         <div class="mainbar">
-
-
-            <div class="messagesleft">
-                <div class="picture"><img src="images/jane.jpg"/></div>
-                <div class="message">
-                    <div class="text">Fusce conseellus, tincidunt sed orci placerat, pellentesque congue libero. </div>
-                    <div class="datetime">13:55 26.05.2015</div>
-                </div>
-            </div>
-
 
     <?php
         foreach($messages as $idMessage=>$message) {
@@ -164,7 +151,6 @@
             <form method="POST" >
                <textarea type="text" name="message" placeholder="Enter username" id="message""></textarea>
                 <input type="text" name="idConversation" id="idConversation" value="<?php echo $idConversation; ?>" hidden/>
-                <input type="text" name="idUser" id="idUser" value="<?php echo $idUser; ?>" hidden/>
                 <div id="sendmessage"><input id="send" type="submit" name="send" value="Send"></div>
             </form>
         </div>

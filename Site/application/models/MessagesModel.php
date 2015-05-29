@@ -7,20 +7,44 @@
  */
 
 class MessagesModel extends CI_Model{
-    var $times=0;
     function __construct(){
-        $this->load->database();
         parent::__construct();
+
+        $this->load->database();
+    }
+
+    function getUserInfo($idConversation,$idUser){
+        $info = array();
+
+        $this->db->select('User1ID, User2ID')->from('Conversations');
+        $this->db->where('ID', $idConversation);
+        $query = $this->db->get();
+
+        $User1ID=$query->row('User1ID');
+        $User2ID=$query->row('User2ID');
+
+        if ($User1ID==$idUser){
+            $this->db->select('Username, PhotoID')->from('Users');
+            $this->db->where('ID', $User2ID);
+            $query = $this->db->get();
+            $info=array("ID"=>$User2ID, "username"=>$query->row("Username"), "PhotoID"=>$query->row("PhotoID"));
+        }else{
+            $this->db->select('Username, PhotoID')->from('Users');
+            $this->db->where('ID', $User1ID);
+            $query = $this->db->get();
+            $info=array("ID"=>$User1ID, "username"=>$query->row("Username"), "PhotoID"=>$query->row("PhotoID"));
+        }
+
+        return $info;
     }
 
     function getMessages($idConversation){
+        $messages = array();
 
         $this->db->select('*')->from('Messages');
         $this->db->where('ConversationID', $idConversation);
         $this->db->order_by("Timestamp", "ASC");
         $query = $this->db->get();
-
-        $messages = array();
 
         foreach ($query->result() as $row) {
             $messages[$row->ID] = array('message'=>$row->Text,'timestamp'=>$row->Timestamp,'idUser'=>$row->UserID);
@@ -47,21 +71,11 @@ class MessagesModel extends CI_Model{
         $this->db->trans_complete();
     }
 
-    function checkMessage($idConversation,$diff){
-
-        #$sql='SELECT * FROM messages WHERE idConversation='.$idConversation.' AND UNIX_TIMESTAMP(datetime)>=(UNIX_TIMESTAMP(now())-1-'.$diff.')';
-        //return 'SELECT * FROM Messages WHERE ConversationID='.$idConversation.' AND DATEDIFF(SECOND,Timestamp, GETDATE())>=DATEDIFF(SECOND,"1970/01/01", GETDATE())-1-'.$diff;
-        $sql = "SELECT * FROM Messages WHERE ConversationID=".$idConversation." AND DATEDIFF(SECOND,'1970/01/01', Timestamp)>=DATEDIFF(SECOND,'1970/01/01', GETDATE())-2-".$diff;
-
-
-       /* $this->db->select('*')->from('Messages');
-        $this->db->where('ConversationID', $idConversation);
-        $this->db->where("DATEDIFF(SECOND,Timestamp, GETDATE())>=",(int)( "DATEDIFF(SECOND,'1970/01/01', GETDATE())-1-".$diff));
-        $this->db->order_by("Timestamp", "ASC");
-        $query = $this->db->get();
-*/
-        $query=$this->db->query($sql);
+    function checkMessage($idConversation, $diff){
         $checkmessage = array();
+
+        $sql = "SELECT * FROM Messages WHERE ConversationID=".$idConversation." AND DATEDIFF(SECOND,'1970/01/01', Timestamp)>=DATEDIFF(SECOND,'1970/01/01', GETDATE())-2-".$diff;
+        $query=$this->db->query($sql);
 
             foreach ($query->result() as $row) {
                 $checkmessage[$row->ID] = array('message'=>$row->Text,'timestamp'=>$row->Timestamp, 'idUser'=>$row->UserID);

@@ -22,8 +22,6 @@ class Homepage extends CI_Controller
        $data2['s']= $this->Newsfeed->getStatuses();
 
       $data['records']=array_merge($data1['q'],$data2['s']);
-     
-      
             $this->load->view('homepage/home',$data);
         
     }
