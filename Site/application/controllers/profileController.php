@@ -113,18 +113,18 @@ $id = 5;
         redirect('profileController/index/'.$idCurr,'refresh');
     }
 
-    function cuddlePhoto($idPhoto)
+    function cuddlePhoto()
     {
         $idCurr=5;
-        $this->profile_model->cuddlePhoto($idPhoto);
-        redirect('profileController/index/'.$idCurr,'refresh');
+        $idPhoto = $this->input->post("idPhoto");
+        echo $this->profile_model->cuddlePhoto($idPhoto);
     }
 
-    function slapPhoto($idPhoto)
+    function slapPhoto()
     {
         $idCurr=5;
-        $this->profile_model->slapPhoto($idPhoto);
-        redirect('profileController/index/'.$idCurr,'refresh');
+        $idPhoto = $this->input->post("idPhoto");
+        echo $this->profile_model->slapPhoto($idPhoto);
     }
 
     function deletePhoto($idPhoto)

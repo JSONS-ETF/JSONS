@@ -233,16 +233,35 @@ return $zavrsni;
 
     function cuddlePhoto($idPhoto)
     {
+        $this->db->trans_start();
         $this->db->set('NumCuddles', 'NumCuddles+1', FALSE);
         $this->db->where('ID', $idPhoto);
         $this->db->update('Photos');
+
+        $this->db->select('NumCuddles')->from('Photos');
+        $this->db->where('ID', $idPhoto);
+        $query = $this->db->get();
+        $cud=$query->row('NumCuddles');
+
+        $this->db->trans_complete();
+        return $cud;
     }
 
     function slapPhoto($idPhoto)
     {
+
+        $this->db->trans_start();
         $this->db->set('NumSlaps', 'NumSlaps+1', FALSE);
         $this->db->where('ID', $idPhoto);
         $this->db->update('Photos');
+
+        $this->db->select('NumSlaps')->from('Photos');
+        $this->db->where('ID', $idPhoto);
+        $query = $this->db->get();
+        $cud=$query->row('NumSlaps');
+
+        $this->db->trans_complete();
+        return $cud;
     }
 
     function deletePhoto($idPhoto)

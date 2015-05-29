@@ -58,11 +58,38 @@
             </div>
             <div class="gallery">
                 <?php
+
                 foreach($photos as $idPhoto=>$photo) {
-                    echo '<a href="'.base_url().'photos/'.$id.'/'.$idPhoto.'.jpg" data-lightbox="image-1" data-title="'.
-                    '<a href=\'../../profileController/cuddlePhoto/'.$idPhoto.'\' ><img src=\'../../../styles/images/cuddle.png\'/></a><b>'.$photo["cuddles"].'</b>'.
-                    '<a href=\'../../profileController/slapPhoto/'.$idPhoto.'\' ><img src=\' ../../../styles/images/slap.png\'/></a><b>'.$photo["slaps"].'</b>'.
-                    '<span style=\'padding-left:50px;\'>'.$photo["description"].'</span>';
+                    echo '<a href="'.base_url().'photos/'.$id.'/'.$idPhoto.'.jpg" data-lightbox="image-1" data-title="';
+                    echo ' <script type=\'text/javascript\'>'.
+                        '$(\'.ccc\').click(function(){'.
+                        'var idPhoto='.$idPhoto.';'.
+                        'jQuery.ajax({'.
+                        'type: \'POST\','.
+                        'url: \'../../profileController/cuddlePhoto/\' ,'.
+                        'data: {idPhoto:idPhoto},'.
+                        'success: function (res) {'.
+                        'document.getElementById(\''.$idPhoto.'C\').innerHTML=res;'.
+                        '}'.
+                        '});'.
+                        '       });'.
+                        '</script>';
+                    echo '<img class=\'ccc\' src=\'../../../styles/images/cuddle.png\'/><div id=\''.$idPhoto.'C\'>'.$photo["cuddles"].'</div>';
+                    echo '<script type=\'text/javascript\'>'.
+                        '$(\'.sss\').click(function(){'.
+                        'var idPhoto='.$idPhoto.';'.
+                        'jQuery.ajax({'.
+                        'type: \'POST\','.
+                        'url: \'../../profileController/slapPhoto/\' ,'.
+                        'data: {idPhoto:idPhoto},'.
+                        'success: function (res) {'.
+                        'document.getElementById(\''.$idPhoto.'S\').innerHTML=res;'.
+                        '}'.
+                        '});'.
+                        '       });'.
+                        '</script>';
+                       echo '<img class=\'sss\' src=\'../../../styles/images/slap.png\'/><div id=\''.$idPhoto.'S\'>'.$photo["slaps"].'</div>'.
+                        '<span style=\'padding-left:50px;\'>'.$photo["description"].'</span>';
                     if ($id==$idCurr)
                         echo '<span style=\'float:right;\'><a href=\'../../profileController/deletePhoto/'.$idPhoto.'\' >Delete</a></span>';
 
