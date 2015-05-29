@@ -1,0 +1,16 @@
+@charset "utf-8";
+body { margin:0; padding:0; width:100%; color:black; font:normal 12px/1.8em Arial, Helvetica, sans-serif;}
+html { padding:0; margin:0;}
+
+
+
+
+.content_resize { margin:0 auto; padding:0; width:990px;}
+
+.content .mainbar { padding:0; overflow: auto; margin:auto;width:415px; text-align: left; margin-top:50px;}
+
+.content .mainbar  input{font-family: Helvetica;font-size: 16px;padding: 5px;border-radius: 10px;border: 2px solid #E0DCD7;position: relative;width:100%;}
+.content .mainbar table{border-radius:10px; border:2px solid #E0DCD7;padding:10px;background:#F2EEE8 ;position:relative;	border-collapse: collapse;margin:auto; }
+.content .mainbar .button{ color:white; font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;     border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;}
+.content .mainbar table td{height: 50px; 	text-align:right; 	vertical-align:middle; 	padding:10px; }
+ h2{padding-left:10px; }
