@@ -54,6 +54,7 @@ class ConversationModel extends CI_Model{
 
                 $conversations[$row->ID] = array('idUser' => $row->User1ID,'username'=>$username, 'picture'=>$picture,  'timestamp' => $row->TimeStamp ,'message'=>$message);
             }
+
         }
 
         $this->db->trans_complete();

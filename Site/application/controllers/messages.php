@@ -20,6 +20,7 @@ class messages extends CI_controller{
             $session_data = $this->session->userdata('logged_in');
             $data['idUser'] =$session_data['id'];
             $data['username'] =$session_data['username'];
+            $data['photoid'] =$session_data['photoid'];
             $idUser=$session_data['id'];
 
             $data['info']=$this->MessagesModel->getUserInfo($idConversation,$idUser);
@@ -27,12 +28,13 @@ class messages extends CI_controller{
 
             $data['idConversation']=$idConversation;
 
-            //$this->load->view('templates/header');
+            $page["page"]=1;
+            $this->load->view('templates/header',$page);
             $this->load->view('conversations/MessagesView', $data);
         }
         else
         {
-            redirect('../index.php/login', 'refresh');
+            redirect('UserHome/logout', 'refresh');
         }
     }
 
@@ -50,7 +52,7 @@ class messages extends CI_controller{
         }
         else
         {
-        redirect('../index.php/login', 'refresh');
+            redirect('UserHome/logout', 'refresh');
         }
     }
 
@@ -71,7 +73,7 @@ class messages extends CI_controller{
             echo json_encode($data['checkmessage']);
         }else
             {
-                redirect('../index.php/login', 'refresh');
+                redirect('UserHome/logout', 'refresh');
             }
     }
 }

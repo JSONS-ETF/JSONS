@@ -2,7 +2,7 @@
 <head>
     <title>Chat</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link href="../../../styles/styleMessages.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url();?>styles/styleMessages.css" rel="stylesheet" type="text/css" />
     <style>
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -43,23 +43,25 @@
                             if(jQuery.inArray( i, existing )==-1) {
                                 var flag=1;
                                 existing.push(i);
+                                var t = el.timestamp.split(/[- :]/);
+                                var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
                                 if (el.idUser ==<?php echo $idUser;?>) {
                                     $('.mainbar').append(
                                     '<div class="messagesright" alt="' + i + '">'+
-                                    '<div class="picture"><img src=""/></div>'+
+                                    '<div class="picture"><?php if($photoid==null) { echo '<img src="'.base_url().'photos/null.jpg"/>';} else {echo '<img src="'.base_url().'photos/'.$idUser.'/'.$photoid.'.jpg"/>';}?></div>'+
                                     '<div class="message">'+
                                     '<div class="text">'+el.message+'</div>'+
-                                    '<div class="datetime">'+el.timestamp +'</div>'+
+                                    '<div class="datetime">'+d+'</div>'+
                                     '</div></div>'
                                     );
                                     flag=0;
                                 } else {
                                     $('.mainbar').append(
                                         '<div class="messagesleft" alt="' + i + '">'+
-                                        '<div class="picture"><img src=""/></div>'+
+                                        '<div class="picture"><?php if($info["PhotoID"]==null) { echo '<img src="'.base_url().'photos/null.jpg"/>';} else {echo '<img src="'.base_url().'photos/'.$info["ID"].'/'.$info["PhotoID"].'.jpg"/>';} ?></div>'+
                                         '<div class="message">'+
                                         '<div class="text">'+el.message+'</div>'+
-                                        '<div class="datetime">'+el.timestamp +'</div>'+
+                                        '<div class="datetime">'+d +'</div>'+
                                         '</div></div>'
                                     );
                                 }
@@ -127,7 +129,7 @@
         foreach($messages as $idMessage=>$message) {
             if ($message['idUser'] == $idUser) {
                 echo '<div class="messagesright" alt="' . $idMessage . '">';
-                echo '<div class="picture"><img src=""/></div>';
+                echo '<div class="picture"><img src="'; if($photoid==null) { echo base_url().'photos/null.jpg"/>';} else {echo base_url().'photos/'.$idUser.'/'.$photoid.'.jpg"/>';} echo '</div>';
                 echo '<div class="message">';
                 echo '<div class="text">'.$message['message'].'</div>';
                 echo '<div class="datetime">'.date('H:i',strtotime($message['timestamp'])).' '.date('d.m.Y',strtotime($message['timestamp'])) .'</div>';
@@ -136,7 +138,7 @@
             }
             else{
                 echo '<div class="messagesleft" alt="' . $idMessage . '">';
-                echo '<div class="picture"><img src=""/></div>';
+                echo '<div class="picture"><img src="'; if($info["PhotoID"]==null) { echo base_url().'photos/null.jpg"/>';} else {echo base_url().'photos/'.$info["ID"].'/'.$info["PhotoID"].'.jpg"/>';} echo '</div>';
                 echo '<div class="message">';
                 echo '<div class="text">'.$message['message'].'</div>';
                 echo '<div class="datetime">'.date('H:i',strtotime($message['timestamp'])).' '.date('d.m.Y',strtotime($message['timestamp'])) .'</div>';
@@ -151,7 +153,7 @@
             <form method="POST" >
                <textarea type="text" name="message" placeholder="Enter username" id="message""></textarea>
                 <input type="text" name="idConversation" id="idConversation" value="<?php echo $idConversation; ?>" hidden/>
-                <div id="sendmessage"><input id="send" type="submit" name="send" value="Send"></div>
+                <div id="sendmessage"><input id="send" style=" color:white;    font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;    width: 120px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;" type="submit" name="send" value="Send"></div>
             </form>
         </div>
 

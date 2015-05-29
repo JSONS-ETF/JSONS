@@ -72,7 +72,7 @@
 
         <div class="questions">
         <div class="picture"><a href="<?php echo'../index.php/profileController/index/'.$row['User1ID']; ?>">
-                                <img src="<?php if($row['User1PhotoId']==null) $photo="null"; else $photo=$row['User1ID'].'/'.$row['User1PhotoId']; echo 'photos/'.$photo.'.jpg';?>" ></a>
+                                <img src="<?php if($row['User1PhotoId']==null) $photo="null"; else $photo=$row['User1ID'].'/'.$row['User1PhotoId']; echo base_url().'photos/'.$photo.'.jpg';?>" ></a>
         <div class="question">
           <div class="username"> <a href="<?php echo'../index.php/profileController/index/'.$row['User1ID']; ?>">
               <?php $lid=$row['ID']; echo $row['Username1']; ?></a>
@@ -87,18 +87,19 @@
 
             <div class="mark">
 
+                <div class="s" style="float:right;line-height: 35px;" id="<?php echo $row['ID']; ?>">  <img src="<?php echo base_url();?>styles/images/slap.png"/></div>
+                <div style="float:right;line-height: 35px;" id="<?php echo $row['ID'] ; ?>S"> <b><?php echo $row['NumSlaps'] ; ?> </b></div>
 
-                <div class="c" id="<?php echo $row['ID']; ?>"><img src="../../../images/cuddle.png"/></div>
-                <div id="<?php echo $row['ID'] ; ?>C"> <b><?php echo $row['NumCuddles'] ; ?></b></div>
+                <div class="c" style="float:right;line-height: 35px;" id="<?php echo $row['ID']; ?>"><img src="<?php echo base_url();?>styles/images/cuddle.png"/></div>
+                <div style="float:right;line-height: 35px;" id="<?php echo $row['ID'] ; ?>C"> <b><?php echo $row['NumCuddles'] ; ?></b></div>
 
-                <div class="s" id="<?php echo $row['ID']; ?>">  <img src="../../../images/slap.png"/></div>
-                <div id="<?php echo $row['ID'] ; ?>S"> <b><?php echo $row['NumSlaps'] ; ?> </b></div>
+
             </div>
 
 
            <?php if ($row['Answers']!=null): ?>
              <?php foreach($row['Answers'] as $row2): ?>
-          <div class="response"><div class="datetime2"><img src="../styles/images/replay.png"/><?php echo  date('d.m.Y H:i',strtotime($row2['DateR'])); ?></div>
+          <div class="response"><div class="datetime2"><img src="<?php echo base_url();?>styles/images/replay.png"/><?php echo  date('d.m.Y H:i',strtotime($row2['DateR'])); ?></div>
           <div class="text">
              <?php echo $row2['TextR']; ?>
           </div>
@@ -134,7 +135,7 @@
       
         <div class="statuses">
             
-             <img src="<?php if($row['UserPhotoId']==null) $photo="null";else $photo=$row['UserID'].'/'.$row['UserPhotoId']; echo 'photos/'. $photo.'.jpg';?>" >
+             <img src="<?php if($row['UserPhotoId']==null) $photo="null";else $photo=$row['UserID'].'/'.$row['UserPhotoId']; echo base_url().'photos/'. $photo.'.jpg';?>" >
           <h2 class="username">
               <a href="<?php echo'../index.php/profileController/index/'.$row['UserID']; ?>" >
                   <?php  echo $row['Username']; ?></a></h2>

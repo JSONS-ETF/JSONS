@@ -22,7 +22,7 @@
     <?php
     foreach($conversations as $idConversation=>$conversation) {
         echo '<a href="'.site_url().'/messages/index/'.$idConversation.'"><div class="conversations" alt="' . $idConversation . '" style="float:left;">'.
-            '<div class="picture"><img src="'.$conversation['picture'].'"/></div>'.
+            '<div class="picture">'; if ($conversation['picture']==null){echo '<img src="'.base_url().'photos/null.jpg"/>';}else echo '<img src="'.base_url().'photos/'.$conversation['idUser'].'/'.$conversation['picture'].'.jpg"/>';echo '</div>'.
             '<div class="message">'.
             '<div class="username">'.$conversation['username'].'</div><div class="datetime">'.date('d.m.Y',strtotime($conversation['timestamp'])).' '.date('H:i',strtotime($conversation['timestamp'])).'</div>' .
              '<div class="text">'.substr ($conversation['message'] ,0, 140).'</div>'.

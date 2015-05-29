@@ -32,21 +32,16 @@ class Homepage extends CI_Controller
 
             $data['records']=array_merge($data1['q'],$data2['s']);
 
-            $this->load->view('templates/header');
+            $page["page"]=0;
+            $this->load->view('templates/header',$page);
             $this->load->view('homepage/home',$data);
         }
         else
         {
             //If no session, redirect to login page
-            redirect('UserLogin', 'refresh');
+            redirect('UserHome/logout', 'refresh');
         }
-
-
-        
     }
-
-
-
 
     function cuddle()
     {
@@ -60,7 +55,7 @@ class Homepage extends CI_Controller
         }
         else
         {
-            redirect('../index.php/UserLogin', 'refresh');
+            redirect('UserHome/logout', 'refresh');
         }
     }
 
@@ -77,7 +72,7 @@ class Homepage extends CI_Controller
         }
         else
         {
-            redirect('../index.php/UserLogin', 'refresh');
+            redirect('UserHome/logout', 'refresh');
         }
     }
     
