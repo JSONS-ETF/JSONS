@@ -8,6 +8,45 @@
     <script src="../../../styles/lightbox/js/lightbox.min.js"></script>
     <link href="../../../styles/styleProfile.css" rel="stylesheet" type="text/css" />
     <link href="../../../styles/lightbox/css/lightbox.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $(".c").click(function(event) {
+            event.preventDefault();
+            var idQ = $(this).attr('id');
+            //alert(idQ);
+            jQuery.ajax({
+                type: "POST",
+                url: "<?php echo site_url();?>/profileController/cuddle",
+                data: {idQ: idQ},
+                success: function (res) {
+                   // alert(res);
+                    document.getElementById(idQ+"C").innerHTML=res;
+                }
+            });
+
+        });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".s").click(function(event) {
+                event.preventDefault();
+                var idQ = $(this).attr('id');
+                //alert(idQ);
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url();?>/profileController/slap",
+                    data: {idQ: idQ},
+                    success: function (res) {
+                        // alert(res);
+                        document.getElementById(idQ+"S").innerHTML=res;
+                    }
+                });
+
+            });
+        });
+    </script>
 </head>
 <body>
 <?php
@@ -22,12 +61,16 @@
         <!--*****************************************************sidebar-->
         <div class="sidebar">
             <div class="user">
-                <img src="../../../images/jane.jpg"/>
-                <h2 class="username"><?php foreach($userInfo as $r) {
-                        if ($r)
-                            echo '<span>' . $r->FirstName . '</span> &nbsp' . $r->LastName;
-                    }
-                    ?></h2>
+                <?php foreach($userInfo as $r): ?>
+                <?php if($r): ?>
+                <img src="<?php echo 'photos/'.$r->ID.'/'.$r->PhotoID.'.jpg'?>"/>
+                <h2 class="username">
+                       <?php
+                            echo '<span>' . $r->FirstName . '</span> &nbsp' . $r->LastName; ?>
+                    <?php endif?>
+                    <?php endforeach ?>
+
+                    </h2>
                 <div class="about"> <?php foreach($userInfo as $r){if($r) echo '<span>'. $r->About.'</span>';} ?>
                 </div>
                 <div class="status"><?php if($status)foreach($status as $stat){if($stat) echo '"'. $stat->Text.'"';} ?></div>
@@ -53,7 +96,7 @@
 
                     <input type="submit" value="upload" />
 
-
+</form>
                 <?php endif; ?>
             </div>
             <div class="gallery">
@@ -99,12 +142,12 @@
                 ?>
             </div>
             <div class="questions">Questions
-                <div class="question"><img src="../../../images/question.png"/>Do you wish you lived in another country? Why?</div>
-                <div class="response"><img src="../../../images/response.png"/>Yes,I wish.Because of the weather.</div>
-                <div class="question"><img src="../../../images/question.png"/>Do you wish you you were younger?</div>
-                <div class="response"><img src="../../../images/response.png"/>No.</div>
-                <div class="question"><img src="../../../images/question.png"/>Do you wish you you were more fashionable? Why?</div>
-                <div class="response"><img src="../../../images/response.png"/>No,I hate fashionable people.</div>
+                <?php foreach($BQ as $b): ?>
+                    <?php if($b): ?>
+                <div class="question"><img src="../../../images/question.png"/><?php echo $b->BQText; ?></div>
+                <div class="response"><img src="../../../images/response.png"/><?php echo $b->BRText; ?></div>
+                        <?php endif ?>
+<?php endforeach ?>
             </div>
 
         </div>
@@ -120,12 +163,12 @@
                     echo '../../profileController/create_status/';}
 
                 else echo '../../profileController/create_question/'.$idCurr?> />
-                    <textarea name="qest" placeholder=<?php
+                    <textarea name="qest" placeholder="<?php
 
-                    if($idCurr == $id)  echo "What's on your mind?";
+                    if($idCurr == $id)  echo 'What\'s on your mind?';
                     else  echo 'Type a question...';
 
-                    ?> ></textarea>
+                    ?>" ></textarea>
                 <input type="submit" value="Post"/>
                 </form>
             </div>
@@ -139,13 +182,14 @@
         <div class="questions">
 
         <div class="picture">
-        <a href=<?php echo'../profileController/index/'.$qu['User1ID']; ?>>    <img src="../../../images/jane.jpg"/></a>
+        <a href=<?php echo'../../profileController/index/'.$qu['User1ID']; ?>>    <img src="<?php if($qu['PhotoID'] != ''){echo 'photos/'.$qu['ID'].'/'.$qu['PhotoID'].'.jpg';}
+                    else{echo 'photos/null.jpg';} ?>"/></a>
 
 
         </div>
         <div class="question">
           <div class="username">
-              <?php echo '<span>'.  $qu['UsernameU2'] . '</span>'; ?>
+              <a href=<?php echo'../../profileController/index/'.$qu['User1ID']; ?>>   <?php echo '<span>'.  $qu['UsernameU2'] . '</span>'; ?></a>
           </div>
             <div class="datetime">
 
@@ -157,12 +201,13 @@
 
 
           <div class="mark">
-              <a href="../../profileController/cuddle/<?php echo $qu['ID'].'/'.$idCurr; ?>" >
-              <img src="../../../images/cuddle.png"/></a>
-              <b><?php echo $qu['NumCuddles'] ; ?></b>
-              <a href="../../profileController/slap/<?php echo $qu['ID'].'/'.$idCurr; ?>">
-                  <img src="../../../images/slap.png"/></a>
-              <b><?php echo $qu['NumSlaps'] ; ?></b>
+
+
+              <div class="c" id="<?php echo $qu['ID']; ?>"><img src="../../../images/cuddle.png"/></div>
+              <div id="<?php echo $qu['ID'] ; ?>C"> <b><?php echo $qu['NumCuddles'] ; ?></b></div>
+
+              <div class="s" id="<?php echo $qu['ID']; ?>">  <img src="../../../images/slap.png"/></div>
+              <div id="<?php echo $qu['ID'] ; ?>S"> <b><?php echo $qu['NumSlaps'] ; ?> </b></div>
           </div>
 
 

@@ -4,37 +4,56 @@ class ProfileController extends CI_Controller {
 
     function __construct(){
         parent::__construct();
+        $this->load->library('session');
         $this->load->model('profile_model');
         $this->load->library('upload');
         $this->load->helper(array('form', 'url'));
     }
     function index($idCurr)
     {
-       // $id = $sess_data['id'];
-        $id = 5;
- 
-        $data['id'] = $id; // ovo izvlacim iz sesije
-        $data['idCurr'] = $idCurr;
 
-        $isBl = $this->profile_model->IsBlocked($idCurr);
-        if($isBl) redirect('profileController/index/'.$id, 'refresh');
 
-        $data['prof'] = $this->profile_model->getAbout($idCurr);
-        $data['status'] = $this->profile_model->getStatus($idCurr);
-        $data['question'] = $this->profile_model->getQuestion($idCurr);
-     //   $data1['q'] =  $this->profile_model->getQuestion();
-       $data['s']= $this->profile_model->getStatuses($idCurr);
-        $data['friends'] = $this->profile_model->isFriend($id,$idCurr);
-        $data['userInfo'] = $this->profile_model->UserData($idCurr);   //  i ovde je current
+       if($this->session->userdata('logged_in'))
+            {
+                $session_data = $this->session->userdata('logged_in');
+                $data['id'] =$session_data['id'];
 
-        $data['photos'] = $this->profile_model->getPhotos($idCurr);
+                $id=$session_data['id'];
 
-        $this->load->view('templates/header');
-       $this->load->view('profile/profile',$data );
+
+
+
+                $data['idCurr'] = $idCurr;
+            // OVO TREBA DA STOJI NEMOJ BRISATI . KAD SE PODESI SESIJA RADICE :)
+             $isBl = $this->profile_model->IsBlocked($idCurr,$id);
+
+            if($isBl) redirect('profileController/index/'.$id, 'refresh');
+else {
+    $data['prof'] = $this->profile_model->getAbout($idCurr);
+    $data['status'] = $this->profile_model->getStatus($idCurr);
+    $data['question'] = $this->profile_model->getQuestion($idCurr);
+    //   $data1['q'] =  $this->profile_model->getQuestion();
+    $data['s'] = $this->profile_model->getStatuses($idCurr);
+    $data['friends'] = $this->profile_model->isFriend($id, $idCurr);
+    $data['userInfo'] = $this->profile_model->UserData($idCurr);   //  i ovde je current
+
+    $data['photos'] = $this->profile_model->getPhotos($idCurr);
+    $data['BQ'] = $this->profile_model->getBQ($idCurr);
+    $this->load->view('templates/header');
+    $this->load->view('profile/profile', $data);
+}
+        }
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
+
     }
     function create($par,$idCurr){
-
-        $id = 1;
+        if($this->session->userdata('logged_in'))
+        {
+            $session_data = $this->session->userdata('logged_in');
+            $id=$session_data['id'];
 
        // $this->load->library('form_validation');
         $this->load->helper('date');
@@ -58,118 +77,212 @@ $resp = $this->profile_model->GetAns($par);
         }
         $this->profile_model->addTableResponses($pd);
         redirect('profileController/index/'.$idCurr,'refresh');
-    }
+        }
+        else
+            {
+                redirect('../index.php/UserLogin', 'refresh');
+            }
+    }//END_CREATE
 
     function create_question($idCurr){
-        $id = 1;
-        $this->load->helper('date');
-        $pd = array(
-            'User1ID' => $id,
-            'User2ID' => $idCurr,
-            'Timestamp' => date('Y-m-d H:i:s'),
-            'Text' =>$this->input->post('qest'),
-            'NumCuddles'=>'0',
-            'NumSlaps'=>'0'
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+            $this->load->helper('date');
+            $pd = array(
+                'User1ID' => $id,
+                'User2ID' => $idCurr,
+                'Timestamp' => date('Y-m-d H:i:s'),
+                'Text' => $this->input->post('qest'),
+                'NumCuddles' => '0',
+                'NumSlaps' => '0'
 
-        );
-        $this->profile_model->addQuestion($pd);
-        redirect('profileController/index/'.$idCurr, 'refresh');
-
-    }
+            );
+            $this->profile_model->addQuestion($pd);
+            redirect('profileController/index/' . $idCurr, 'refresh');
+        }
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
+    } //END_CREATE_QUESTION
 
     function block($idCurr){
-$id = 5;
-        $fr = array(
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
 
-            'Blocker' => $id,
-            'Blockee' => $idCurr
-        );
-        $this->profile_model->addBlock($fr);
+            $fr = array(
 
-        redirect('profileController/index/'.$id,'refresh');
-    }
+                'Blocker' => $id,
+                'Blockee' => $idCurr
+            );
+            $this->profile_model->addBlock($fr);
+
+            redirect('profileController/index/' . $id, 'refresh');
+        }
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
+    } //END_BLOCK
 
     function create_status(){
 
-        $id = 1;        /// iz sesije
-        $this->load->helper('date');
-        $pd = array(
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
 
-            'Timestamp' => date('Y-m-d H:i:s'),
-            'Text' =>$this->input->post('qest'),
-           'UserID'=>$id
-        );
+            $this->load->helper('date');
+            $pd = array(
 
-        $this->profile_model->addStatus($pd);
-        redirect('profileController/index/'.$id, 'refresh');
-    }
+                'Timestamp' => date('Y-m-d H:i:s'),
+                'Text' => $this->input->post('qest'),
+                'UserID' => $id
+            );
+
+            $this->profile_model->addStatus($pd);
+            redirect('profileController/index/' . $id, 'refresh');
+        }
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
+
+    } // END_CREATE_STATUS
 
     function redirect($idCurr)
     {
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
 
-        redirect('profileController/index'.$idCurr, 'refresh');
-    }
+            redirect('profileController/index' . $idCurr, 'refresh');
+        }
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
+    }//END_REDIRECT
 
-    function cuddle($ide,$idCurr)
+    function cuddle()
     {
-        $this->profile_model->cuddle($ide);
-        redirect('profileController/index/'.$idCurr,'refresh');
-    }
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+
+            $idQ = $this->input->post("idQ");
+            echo $this->profile_model->cuddle($idQ);
+            // redirect('profileController/index/'.$idCurr,'refresh');
+        }
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
+    }//END_CUDDLE
+    function slap()
+    {
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+
+            $idQ = $this->input->post("idQ");
+            echo $this->profile_model->slap($idQ);
+            // redirect('profileController/index/'.$idCurr,'refresh');
+        }
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
+    }//END_SLAP
 
     function cuddlePhoto()
     {
-        $idCurr=5;
-        $idPhoto = $this->input->post("idPhoto");
-        echo $this->profile_model->cuddlePhoto($idPhoto);
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+
+
+            $idPhoto = $this->input->post("idPhoto");
+            echo $this->profile_model->cuddlePhoto($idPhoto);
+        } else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
     }
 
     function slapPhoto()
     {
-        $idCurr=5;
-        $idPhoto = $this->input->post("idPhoto");
-        echo $this->profile_model->slapPhoto($idPhoto);
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+
+            $idPhoto = $this->input->post("idPhoto");
+            echo $this->profile_model->slapPhoto($idPhoto);
+        }
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
     }
 
     function deletePhoto($idPhoto)
     {
-        $idCurr=5;
-        $this->profile_model->deletePhoto($idPhoto);
-        redirect('profileController/index/'.$idCurr,'refresh');
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+
+            $idCurr = 5;
+            $this->profile_model->deletePhoto($idPhoto);
+            redirect('profileController/index/' . $idCurr, 'refresh');
+        } else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
+        }
     }
 
     function do_upload()
     {
-        $idUser = 5;
-        $description=$this->input->post("description");
-        $idCurr=$this->input->post("idCurr");
-        $idPhoto= $this->profile_model->newPhoto($idUser,$description);
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $idUser = $session_data['id'];
 
-        $path = 'photos/'.$idUser;
-        if (!file_exists($path)) {
-            mkdir($path);
+
+            $description = $this->input->post("description");
+            $idCurr = $this->input->post("idCurr");
+            $idPhoto = $this->profile_model->newPhoto($idUser, $description);
+
+            $path = 'photos/' . $idUser;
+            if (!file_exists($path)) {
+                mkdir($path);
+            }
+
+            $config['upload_path'] = $path;
+            $config['allowed_types'] = 'jpg';
+            //$config['max_size'] = '100';
+            //$config['max_width'] = '1024';
+            // $config['max_height'] = '768';
+            $config['file_name'] = $idPhoto;
+
+
+            $this->load->library('upload', $config);
+
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload()) {
+                $data["err"] = array('error' => $this->upload->display_errors());
+                $data["path"] = $path;
+                $this->load->view('profile/profile', $data);
+                // redirect('profileController/index/'.$idCurr,'refresh');
+            } else {
+                //$data = array('upload_data' => $this->upload->data());
+
+                redirect('profileController/index/' . $idCurr, 'refresh');
+            }
         }
-
-        $config['upload_path'] = $path;
-        $config['allowed_types'] = 'gif|jpg|png';
-        //$config['max_size'] = '100';
-        //$config['max_width'] = '1024';
-        // $config['max_height'] = '768';
-        $config['file_name'] = $idPhoto;
-
-
-        $this->load->library('upload', $config);
-
-        $this->upload->initialize($config);
-
-        if (!$this->upload->do_upload()) {
-            $data["err"] = array('error' => $this->upload->display_errors());
-            $data["path"]=$path;
-            $this->load->view('profile/profile',$data );
-           // redirect('profileController/index/'.$idCurr,'refresh');
-        } else {
-            //$data = array('upload_data' => $this->upload->data());
-
-            redirect('profileController/index/'.$idCurr,'refresh');
+        else
+        {
+            redirect('../index.php/UserLogin', 'refresh');
         }
     }
 

@@ -26,11 +26,15 @@ function GetAns($i){
     }
 }
 
-    function getAbout($id)
+    function getAbout($idU)
     {
 
         $data = "";
-        $q = $this->db->get_where('users', array('ID' => $id));
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('users.ID',$idU);
+        $q = $this->db->get();
+        //$q = $this->db->get_where('users', array('ID' => $id));
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $m) {
                 $data[] = $m;
@@ -65,7 +69,7 @@ function GetAns($i){
     {
 
         $zavrsni = array();
-        $this->db->select('questions.ID as ID, questions.User1ID as U1, questions.User2ID as U2, questions.Timestamp as QDate,questions.Text as QText, questions.NumCuddles as NumCuddles, questions.NumSlaps as NumSlaps, users.FirstName as Name, users.Username as UsernameU2 ,users.LastName as Surname,');
+        $this->db->select('questions.ID as ID, questions.User1ID as U1, questions.User2ID as U2, questions.Timestamp as QDate,questions.Text as QText, questions.NumCuddles as NumCuddles, questions.NumSlaps as NumSlaps, users.FirstName as Name, users.Username as UsernameU2 ,users.LastName as Surname,users.PhotoID as PhotoID,');
         $this->db->from('questions');
         $this->db->where('User2ID',$currId);
         $this->db->join('users','questions.User1ID = users.ID');
@@ -117,6 +121,7 @@ array(
     'Name' => $row->Name,
     'UsernameU2' => $row->UsernameU2 ,
     'LastName'=> $row->Surname,
+    'PhotoID' => $row->PhotoID,
     'odg'=> $odgovori
 )
 );
@@ -219,18 +224,42 @@ return $zavrsni;
             return $data;
 
         }
-        return NUll;
+     //   return NUll;
     }
 
 
     function cuddle($id)
+{
+    $this->db->trans_start();
+    $this->db->set('questions.NumCuddles', 'NumCuddles+1', FALSE);
+    $this->db->where('questions.ID', $id);
+    $this->db->update('questions');
+
+    $this->db->select('NumCuddles')->from('Questions');
+    $this->db->where('ID', $id);
+    $query = $this->db->get();
+    $cud=$query->row('NumCuddles');
+
+    $this->db->trans_complete();
+    return $cud;
+}
+
+    function slap($id)
     {
-        $this->db->set('questions.NumCuddles', 'NumCuddles+1', FALSE);
-        $this->db->where('questions.ID', $id);
+        $this->db->trans_start();
+        $this->db->set('NumSlaps', 'NumSlaps+1', FALSE);
+        $this->db->where('ID', $id);
         $this->db->update('questions');
 
-    }
+        $this->db->select('NumSlaps')->from('Questions');
+        $this->db->where('ID', $id);
+        $query = $this->db->get();
+        $cud=$query->row('NumSlaps');
 
+        $this->db->trans_complete();
+        return $cud;
+
+    }
     function cuddlePhoto($idPhoto)
     {
         $this->db->trans_start();
@@ -269,35 +298,35 @@ return $zavrsni;
         $this->db->delete('Photos', array('ID' => $idPhoto));
     }
 
-    function slap($id)
-    {
 
-        $this->db->set('NumSlaps', 'NumSlaps+1', FALSE);
-        $this->db->where('ID', $id);
-        $this->db->update('questions');
-    }
 
     function addBlock($pd){
 $this->db->insert('Blocks',$pd);
     }
-    function IsBlocked($id_User){
 
-        $id =1;
+    function IsBlocked($id_User,$id){
+
         $a1 = array('Blocker' => $id, 'Blockee' => $id_User);
         $a2 = array('Blockee' => $id, 'Blocker' => $id_User);
         $this->db->select('*');
         $this->db->from('Blocks');
-        $this->db->where($a1);
-        $this->db->or_where($a2);
+        //$this->db->where($a1);
+        //$this->db->or_where($a2);
+        $this->db->where('Blocker', $id);
+        $this->db->where('Blockee', $id_User);
+        $this->db->or_where('Blockee', $id);
+        $this->db->where('Blocker', $id_User);
+
         $q = $this->db->get();
 
         if ($q->num_rows() > 0) {
-            foreach ($q->result() as $m) {
+            return TRUE;
+            /*foreach ($q->result() as $m) {
                 $data[] = $m;
             }
-            return $data;
+            return $data;*/
         }
-        return NULL;
+        return FALSE;
 
 
 
@@ -323,7 +352,22 @@ $this->db->insert('Blocks',$pd);
 
         return $idPhoto;
     }
+function getBQ($idCurr){
+    $this->db->select('BaseQuestions.ID as BID, BaseQuestions.Text as BQText, Baseresponses.Text as BRText ');
+    $this->db->from('Baseresponses');
+    $this->db->where('Baseresponses.UserID',$idCurr);
+    $this->db->join('BaseQuestions','BaseQuestions.ID = Baseresponses.QuestionID');
+   // $this->db->order_by('questions.Timestamp', 'DESC');
+    $q = $this->db->get();
 
+    if ($q->num_rows() > 0) {
+        foreach ($q->result() as $row) {
+            $data[] = $row;
+
+        }
+        return $data;
+    }
+}
 
 }
 
