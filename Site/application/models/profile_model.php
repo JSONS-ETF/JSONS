@@ -280,7 +280,28 @@ return $zavrsni;
     function addBlock($pd){
 $this->db->insert('Blocks',$pd);
     }
+    function IsBlocked($id_User){
 
+        $id =1;
+        $a1 = array('Blocker' => $id, 'Blockee' => $id_User);
+        $a2 = array('Blockee' => $id, 'Blocker' => $id_User);
+        $this->db->select('*');
+        $this->db->from('Blocks');
+        $this->db->where($a1);
+        $this->db->or_where($a2);
+        $q = $this->db->get();
+
+        if ($q->num_rows() > 0) {
+            foreach ($q->result() as $m) {
+                $data[] = $m;
+            }
+            return $data;
+        }
+        return NULL;
+
+
+
+    }
     function newPhoto($idUser,$description){
 
         $this->db->trans_start();
@@ -302,6 +323,8 @@ $this->db->insert('Blocks',$pd);
 
         return $idPhoto;
     }
+
+
 }
 
 

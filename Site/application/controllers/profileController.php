@@ -16,6 +16,9 @@ class ProfileController extends CI_Controller {
         $data['id'] = $id; // ovo izvlacim iz sesije
         $data['idCurr'] = $idCurr;
 
+        $isBl = $this->profile_model->IsBlocked($idCurr);
+        if($isBl) redirect('profileController/index/'.$id, 'refresh');
+
         $data['prof'] = $this->profile_model->getAbout($idCurr);
         $data['status'] = $this->profile_model->getStatus($idCurr);
         $data['question'] = $this->profile_model->getQuestion($idCurr);
@@ -83,7 +86,7 @@ $id = 5;
         );
         $this->profile_model->addBlock($fr);
 
-        redirect('profileController/index/'.$idCurr,'refresh');
+        redirect('profileController/index/'.$id,'refresh');
     }
 
     function create_status(){
@@ -169,5 +172,7 @@ $id = 5;
             redirect('profileController/index/'.$idCurr,'refresh');
         }
     }
+
+
 
 }
