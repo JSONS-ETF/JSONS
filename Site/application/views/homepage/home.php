@@ -31,7 +31,7 @@ include ("header.php");
 
         <div class="questions">
         <div class="picture"><a href="<?php echo'../index.php/profileController/index/'.$row['User1ID']; ?>">
-                                <img src="../styles/images/jane.jpg"/></a>
+                                <img src=<?php echo 'photos/'.$row['User1ID'].'/'.idphoto.'.jpg'></a>
         <div class="question">
           <div class="username"> <a href="<?php echo'../index.php/profileController/index/'.$row['User1ID']; ?>">
               <?php $lid=$row['ID']; echo $row['Username1']; ?></a>

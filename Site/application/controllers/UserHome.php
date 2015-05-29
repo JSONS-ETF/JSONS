@@ -33,8 +33,8 @@ class UserHome extends CI_Controller {
     function logout()
     {
         $this->session->unset_userdata('logged_in');
-        session_destroy();
-        redirect('UserHome', 'refresh');
+        //session_destroy();
+        redirect('UserLogin', 'refresh');
     }
 }
 

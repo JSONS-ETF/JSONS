@@ -27,7 +27,7 @@ class messages extends CI_controller{
 
             $data['idConversation']=$idConversation;
 
-            $this->load->view('templates/header');
+            //$this->load->view('templates/header');
             $this->load->view('conversations/MessagesView', $data);
         }
         else
