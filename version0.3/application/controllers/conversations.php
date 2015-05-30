@@ -1,4 +1,4 @@
-//Milos Kotlar 115/12
+<!--Milos Kotlar 115/12-->
 <?php
 /**
  * Created by PhpStorm.
@@ -54,7 +54,7 @@ class conversations extends CI_controller{
             if ($idConversation!=-1)
                 redirect(base_url().'index.php/messages/index/'.$idConversation, 'refresh');
             else
-                redirect(base_url().'index.php/conversations','refresh');
+                redirect(base_url().'index.php/conversations/','refresh');
         }
         else
         {

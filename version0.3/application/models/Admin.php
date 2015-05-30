@@ -1,4 +1,4 @@
-//Stevan Milicic
+<!--Stevan Milicic-->
 <?php
 Class Admin extends CI_Model
 {

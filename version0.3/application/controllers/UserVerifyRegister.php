@@ -1,4 +1,4 @@
-//Stevan Milicic
+<!--Stevan Milicic-->
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class UserVerifyRegister extends CI_Controller

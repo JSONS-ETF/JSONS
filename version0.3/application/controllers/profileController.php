@@ -1,4 +1,4 @@
-//Maja Zivkovic 528/12
+<!--Maja Zivkovic 528/12-->
 <?php
 
 class ProfileController extends CI_Controller {
@@ -234,7 +234,22 @@ $resp = $this->profile_model->GetAns($par);
     {
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
+
+            $username = $session_data['id'];
             $id = $session_data['id'];
+            $photoid = $session_data['photoid'];
+
+            if ($idPhoto==$photoid){
+                $sess_array = array(
+                    'id' =>  $id,
+                    'username' => $username,
+                    'photoid' => $photoid
+                );
+
+                $this->session->set_userdata('logged_in', $sess_array);
+
+                $this->profile_model->deleteProfilePhoto($id);
+            }
 
             $this->profile_model->deletePhoto($idPhoto);
             redirect('profileController/index/' . $id, 'refresh');
@@ -249,6 +264,8 @@ $resp = $this->profile_model->GetAns($par);
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $idUser = $session_data['id'];
+            $username = $session_data['id'];
+
 
 
             $description = $this->input->post("description");
@@ -279,7 +296,13 @@ $resp = $this->profile_model->GetAns($par);
                 // redirect('profileController/index/'.$idCurr,'refresh');
             } else {
                 //$data = array('upload_data' => $this->upload->data());
+                $sess_array = array(
+                    'id' =>  $idUser,
+                    'username' => $username,
+                    'photoid' => $idPhoto
+                );
 
+                $this->session->set_userdata('logged_in', $sess_array);
                 redirect('profileController/index/' . $idCurr, 'refresh');
             }
         }

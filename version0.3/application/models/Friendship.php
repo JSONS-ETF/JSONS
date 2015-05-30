@@ -1,4 +1,4 @@
-//Stevan Milicic
+<!--Stevan Milicic-->
 <?php
 Class Friendship extends CI_Model
 {

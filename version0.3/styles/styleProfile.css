@@ -25,16 +25,16 @@ html { padding:0; margin:0;}
 .content .sidebar .questions .question {margin:5px;font-size:12px;color:#6c94b8;}
 .content .sidebar .questions .response {margin:5px;font-size:13px;font-weight: bold;}
 
-.content .mainbar { margin:0; padding:0; float:left; width:670px;text-align: left; margin-top:20px;}
+.content .mainbar { margin:0; padding:0; float:left; width:670px;text-align: left; margin-top:0px;}
 
 .content .mainbar .ask{display: table;margin-bottom:30px;}
-.content .mainbar .ask textarea { resize:none;width:640px;font-family: Verdana; padding:10px;margin:0 0 10px 10px;height:50px;}
+.content .mainbar .ask textarea { resize:none;width:660px;font-family: Verdana; padding:10px;margin:0 0 10px 10px;height:50px;}
 .content .mainbar .ask input { color:white;font-family:Helvetica;font-size:16px; background: #6c94b8;padding:10px;width:150px;border-radius: 30px;border:0;float:right;clear:both; }
 
 .content .mainbar .questions {background: #f2eee8; padding:15px 5px 15px 5px; display: table;width:655px; border:2px solid #e0dcd7; margin:15px 5px 15px 5px;}
-.content .mainbar .questions .picture{ height:100%;float:left;position: :relative;}
+.content .mainbar .questions .picture{ height:100%;float:left;position :relative;}
 .content .mainbar .questions .picture img{ height: 50px;width: 50px; border-radius: 150px;border:0;}
-.content .mainbar .questions .question {position: :relative;float:left;width:550px;height:100%;padding-top:10px;font-family: Helvetica;padding-left:10px; }
+.content .mainbar .questions .question {position :relative;float:left;width:550px;height:100%;padding-top:10px;font-family: Helvetica;padding-left:10px; }
 .content .mainbar .questions .question .username { color:#57575f; font-size:15px; font-weight: bold; float:left; }
 .content .mainbar .questions .question .datetime { color:#b7b5b4; font-size:12px; float:right; }
 .content .mainbar .questions .question .text { color:#605e58; font-size:14px; float:left;text-align: left;clear:both;margin-top:10px; }

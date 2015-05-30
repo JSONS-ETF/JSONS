@@ -25,7 +25,10 @@
 .menu_nav ul li a { display:block; margin:0; padding:20px; color:#52aec6; text-decoration:none; font-size:13px; text-transform:uppercase;}
 .menu_nav ul li a img{width:22px; height:22px;}
 .menu_nav ul li.active a, .menu_nav ul li a:hover { background:#80A8CC; border-radius: 1300px;}
- </style>
+.header_resize .button{color:white;font-family:Helvetica;font-size:16px; background: #6c94b8;padding:10px;width:80px;cursor:pointer;margin:0 0 0 5px;border:0px;border-radius: 10px;position:relative;float:left; text-align:center;margin-top:15px;}
+.header_resize input{color:black;  border: 2px solid #e0dcd7;font-family:Helvetica;font-size:16px; background: white;padding:10px;width:180px;margin:0 0 0 5px;border-radius: 10px;position:relative;float:left; text-align:center;margin-top:14px}
+
+</style>
 
  <div class="header">
     <div class="header_resize">
@@ -36,14 +39,15 @@
           <li <?php if($page==0) echo ' class="active"'; ?>><a href="<?php echo site_url()?>/homepage"><img src="<?php echo base_url()?>styles/images/home.png"></a></li>
           <li <?php if($page==1) echo ' class="active"'; ?>><a href="<?php echo site_url()?>/conversations"><img src="<?php echo base_url()?>styles/images/inbox.png"></a></li>
           <li <?php if($page==2) echo ' class="active"'; ?>><a href="<?php echo site_url()?>/profilecontroller/index/<?php echo $id;?>"><img src="<?php echo base_url()?>styles/images/profile.png"></a></li>
-          <li style="position:relative;left:370px;"><a href="UserHome/logout"><img src="<?php echo base_url()?>styles/images/logout.png"></a></li>
+
+              <li> <form method="post" action=<?php echo site_url();?>/homepage/findUser> <input type="text" name="newUser" id="newUser" class="newUser" placeholder="Enter username"/>
+               <input id="send" type="submit" name="send" value="Search" class="button"> </form></li>
+
+            <li style="position:relative;left:100px;"><a href="UserHome/logout"><img src="<?php echo base_url()?>styles/images/logout.png"></a></li>
         </ul>
       </div>
 
-        <form method="post" action=<?php echo site_url();?>/homepage/findUser>
-        <input type="text" name="newUser" id="newUser" class="newUser" placeholder="Enter username"/><br/>
-        <input id="send" type="submit" name="send" value="Send" class="newConversationButton">
-        </form>
+
     <div class="clr"></div>
     </div>
   </div>

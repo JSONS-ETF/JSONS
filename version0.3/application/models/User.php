@@ -1,4 +1,4 @@
-//Stevan Milicic
+<!--Stevan Milicic-->
 <?php
 Class User extends CI_Model
 {

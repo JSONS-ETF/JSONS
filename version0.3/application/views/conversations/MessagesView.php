@@ -26,7 +26,7 @@
                 start = new Date().getTime();
                 while (lockSend===1);
                 lockCheck=1;
-                document.getElementById('send').disabled = true;
+                document.getElementById('sendM').disabled = true;
 
                 jQuery.ajax({
                     type: "POST",
@@ -52,7 +52,7 @@
                                     '<div class="picture"><?php if($photoid==null) { echo '<img src="'.base_url().'photos/null.jpg"/>';} else {echo '<img src="'.base_url().'photos/'.$idUser.'/'.$photoid.'.jpg"/>';}?></div>'+
                                     '<div class="message">'+
                                     '<div class="text">'+el.message+'</div>'+
-                                    '<div class="datetime">'+d+'</div>'+
+                                    '<div class="datetime">'+(el.timestamp.split(/[- :]/))[3]+':'+(el.timestamp.split(/[- :]/))[4]+' '+(el.timestamp.split(/[- :]/))[2]+'.'+(el.timestamp.split(/[- :]/))[1]+'.'+(el.timestamp.split(/[- :]/))[0]+'</div>'+
                                     '</div></div>'
                                     );
                                     flag=0;
@@ -62,7 +62,7 @@
                                         '<div class="picture"><?php if($info["PhotoID"]==null) { echo '<img src="'.base_url().'photos/null.jpg"/>';} else {echo '<img src="'.base_url().'photos/'.$info["ID"].'/'.$info["PhotoID"].'.jpg"/>';} ?></div>'+
                                         '<div class="message">'+
                                         '<div class="text">'+el.message+'</div>'+
-                                        '<div class="datetime">'+d +'</div>'+
+                                        '<div class="datetime">'+(el.timestamp.split(/[- :]/))[3]+':'+(el.timestamp.split(/[- :]/))[4]+' '+(el.timestamp.split(/[- :]/))[2]+'.'+(el.timestamp.split(/[- :]/))[1]+'.'+(el.timestamp.split(/[- :]/))[0]+'</div>'+
                                         '</div></div>'
                                     );
                                 }
@@ -83,16 +83,16 @@
                     }
                 });
                 lockCheck=0;
-                document.getElementById('send').disabled = false;
+                document.getElementById('sendM').disabled = false;
                 end = new Date().getTime();
             }, 1000);
 
 
 
-            $("#send").click(function(event) {
+            $("#sendM").click(function(event) {
                 while (lockCheck==1);
                 lockSend=1;
-                document.getElementById('send').disabled = true;
+                document.getElementById('sendM').disabled = true;
 
                 event.preventDefault();
                 var message = $("#message").val();
@@ -112,7 +112,7 @@
                     });
                 }
                 lockSend=0;
-                document.getElementById('send').disabled = false;
+                document.getElementById('sendM').disabled = false;
             });
 
         });
@@ -154,7 +154,7 @@
             <form method="POST" >
                <textarea type="text" name="message" placeholder="Enter username" id="message""></textarea>
                 <input type="text" name="idConversation" id="idConversation" value="<?php echo $idConversation; ?>" hidden/>
-                <div id="sendmessage"><input id="send" style=" color:white;    font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;    width: 120px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;" type="submit" name="send" value="Send"></div>
+                <div id="sendmessage"><input id="sendM" style=" color:white; border:0px;   font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;    width: 120px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;" type="submit" name="send" value="Send"></div>
             </form>
         </div>
 

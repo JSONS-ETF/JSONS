@@ -9,6 +9,37 @@
     <script src="../../../styles/lightbox/js/lightbox.min.js"></script>
     <link href="../../../styles/styleProfile.css" rel="stylesheet" type="text/css" />
     <link href="../../../styles/lightbox/css/lightbox.css" rel="stylesheet" />
+    <style Stylesheet="text/css">
+        a{
+            color:slategray;
+            text-decoration:none;
+        }
+        .custom-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+        .custom-file-input::before {
+            content: 'Select picture';
+            display: inline-block;
+            background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+            border: 1px solid #999;
+            border-radius: 3px;
+            padding: 8px 15px;
+            outline: none;
+            white-space: nowrap;
+            -webkit-user-select: none;
+            cursor: pointer;
+            text-shadow: 1px 1px #fff;
+            font-weight: 700;
+            font-size: 10pt;
+            margin-left:60px;
+        }
+        .custom-file-input:hover::before {
+            border-color: black;
+        }
+        .custom-file-input:active::before {
+            background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+        }
+    </style>
     <script type="text/javascript">
         $(document).ready(function() {
         $(".c").click(function(event) {
@@ -64,7 +95,7 @@
             <div class="user">
                 <?php foreach($userInfo as $r): ?>
                 <?php if($r): ?>
-            <img src="<?php if($r->PhotoID==null and $r->PhotoID!=0) $photo="null"; else $photo=$r->ID.'/'.$r->PhotoID; echo base_url().'photos/'.$photo.'.jpg';?>" >
+            <img src="<?php if($r->PhotoID==null) $photo="null"; else $photo=$r->ID.'/'.$r->PhotoID; echo base_url().'photos/'.$photo.'.jpg';?>" >
                 <h2 class="username">
                        <?php
                             echo '<span>' . $r->FirstName . '</span> &nbsp' . $r->LastName; ?>
@@ -78,8 +109,11 @@
                 <?php
 
                 if(($friends != null) && ($id!=$idCurr)): ?>
-                <a href=""><div class="button">Send message</div></a>
-
+                    <?php echo validation_errors(); ?>
+                    <?php echo form_open('conversations/newConversation'); ?>
+                <input type="text" name="newUser" id="newUser" class="newUser" value="<?php echo $r->Username; ?>" hidden/>
+                <input id="send" type="submit" name="send" value="Send Message" class="button" style="border:0;cursor:pointer;">
+            </form>
 
                 <?php endif; ?>
 
@@ -88,16 +122,16 @@
                 if($id==$idCurr): ?>
                     <?php echo form_open_multipart('profileController/do_upload');?>
 
-                    <input type="file" name="userfile" size="20" />
+                    <input type="file" name="userfile" class="custom-file-input"/>
 
-                    <textarea name="description" cols="20" rows="5" /></textarea>
+                    <textarea name="description" style="   border: 2px solid #e0dcd7;color:black; border:0px;   font-family: Helvetica;    font-size: 14px;    background: white;    padding: 10px;    width: 170px;    border-radius: 10px;    position: relative; resize:none;" placeholder="Description"/></textarea>
                     <input name="idCurr" value="<?php echo $idCurr; ?>" hidden/>
 
-                    <br /><br />
+                    <br />
 
-                    <input type="submit" value="upload" />
+                    <input type="submit" value="Upload" style=" color:white; border:0px;   font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;    width: 120px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;"/>
 
-</form>
+            </form>
                 <?php endif; ?>
             </div>
             <div class="gallery">
@@ -118,7 +152,7 @@
                         '});'.
                         '       });'.
                         '</script>';
-                    echo '<img class=\'ccc\' src=\''.base_url().'styles/images/cuddle.png\'/><div id=\''.$idPhoto.'C\'>'.$photo["cuddles"].'</div>';
+                    echo '<div style=\'float:left;line-height:35px;text-align:left;\'><img class=\'ccc\' src=\''.base_url().'styles/images/cuddle.png\' style=\'width:20px;height:20px;margin:5px;border:3px solid #6C94B8;border-radius:150px;cursor:pointer;\'/><div style=\'float:left;\' id=\''.$idPhoto.'C\'>'.$photo["cuddles"].'</div></div>';
                     echo '<script type=\'text/javascript\'>'.
                         '$(\'.sss\').click(function(){'.
                         'var idPhoto='.$idPhoto.';'.
@@ -132,10 +166,10 @@
                         '});'.
                         '       });'.
                         '</script>';
-                       echo '<img class=\'sss\' src=\''.base_url().'styles/images/slap.png\'/><div id=\''.$idPhoto.'S\'>'.$photo["slaps"].'</div>'.
-                        '<span style=\'padding-left:50px;\'>'.$photo["description"].'</span>';
+                       echo '<div style=\'float:left;line-height:35px;text-align:left;\'><img class=\'sss\' src=\''.base_url().'styles/images/slap.png\' style=\'width:20px;height:20px;margin:5px;border:3px solid #6C94B8;border-radius:150px;cursor:pointer;\'/><div style=\'float:left;\' id=\''.$idPhoto.'S\'>'.$photo["slaps"].'</div></div>'.
+                        '<span style=\'padding-left:50px;line-height:35px;\'>'.$photo["description"].'</span>';
                     if ($id==$idCurr)
-                        echo '<span style=\'float:right;\'><a href=\'../../profileController/deletePhoto/'.$idPhoto.'\' >Delete</a></span>';
+                        echo '<span style=\'float:right;\'><a href=\'../../profileController/deletePhoto/'.$idPhoto.'\' style=\' color:white; border:0px;   font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px; line-height:35px;   width: 120px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;text-decoration:none;\' >Delete</a></span>';
 
                     echo '"><img src="'.base_url().'photos/'.$id.'/'.$idPhoto.'.jpg"/></a>';
 
@@ -202,22 +236,22 @@
 
           <div class="mark">
 
+              <div style="float:right;line-height: 35px;" class="s" id="<?php echo $qu['ID']; ?>">  <img src="<?php echo base_url();?>styles/images/slap.png"/></div>
+              <div style="float:right;line-height: 35px;" id="<?php echo $qu['ID'] ; ?>S"> <b><?php echo $qu['NumSlaps'] ; ?> </b></div>
+              <div style="float:right;line-height: 35px;" class="c" id="<?php echo $qu['ID']; ?>"><img src="<?php echo base_url();?>styles/images/cuddle.png"/></div>
+              <div style="float:right;line-height: 35px;" id="<?php echo $qu['ID'] ; ?>C"> <b><?php echo $qu['NumCuddles'] ; ?></b></div>
 
-              <div class="c" id="<?php echo $qu['ID']; ?>"><img src="<?php echo base_url();?>styles/images/cuddle.png"/></div>
-              <div id="<?php echo $qu['ID'] ; ?>C"> <b><?php echo $qu['NumCuddles'] ; ?></b></div>
 
-              <div class="s" id="<?php echo $qu['ID']; ?>">  <img src="<?php echo base_url();?>styles/images/slap.png"/></div>
-              <div id="<?php echo $qu['ID'] ; ?>S"> <b><?php echo $qu['NumSlaps'] ; ?> </b></div>
           </div>
 
 
 
             <form method="post" accept-charset="utf-8" action = <?php  echo '../../profileController/create/'.$qu['ID'].'/'.$idCurr ?> />
-            <table>
+            <table style="clear:both;">
 
                 <?php if($idCurr == $id) {
-                        echo '<tr>' . '<td>' . ' <input type=' . 'text name=' . 'ans>' . '</td>' . '</tr>' .
-                            '<tr>' . '<td>' . '<input class="buttonB" type=' . 'submit' . ' value=' . 'Answer' . '>' . '</td>' . '</tr>';
+                        echo '<tr>' . '<td>' . ' <input style=\'color:black; border:0px;   font-family: Helvetica;    font-size: 14px;    background: white;    border: 2px solid #e0dcd7;  padding: 10px;    width: 452px;    border-radius: 10px;    position: relative;\' type=' . 'text name=' . 'ans>'.
+                            '<input class="buttonB" style=\' color:white; border:0px;   font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;    width: 80px; margin-left:10px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;\' type=' . 'submit' . ' value=' . 'Answer' . '>' . '</td>' . '</tr>';
                     }
                         ?>
 
@@ -263,7 +297,7 @@
             <?php if($s)foreach($s as $stat): ?>
                 <div class="statuses">
                     <div class="status"><?php if($stat){
-                            echo $stat->Text .'&nbsp&nbsp' .'</br>'. date('d.m.Y H:i',strtotime($stat->Timestamp));
+                            echo '"'.$stat->Text .'"<div style=" margin-top:5px; color: gray; font-size: 12px;">'. date('d.m.Y H:i',strtotime($stat->Timestamp)).'</div>';
                             $counter++;
                         }   ?></div>
                 </div>

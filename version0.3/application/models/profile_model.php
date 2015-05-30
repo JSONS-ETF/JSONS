@@ -1,4 +1,4 @@
-//Maja Zivkovic 528/12 Milos Kotlar 115/12
+<!--Maja Zivkovic 528/12 Milos Kotlar 115/12-->
 <?php
 
 class Profile_model extends CI_Model
@@ -298,6 +298,13 @@ return $zavrsni;
     {
         $this->db->delete('Photos', array('ID' => $idPhoto));
     }
+
+    function deleteProfilePhoto($idUser)
+    {
+        $this->db->query('UPDATE users SET PhotoID=NULL WHERE ID='.$idUser);
+    }
+
+
 
 
 

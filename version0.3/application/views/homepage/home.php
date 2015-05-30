@@ -6,6 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="../styles/styleHomepage.css" rel="stylesheet" type="text/css" />
  <style>
+     a{
+         color:slategray;
+         text-decoration:none;
+     }
   <?php $s=true;$m=true;?>
 </style>
 <!--<link href="styleHomepage.css" rel="stylesheet" type="text/css" />-->
@@ -75,11 +79,12 @@
         <div class="questions">
         <div class="picture"><a href="<?php echo'../index.php/profileController/index/'.$row['User1ID']; ?>">
                                 <img src="<?php if($row['User1PhotoId']==null) $photo="null"; else $photo=$row['User1ID'].'/'.$row['User1PhotoId']; echo base_url().'photos/'.$photo.'.jpg';?>" ></a>
+        </div>
         <div class="question">
           <div class="username"> <a href="<?php echo'../index.php/profileController/index/'.$row['User1ID']; ?>">
               <?php $lid=$row['ID']; echo $row['Username1']; ?></a>
               <span style="font-weight:normal;">asks</span> 
-              <a href="<?php echo'../index.php/profileController/index/'.$row['User1ID']; ?>">
+              <a href="<?php echo'../index.php/profileController/index/'.$row['User2ID']; ?>">
              <?php echo $row['Username2']; ?></a></div>
             
             <div class="datetime"><?php echo  date('d.m.Y H:i',strtotime($row['DateQ'])); ?></div>
@@ -111,7 +116,7 @@
           
           
         </div>
-        </div>
+
       </div>
           
      <?php endif; ?>
@@ -131,19 +136,19 @@
      <div class="sidebar">
          <?php if($s==true):$s=false; ?>
      
-         <h2 class="head"><b>Statuses</b></h2>
+         <h2 class="head">Status</h2>
                 
             <?php endif; ?>
       
         <div class="statuses">
             
              <img src="<?php if($row['UserPhotoId']==null) $photo="null";else $photo=$row['UserID'].'/'.$row['UserPhotoId']; echo base_url().'photos/'. $photo.'.jpg';?>" >
-          <h2 class="username">
-              <a href="<?php echo'../index.php/profileController/index/'.$row['UserID']; ?>" >
+          <h2 class="username" >
+              <a style="  color: white;" href="<?php echo'../index.php/profileController/index/'.$row['UserID']; ?>" >
                   <?php  echo $row['Username']; ?></a></h2>
 
-          <div class="status"><b><?php echo $row['TextS']; ?></b></div>
-          <div class="statusd"><?php echo date('d.m.Y H:i',strtotime($row['Date'])); ?></div>
+          <div class="status" style="  font-size: 15px; font-style: italic;">"<?php echo $row['TextS']; ?>"</div>
+          <div class="statusd" style=" margin-top:5px; color: gray; font-size: 12px;"><?php echo date('d.m.Y H:i',strtotime($row['Date'])); ?></div>
         
         </div>
         
