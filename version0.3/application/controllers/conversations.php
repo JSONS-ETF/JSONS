@@ -44,17 +44,15 @@ class conversations extends CI_controller{
         {
             $session_data = $this->session->userdata('logged_in');
             $data['idUser'] =$session_data['id'];
-            $data['username'] =$session_data['username'];
-            $data['photo'] =$session_data['photoid'];
             $idUser=$session_data['id'];
 
             $newUser=$this->input->post("newUser");
             $idConversation=$this->ConversationModel->newConversation($idUser,$newUser);
 
-            if ($idConversation!=-1)
+            if ($idConversation>-1)
                 redirect(base_url().'index.php/messages/index/'.$idConversation, 'refresh');
             else
-                redirect(base_url().'index.php/conversations/','refresh');
+                redirect(base_url().'index.php/conversations/'.$idConversation,'refresh');
         }
         else
         {

@@ -43,7 +43,7 @@
               <li> <form method="post" action=<?php echo site_url();?>/homepage/findUser> <input type="text" name="newUser" id="newUser" class="newUser" placeholder="Enter username"/>
                <input id="send" type="submit" name="send" value="Search" class="button"> </form></li>
 
-            <li style="position:relative;left:100px;"><a href="UserHome/logout"><img src="<?php echo base_url()?>styles/images/logout.png"></a></li>
+            <li style="position:relative;left:100px;"><a href="<?php echo site_url()?>/UserHome/logout"><img src="<?php echo base_url()?>styles/images/logout.png"></a></li>
         </ul>
       </div>
 

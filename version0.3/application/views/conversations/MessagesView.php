@@ -1,4 +1,3 @@
-<!-- Milos Kotlar 115/12 -->
 <html>
 <head>
     <title>Chat</title>
@@ -28,6 +27,7 @@
                 lockCheck=1;
                 document.getElementById('sendM').disabled = true;
 
+
                 jQuery.ajax({
                     type: "POST",
                     dataType: 'json',
@@ -35,9 +35,9 @@
                     data: {idConversation:<?php echo $idConversation; ?>,diff:diff},
                     url: "<?php echo site_url();?>/messages/checkMessage",
                     success: function(data) {
-                       console.log(JSON.stringify(data));
+                        console.log(JSON.stringify(data));
 
-                        //alert(JSON.stringify(data));
+                       // alert(JSON.stringify(data));
                         $.each(data,function(i,el)
                         {
 
@@ -48,12 +48,12 @@
                                 var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
                                 if (el.idUser ==<?php echo $idUser;?>) {
                                     $('.mainbar').append(
-                                    '<div class="messagesright" alt="' + i + '">'+
-                                    '<div class="picture"><?php if($photoid==null) { echo '<img src="'.base_url().'photos/null.jpg"/>';} else {echo '<img src="'.base_url().'photos/'.$idUser.'/'.$photoid.'.jpg"/>';}?></div>'+
-                                    '<div class="message">'+
-                                    '<div class="text">'+el.message+'</div>'+
-                                    '<div class="datetime">'+(el.timestamp.split(/[- :]/))[3]+':'+(el.timestamp.split(/[- :]/))[4]+' '+(el.timestamp.split(/[- :]/))[2]+'.'+(el.timestamp.split(/[- :]/))[1]+'.'+(el.timestamp.split(/[- :]/))[0]+'</div>'+
-                                    '</div></div>'
+                                        '<div class="messagesright" alt="' + i + '">'+
+                                        '<div class="picture"><?php if($photoid==null) { echo '<img src="'.base_url().'photos/null.jpg"/>';} else {echo '<img src="'.base_url().'photos/'.$idUser.'/'.$photoid.'.jpg"/>';}?></div>'+
+                                        '<div class="message">'+
+                                        '<div class="text">'+el.message+'</div>'+
+                                        '<div class="datetime">'+(el.timestamp.split(/[- :]/))[3]+':'+(el.timestamp.split(/[- :]/))[4]+' '+(el.timestamp.split(/[- :]/))[2]+'.'+(el.timestamp.split(/[- :]/))[1]+'.'+(el.timestamp.split(/[- :]/))[0]+'</div>'+
+                                        '</div></div>'
                                     );
                                     flag=0;
                                 } else {
@@ -67,14 +67,14 @@
                                     );
                                 }
                             }
-							var scrollHeight = $(".mainbar").prop('scrollHeight');
+                            var scrollHeight = $(".mainbar").prop('scrollHeight');
                             var divHeight = $(".mainbar").height();
                             var scrollerEndPoint = scrollHeight - divHeight;
 
                             var divScrollerTop =  $(".mainbar").scrollTop();
                             divScrollerTop+=$(".messagesright").height()+20;
 
-                                //alert(divScrollerTop+' '+scrollerEndPoint);
+                            //alert(divScrollerTop+' '+scrollerEndPoint);
                             if(divScrollerTop>=scrollerEndPoint-20){
                                 $(".mainbar").scrollTop($(".mainbar")[0].scrollHeight);
                             }
@@ -120,7 +120,6 @@
 
 </head>
 <body>
-
 <div class="content">
     <div class="content_resize">
         <div class="username"><?php echo $info["username"]; ?></div>

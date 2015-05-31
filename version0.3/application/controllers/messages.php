@@ -1,4 +1,3 @@
-<!--Milos Kotlar 115/12-->
 <?php
 /**
  * Created by PhpStorm.
@@ -63,15 +62,16 @@ class messages extends CI_controller{
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $data['idUser'] = $session_data['id'];
-            $data['username'] = $session_data['username'];
-            $idUser = $session_data['id'];
 
             $diff = $this->input->post("diff");
             $idConversation = $this->input->post("idConversation");
 
+
+
             $data['checkmessage'] = $this->MessagesModel->checkMessage($idConversation, $diff);
             header('Content-type: text/plain');
             header('Content-type: application/json');
+         //   echo json_encode("ok");
             echo json_encode($data['checkmessage']);
         }else
             {

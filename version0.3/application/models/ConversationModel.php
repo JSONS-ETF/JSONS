@@ -79,24 +79,20 @@ class ConversationModel extends CI_Model{
         $this->db->trans_start();
 
         $this->db->select('ID')->from('Conversations');
-        $this->db->where('User1ID', $idUser1);
-        $this->db->where('User2ID', $idUser2);
-        $this->db->or_where('User1ID', $idUser2);
-        $this->db->where('User2ID', $idUser1);
+        $this->db->where('User1ID='.$idUser1.' AND User2ID='.$idUser2);
+        $this->db->or_where('User1ID='.$idUser2.' AND User2ID='.$idUser1);
         $query = $this->db->get();
 
         if ($query->num_rows()){
             $idConversation= $query->row('ID');
         }else{
             $this->db->select('ID')->from('Friendships');
-            $this->db->where('User1ID', $idUser1);
-            $this->db->where('User2ID', $idUser2);
-            $this->db->or_where('User1ID', $idUser2);
-            $this->db->where('User2ID', $idUser1);
+            $this->db->where('User1ID='.$idUser1.' AND User2ID='.$idUser2);
+            $this->db->or_where('User1ID='.$idUser2.' AND User2ID='.$idUser1);
             $query = $this->db->get();
 
             if ($query->num_rows()==0) {
-                $idConversation = -1;
+                $idConversation = -2;
             }else{
                 $data = array(
                     'User1ID' => $idUser1 ,

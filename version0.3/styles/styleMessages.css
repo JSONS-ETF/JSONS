@@ -18,15 +18,15 @@ html { padding:0; margin:0;}
 .content .mainbar .messagesleft {clear:both; padding:5px 5px 5px 5px;max-width:700px; margin:5px 5px 5px 5px;font-family: Helvetica;}
 
 .content .mainbar .messagesleft .message{background:#f2eee8; border:2px solid #e0dcd7;display: table;padding:10px; border-radius: 15px;}
-.content .mainbar .messagesleft .picture{float:left;position: :relative;margin-right:10px;}
+.content .mainbar .messagesleft .picture{float:left;position :relative;margin-right:10px;}
 .content .mainbar .messagesleft .picture img{ height: 50px;width: 50px; border-radius: 150px;border:0;}
 .content .mainbar .messagesleft .message .datetime { color:#b7b5b4; font-size:12px; float:right; clear:both;}
 .content .mainbar .messagesleft .message .text { color:#605e58; font-size:14px; float:left;text-align: left; }
 
 .content .mainbar .messagesright {clear:both; float:right; padding:5px 5px 5px 5px;max-width:700px; margin:5px 5px 5px 5px;font-family: Helvetica;}
 
-.content .mainbar .messagesright .message{background:#f2eee8;border:2px solid #e0dcd7;display: table;padding:10px; border-radius: 15px;}
-.content .mainbar .messagesright .picture{float:right;position: :relative;margin-left:10px;}
+.content .mainbar .messagesright .message{background:#f2eee8;border:2px solid #e0dcd7;display: table;padding:10px;float:right; border-radius: 15px;}
+.content .mainbar .messagesright .picture{float:right;position :relative;margin-left:10px;}
 .content .mainbar .messagesright .picture img{ height: 50px;width: 50px; border-radius: 150px;border:0;}
 .content .mainbar .messagesright .message .datetime { color:#b7b5b4; font-size:12px; float:right;clear: both; }
 .content .mainbar .messagesright .message .text { color:#605e58; font-size:14px; float:left;text-align: left; }

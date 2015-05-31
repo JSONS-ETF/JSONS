@@ -1,4 +1,3 @@
-<!--Milos Kotlar 115/12-->
 <?php
 /**
  * Created by PhpStorm.
