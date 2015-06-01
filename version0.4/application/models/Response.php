@@ -36,6 +36,14 @@ Class Response extends CI_Model
         return $ret;
     }
 
+    public function insertBasic($responses)
+    {
+        foreach($responses as $response)
+        {
+            $this->db->insert('BaseResponses', $response);
+        }
+    }
+
     public function getByQuestion($id)
     {
         $this->db->select('r.id as r_id, r.timestamp as r_timestamp, r.text as r_text, q.text as q_text');

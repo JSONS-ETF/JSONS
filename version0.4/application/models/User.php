@@ -10,6 +10,7 @@ Class User extends CI_Model
         $this->load->model('status','',TRUE);
         $this->load->model('conversation','',TRUE);
         $this->load->model('question','',TRUE);
+        $this->load->model('response','',TRUE);
         $this->load->model('photo','',TRUE);
     }
 
@@ -64,6 +65,8 @@ Class User extends CI_Model
             $query = $this->db->get();
             $row = $query->result()[0];
 
+            $responses = array();
+
             foreach ($questions as $question)
             {
                 $responseData = array(
@@ -72,8 +75,10 @@ Class User extends CI_Model
                     'timestamp' => date('Y-m-d H:i:s'),
                     'text' => $this->input->post('question'.$question['id'])
                 );
-                $this->db->insert('BaseResponses', $responseData);
+                array_push($responses, $responseData);
             }
+
+            $this->response->insertBasic($responses);
 
             return TRUE;
         }
