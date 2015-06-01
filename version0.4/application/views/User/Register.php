@@ -27,6 +27,15 @@
                     <tr><td colspan="2"><input type="text" size="20" id="username" placeholder="Username" name="username"/></tr>
                     <tr><td> <input type="password" size="20" placeholder="Password" id="password" name="password"/></td><td><input type="password" size="20" id="password2" name="password2" placeholder="Repeat Password"/></td></tr>
                     <tr><td colspan="2"><textarea style="resize:none;" placeholder="About" type="text" size="100" id="about" name="about"></textarea></td></tr>
+
+                    <?php foreach ($questions as $question): ?>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" size="40" id="question<?php echo $question['id'] ?>" placeholder="<?php echo $question['text'] ?>" name="question<?php echo $question['id'] ?>"/>
+                        </td>
+                    </tr>
+                    <?php endforeach ?>
+
                     <tr><td></td><td><input type="submit" class="button" value="Register"></td></tr>
                 </table>
                 </form>

@@ -8,6 +8,8 @@ class UserLogin extends CI_Controller
         parent::__construct();
         $this->load->library('session');
         $this->load->helper('url');
+        $this->load->model('question','',TRUE);
+        $this->load->model('response','',TRUE);
     }
 
     function index()
@@ -20,8 +22,9 @@ class UserLogin extends CI_Controller
         {
             $this->load->helper(array('form'));
 
+            $data['questions'] = $this->question->getBasic();
             $this->load->view('User/Login');
-            $this->load->view('User/Register');
+            $this->load->view('User/Register', $data);
         }
     }
 }

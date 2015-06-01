@@ -9,6 +9,7 @@ class UserVerifyRegister extends CI_Controller
         $this->load->library('session');
         $this->load->helper('url');
         $this->load->model('user','',TRUE);
+        $this->load->model('question','',TRUE);
     }
 
     function index()
@@ -23,7 +24,14 @@ class UserVerifyRegister extends CI_Controller
         $this->form_validation->set_rules('lastname', 'Last name', 'trim|required');
         $this->form_validation->set_rules('about', 'About', 'trim');
 
-        if ($this->user->create())
+        $questions = $this->question->getBasic();
+
+        foreach ($questions as $question)
+        {
+            $this->form_validation->set_rules('question'.$question['id'], 'question'.$question['id'], 'trim|required');
+        }
+
+        if ($this->user->create($questions))
         {
             redirect('UserLogin', 'refresh');
         }

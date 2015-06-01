@@ -33,6 +33,27 @@ Class Question extends CI_Model
         }
     }
 
+    public function getBasic()
+    {
+        $this->db->select('id, timestamp, text');
+        $this->db->from('BaseQuestions');
+
+        $query = $this->db->get();
+
+        $ret = array();
+
+        foreach ($query->result() as $row)
+        {
+            array_push($ret, array(
+                'id' => $row->id,
+                'timestamp' => $row->timestamp,
+                'text' => $row->text
+            ));
+        }
+
+        return $ret;
+    }
+
     public function getByUser($id)
     {
         $this->db->select('q.id as q_id, q.user1id as q_u1id, q.user2id as q_u2id, q.timestamp as q_timestamp, q.text as q_text, u1.username as user1, u2.username as user2');

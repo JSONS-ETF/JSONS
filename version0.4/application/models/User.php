@@ -33,16 +33,19 @@ Class User extends CI_Model
         }
     }
 
-    public function create()
+    public function create($questions)
     {
         $this->load->helper('url');
 
         $pass = $this->input->post('password');
         $passRepeat = $this->input->post('password2');
 
+        $email = $this->input->post('email');
+        $username = $this->input->post('username');
+
         $data = array(
-            'email' => $this->input->post('email'),
-            'username' => $this->input->post('username'),
+            'email' => $email,
+            'username' => $username,
             'password' => MD5($pass),
             'firstname' => $this->input->post('firstname'),
             'lastname' => $this->input->post('lastname'),
@@ -51,7 +54,27 @@ Class User extends CI_Model
 
         if ($pass === $passRepeat)
         {
-            $this->db->insert('users', $data);
+            $this->db->insert('Users', $data);
+
+            $this->db->select('id');
+            $this->db->from('Users');
+            $this->db->where('email', $email);
+            $this->db->where('username', $username);
+
+            $query = $this->db->get();
+            $row = $query->result()[0];
+
+            foreach ($questions as $question)
+            {
+                $responseData = array(
+                    'questionID' => $question['id'],
+                    'userID' => $row->id,
+                    'timestamp' => date('Y-m-d H:i:s'),
+                    'text' => $this->input->post('question'.$question['id'])
+                );
+                $this->db->insert('BaseResponses', $responseData);
+            }
+
             return TRUE;
         }
         else return FALSE;

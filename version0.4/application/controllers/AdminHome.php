@@ -15,6 +15,7 @@ class AdminHome extends CI_Controller {
         $this->load->model('conversation','',TRUE);
         $this->load->model('message','',TRUE);
         $this->load->model('photo','',TRUE);
+        $this->load->model('question','',TRUE);
         $this->load->model('response','',TRUE);
     }
 
