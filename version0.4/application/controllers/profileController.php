@@ -235,7 +235,7 @@ $resp = $this->profile_model->GetAns($par);
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
 
-            $username = $session_data['id'];
+            $username = $session_data['username'];
             $id = $session_data['id'];
             $photoid = $session_data['photoid'];
 
@@ -243,7 +243,7 @@ $resp = $this->profile_model->GetAns($par);
                 $sess_array = array(
                     'id' =>  $id,
                     'username' => $username,
-                    'photoid' => $photoid
+                    'photoid' => null
                 );
 
                 $this->session->set_userdata('logged_in', $sess_array);
