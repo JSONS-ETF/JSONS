@@ -96,8 +96,19 @@ CREATE TABLE Responses
 	Text varchar(128) NOT NULL
 );
 
-CREATE TABLE NotAllowed
+
+CREATE TABLE BaseQuestions
 (
 	ID int IDENTITY(1,1) PRIMARY KEY,
-	QuestionID int NOT NULL FOREIGN KEY REFERENCES Questions(ID)
+	Timestamp DateTime2 NOT NULL,
+	Text varchar(128) NOT NULL,
+);
+
+CREATE TABLE BaseResponses
+(
+	ID int IDENTITY(1,1) PRIMARY KEY,
+	QuestionID int NOT NULL FOREIGN KEY REFERENCES BaseQuestions(ID),
+	UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
+	Timestamp DateTime2 NOT NULL,
+	Text varchar(128) NOT NULL
 );
