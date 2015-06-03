@@ -22,16 +22,21 @@ class messages extends CI_controller{
             $data['username'] =$session_data['username'];
             $data['photoid'] =$session_data['photoid'];
             $idUser=$session_data['id'];
+            if ($this->MessagesModel->isConversation($idConversation,$idUser)==true) {
+                $data['info'] = $this->MessagesModel->getUserInfo($idConversation, $idUser);
+                $data['messages'] = $this->MessagesModel->getMessages($idConversation);
 
-            $data['info']=$this->MessagesModel->getUserInfo($idConversation,$idUser);
-            $data['messages'] = $this->MessagesModel->getMessages($idConversation);
+                $data['idConversation'] = $idConversation;
 
-            $data['idConversation']=$idConversation;
-
-            $page["page"]=1;
-            $page["id"]=$idUser;
-            $this->load->view('templates/header',$page);
-            $this->load->view('conversations/MessagesView', $data);
+                $page["page"] = 1;
+                $page["id"] = $idUser;
+                $this->load->view('templates/header', $page);
+                $this->load->view('conversations/MessagesView', $data);
+            }else{
+                $sess_err="Greska!";
+                $this->session->set_userdata('err', $sess_err);
+                redirect(base_url() . 'index.php/conversations', 'refresh');
+            }
         }
         else
         {

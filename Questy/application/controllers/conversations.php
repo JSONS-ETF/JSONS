@@ -28,6 +28,12 @@ class conversations extends CI_controller{
 
             $data['conversations'] = $this->ConversationModel->getConversation($idUser);
 
+
+            if($this->session->userdata('err')) {
+                $err = $this->session->userdata('err');
+                $page["err"]=$err;
+                $this->session->set_userdata('err', '');
+            }
             $page["page"]=1;
             $page["id"]=$idUser;
             $this->load->view('templates/header',$page);
@@ -49,10 +55,20 @@ class conversations extends CI_controller{
             $newUser=$this->input->post("newUser");
             $idConversation=$this->ConversationModel->newConversation($idUser,$newUser);
 
-            if ($idConversation>-1)
-                redirect(base_url().'index.php/messages/index/'.$idConversation, 'refresh');
-            else
-                redirect(base_url().'index.php/conversations/'.$idConversation,'refresh');
+            if ($idConversation>-1) {
+                redirect(base_url() . 'index.php/messages/index/' . $idConversation, 'refresh');
+            }
+            else{
+                    if ($idConversation==-1)
+                        $sess_err="Korisnik sa tekucim username-om ne postoji!";
+                    else if($idConversation==-2)
+                        $sess_err="Niste prijatelj sa tekucim korisnikom!";
+                    else
+                        $sess_err="Blokirani ste sa tekucim korisnikom!";
+
+                $this->session->set_userdata('err', $sess_err);
+                redirect(base_url() . 'index.php/conversations', 'refresh');
+            }
         }
         else
         {

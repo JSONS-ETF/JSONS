@@ -41,6 +41,7 @@ class MessagesModel extends CI_Model{
     function getMessages($idConversation){
         $messages = array();
 
+
         $this->db->select('*')->from('Messages');
         $this->db->where('ConversationID', $idConversation);
         $this->db->order_by("Timestamp", "ASC");
@@ -55,12 +56,11 @@ class MessagesModel extends CI_Model{
     function sendMessage($idConversation,$message,$idUser){
 
         $this->db->trans_start();
-
-        $data = array(
-            'ConversationID' => $idConversation ,
+        $data = [
+            'ConversationID' =>$idConversation ,
             'Text' => $message ,
             'UserID' => $idUser,
-        );
+        ];
         $this->db->set('Timestamp', 'GETDATE()', FALSE);
         $this->db->insert('Messages', $data);
 
@@ -82,5 +82,22 @@ class MessagesModel extends CI_Model{
            }
 
         return $checkmessage;
+    }
+
+    function isConversation($idConversation,$idUser){
+
+
+        $this->db->select('ID')->from('Conversations');
+        $this->db->where('ID=',$idConversation);
+        $this->db->where('User1ID='.$idUser.' OR User2ID='.$idUser);
+        $query = $this->db->get();
+
+        if ($query->num_rows()) {
+            return true;
+        }else{
+            return false;
+        }
+
+
     }
 }

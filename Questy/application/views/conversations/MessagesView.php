@@ -122,7 +122,7 @@
 <body>
 <div class="content">
     <div class="content_resize">
-        <div class="username"><?php echo $info["username"]; ?></div>
+        <a href="<?php echo site_url();?>/profileController/index/<?php echo $info["ID"];?>"><div class="username"><?php echo $info["username"]; ?></div></a>
         <div class="mainbar">
 
     <?php
@@ -151,7 +151,7 @@
 
         <div class="newmessage">
             <form method="POST" >
-               <textarea type="text" name="message" placeholder="Enter username" id="message""></textarea>
+               <textarea type="text" name="message" placeholder="Enter message" id="message""></textarea>
                 <input type="text" name="idConversation" id="idConversation" value="<?php echo $idConversation; ?>" hidden/>
                 <div id="sendmessage"><input id="sendM" style=" color:white; border:0px;   font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;    width: 120px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;" type="submit" name="send" value="Send"></div>
             </form>

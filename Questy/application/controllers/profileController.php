@@ -24,6 +24,7 @@ class ProfileController extends CI_Controller {
 
 
 
+
                 $data['idCurr'] = $idCurr;
 
              $isBl = $this->profile_model->IsBlocked($idCurr,$id);
@@ -41,7 +42,17 @@ else {
     $data['photos'] = $this->profile_model->getPhotos($idCurr);
     $data['bbq'] = $this->profile_model->getBQ($idCurr);
 
-    $page["page"]=2;
+
+
+    if($this->session->userdata('err')) {
+        $err = $this->session->userdata('err');
+        $page["err"]=$err;
+        $this->session->set_userdata('err', '');
+    }
+
+    if ($id==$idCurr)
+        $page["page"]=2;
+    else $page["page"]=-1;
     $page["id"]=$id;
     $this->load->view('templates/header',$page);
     $this->load->view('profile/profile', $data);
@@ -260,7 +271,7 @@ echo $dt;
                 $sess_array = array(
                     'id' =>  $id,
                     'username' => $username,
-                    'photoid' => $photoid
+                    'photoid' => null
                 );
 
                 $this->session->set_userdata('logged_in', $sess_array);
@@ -287,16 +298,16 @@ echo $dt;
 
             $description = $this->input->post("description");
             $idCurr = $this->input->post("idCurr");
-            $idPhoto = $this->profile_model->newPhoto($idUser, $description);
+
 
             $path = 'photos/' . $idUser;
             if (!file_exists($path)) {
                 mkdir($path);
             }
-
+            $idPhoto = $this->profile_model->newPhoto($idUser, $description);
             $config['upload_path'] = $path;
             $config['allowed_types'] = 'jpg';
-            //$config['max_size'] = '100';
+            $config['max_size'] = 2048;
             //$config['max_width'] = '1024';
             // $config['max_height'] = '768';
             $config['file_name'] = $idPhoto;
@@ -307,12 +318,12 @@ echo $dt;
             $this->upload->initialize($config);
 
             if (!$this->upload->do_upload()) {
-                $data["err"] = array('error' => $this->upload->display_errors());
-                $data["path"] = $path;
-                $this->load->view('profile/profile', $data);
-                // redirect('profileController/index/'.$idCurr,'refresh');
+                $this->profile_model->deletePhoto($idPhoto);
+                $sess_err="Greska!";
+                $this->session->set_userdata('err', $sess_err);
+                redirect('profileController/index/'.$idCurr,'refresh');
             } else {
-                //$data = array('upload_data' => $this->upload->data());
+
                 $sess_array = array(
                     'id' =>  $idUser,
                     'username' => $username,

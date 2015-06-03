@@ -39,7 +39,7 @@
 
     function tempAlert(msg,duration){
         var el = document.createElement("div");
-        el.setAttribute("style","position:absolute;top:10%;left:0;right:0;margin:auto;background-color:#cc8980;padding:10px;color:white;font-weight:bold;font-size:22px;border-radius:5px;width:600px;text-align:center;height:200px;border:2px solid #FE2E2E;");
+        el.setAttribute("style","position:absolute;top:10%;left:0;right:0;margin:auto;background-color:#cc8980;padding:10px;color:white;font-weight:bold;font-size:22px;border-radius:5px;width:600px;text-align:center;height:100px;border:2px solid #FE2E2E;");
         el.innerHTML = msg;
         setTimeout(function(){
             el.parentNode.removeChild(el);

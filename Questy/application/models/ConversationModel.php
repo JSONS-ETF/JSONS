@@ -23,6 +23,7 @@ class ConversationModel extends CI_Model{
 
         $conversations=array();
 
+
         $this->db->trans_start();
 
         foreach ($query->result() as $row) {
@@ -98,7 +99,7 @@ class ConversationModel extends CI_Model{
                 } else {
                     $data = array(
                         'User1ID' => $idUser1,
-                        'User2ID' => $idUser2,
+                        'User2ID' =>$idUser2,
                     );
                     $this->db->set('TimeStamp', 'GETDATE()', FALSE);
                     $this->db->insert('Conversations', $data);

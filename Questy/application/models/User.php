@@ -63,7 +63,14 @@ Class User extends CI_Model
             $this->db->where('username', $username);
 
             $query = $this->db->get();
-            $row = $query->result()[0];
+
+            $id = 0;
+            foreach ($query->result() as $row)
+            {
+                $id = $row->id;
+            }
+
+            //$row = $query->result()[0];
 
             $responses = array();
 
@@ -71,7 +78,7 @@ Class User extends CI_Model
             {
                 $responseData = array(
                     'questionID' => $question['id'],
-                    'userID' => $row->id,
+                    'userID' => $id,
                     'timestamp' => date('Y-m-d H:i:s'),
                     'text' => $this->input->post('question'.$question['id'])
                 );
