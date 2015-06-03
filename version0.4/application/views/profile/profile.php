@@ -1,4 +1,3 @@
-<!-- Milos Kotlar 115/12  Maja Zivkovic 528/12-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -44,8 +43,7 @@
         $(document).ready(function() {
         $(".c").click(function(event) {
             event.preventDefault();
-            var id = $(this).attr('id');
-            var idQ =id.substring(0, id.length - 2);
+            var idQ = $(this).attr('id');
             //alert(idQ);
             jQuery.ajax({
                 type: "POST",
@@ -53,7 +51,7 @@
                 data: {idQ: idQ},
                 success: function (res) {
                    // alert(res);
-                    document.getElementById(idQ+"C").innerHTML =  "<b>" + res + "</b>";
+                    document.getElementById(idQ+"C").innerHTML=res;
                 }
             });
 
@@ -65,8 +63,7 @@
         $(document).ready(function() {
             $(".s").click(function(event) {
                 event.preventDefault();
-                var id = $(this).attr('id');
-                var idQ =id.substring(0, id.length - 2);
+                var idQ = $(this).attr('id');
                 //alert(idQ);
                 jQuery.ajax({
                     type: "POST",
@@ -74,7 +71,39 @@
                     data: {idQ: idQ},
                     success: function (res) {
                         // alert(res);
-                        document.getElementById(idQ+"S").innerHTML =  "<b>" + res + "</b>";
+                        document.getElementById(idQ+"S").innerHTML=res;
+                    }
+                });
+
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".a").click(function(event){
+                event.preventDefault();
+                var IdQA = $(this).attr('id');
+                var ans=document.getElementById ( IdQA+"ans").value;
+                //alert(ans);
+                document.getElementById ( IdQA+"ans").value="";
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url();?>/profileController/create",
+                    data: {IdQA: IdQA,ans:ans},
+                    success: function (res) {
+                         //alert(IdQA);
+                        $( "#"+IdQA+"dodg").prepend(
+                            "<div class='response' id='"+IdQA+"A'>"+
+                            "<div class='datetime2'>"+
+                        "<img src='<?php echo base_url();?>styles/images/replay.png'/>"+
+                        "<span><?php echo $username;?> </span>"+
+                            (res.split(/[- :]/))[2]+'.'+(res.split(/[- :]/))[1]+'.'+(res.split(/[- :]/))[0]+' '+(res.split(/[- :]/))[3]+':'+(res.split(/[- :]/))[4]+
+                        "</div>"+
+                        "<div class='text'>"+
+                        ans+
+                        "</div>"+
+                        "</div>"
+                        );
                     }
                 });
 
@@ -140,7 +169,7 @@
                 <?php
 
                 foreach($photos as $idPhoto=>$photo) {
-                    echo '<a href="'.base_url().'photos/'.$id.'/'.$idPhoto.'.jpg" data-lightbox="image-1" data-title="';
+                    echo '<a href="'.base_url().'photos/'.$idCurr.'/'.$idPhoto.'.jpg" data-lightbox="image-1" data-title="';
                     echo ' <script type=\'text/javascript\'>'.
                         '$(\'.ccc\').click(function(){'.
                         'var idPhoto='.$idPhoto.';'.
@@ -173,7 +202,7 @@
                     if ($id==$idCurr)
                         echo '<span style=\'float:right;\'><a href=\'../../profileController/deletePhoto/'.$idPhoto.'\' style=\' color:white; border:0px;   font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px; line-height:35px;   width: 120px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;text-decoration:none;\' >Delete</a></span>';
 
-                    echo '"><img src="'.base_url().'photos/'.$id.'/'.$idPhoto.'.jpg"/></a>';
+                    echo '"><img src="'.base_url().'photos/'.$idCurr.'/'.$idPhoto.'.jpg"/></a>';
 
                 }
                 ?>
@@ -230,7 +259,7 @@
           </div>
             <div class="datetime">
 
-                <?php echo date('d.m.Y H:i',strtotime($qu['TimestampQ'])) ;; ?>
+                <?php echo date('d.m.Y H:i',strtotime($qu['TimestampQ'])) ; ?>
             </div>
           <div class="text">
               <?php echo   $qu['TextQ'] ; ?>
@@ -239,9 +268,9 @@
 
           <div class="mark">
 
-              <div style="float:right;line-height: 35px;" class="s" id="<?php echo $qu['ID']; ?>s1">  <img src="<?php echo base_url();?>styles/images/slap.png"/></div>
+              <div style="float:right;line-height: 35px;" class="s" id="<?php echo $qu['ID']; ?>">  <img src="<?php echo base_url();?>styles/images/slap.png"/></div>
               <div style="float:right;line-height: 35px;" id="<?php echo $qu['ID'] ; ?>S"> <b><?php echo $qu['NumSlaps'] ; ?> </b></div>
-              <div style="float:right;line-height: 35px;" class="c" id="<?php echo $qu['ID']; ?>c1"><img src="<?php echo base_url();?>styles/images/cuddle.png"/></div>
+              <div style="float:right;line-height: 35px;" class="c" id="<?php echo $qu['ID']; ?>"><img src="<?php echo base_url();?>styles/images/cuddle.png"/></div>
               <div style="float:right;line-height: 35px;" id="<?php echo $qu['ID'] ; ?>C"> <b><?php echo $qu['NumCuddles'] ; ?></b></div>
 
 
@@ -249,25 +278,27 @@
 
 
 
-            <form method="post" accept-charset="utf-8" action = <?php  echo '../../profileController/create/'.$qu['ID'].'/'.$qu['User1ID']; ?> />
+            <form method="post" accept-charset="utf-8"  />
+
+
             <table style="clear:both;">
 
+                <?php if($idCurr == $id): ?>
 
-                <?php if($idCurr == $id){
 
-                        echo '<tr>' . '<td>' . ' <input style=\'color:black; border:0px;   font-family: Helvetica;    font-size: 14px;    background: white;    border: 2px solid #e0dcd7;  padding: 10px;    width: 452px;    border-radius: 10px;    position: relative;\' type=' . 'text name=' . 'ans>'.
-                            '<input class="buttonB" style=\' color:white; border:0px;   font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;    width: 80px; margin-left:10px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;\' type=' . 'submit' . ' value=' . 'Answer' . '>' . '</td>' . '</tr>';
-                    }
-                        ?>
+                        <tr><td> <input style='color:black; border:0px;   font-family: Helvetica;    font-size: 14px;    background: white;    border: 2px solid #e0dcd7;  padding: 10px;    width: 452px;    border-radius: 10px;    position: relative;' type='text' name='ans' id="<?php echo $qu['ID'];?>ans">
+                                <div class="a" id="<?php echo $qu['ID']; ?>"> <input class="buttonB" style=' color:white; border:0px;   font-family: Helvetica;    font-size: 16px;    background: #6C94B8 none repeat scroll 0% 0%;    padding: 10px;    width: 80px; margin-left:10px;    border-radius: 30px;    position: relative;    text-align: center;    cursor:pointer;' type='submit'  value='Answer'  ></div></td></tr>
+
+                     <?php endif   ?>
 
 
             </table></form>
 
 
-
+                <div id="<?php echo $qu['ID'];?>dodg">
                     <?php if($qu['odg']!=null)?>
                         <?php foreach($qu['odg'] as $od): ?>
-                        <div class="response">
+                        <div class="response" id="<?php echo $qu['ID'] ; ?>A">
                             <div class="datetime2">
                                 <img src="<?php echo base_url();?>styles/images/replay.png"/>
 
@@ -281,7 +312,7 @@
 
                         <?php endforeach; ?>
 
-
+                    </div>
                     </div>
                     </div>
 

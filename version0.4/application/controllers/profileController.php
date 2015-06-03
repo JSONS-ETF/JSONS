@@ -1,4 +1,3 @@
-<!--Maja Zivkovic 528/12-->
 <?php
 
 class ProfileController extends CI_Controller {
@@ -20,12 +19,13 @@ class ProfileController extends CI_Controller {
                 $data['id'] =$session_data['id'];
 
                 $id=$session_data['id'];
+                $data["username"]=$session_data['username'];
 
 
 
 
                 $data['idCurr'] = $idCurr;
-            // OVO TREBA DA STOJI NEMOJ BRISATI . KAD SE PODESI SESIJA RADICE :)
+
              $isBl = $this->profile_model->IsBlocked($idCurr,$id);
 
             if($isBl) redirect('profileController/index/'.$id, 'refresh');
@@ -53,35 +53,50 @@ else {
         }
 
     }
-    function create($par,$idCurr){
+    function create(){
         if($this->session->userdata('logged_in'))
         {
             $session_data = $this->session->userdata('logged_in');
             $id=$session_data['id'];
 
+
        // $this->load->library('form_validation');
         $this->load->helper('date');
+            $idQA = $this->input->post("IdQA");
+            $ans=$this->input->post('ans');
+
         $pd = array(
 
-            'QuestionID' => $par,
+            'QuestionID' => $idQA,
             'Timestamp' => date('Y-m-d H:i:s'),
-            'Text' => $this->input->post('ans')
+            'Text' => $ans
         );
-$resp = $this->profile_model->GetAns($par);
+$resp = $this->profile_model->GetAns($idQA);
 
-        if($resp == NULL){
+
+
+        if($resp == FALSE){
+
+            $idU = $this->profile_model->getIdUser1($idQA);
+
+
+            if($this->profile_model->isFriend($id,$idU['User1Id']) == FALSE){
+
             $fr = array(
 
                 'User1ID' => $id,
-                'User2ID' => $idCurr
+                'User2ID' => $idU['User1Id']
             );
 
             $this->profile_model->addFriendship($fr);
 
+            }
+
         }
         $this->profile_model->addTableResponses($pd);
-        redirect('profileController/index/'.$idCurr,'refresh');
-        }
+
+
+       }
         else
             {
                 redirect(site_url().'UserHome/logout', 'refresh');
@@ -235,7 +250,7 @@ $resp = $this->profile_model->GetAns($par);
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
 
-            $username = $session_data['username'];
+            $username = $session_data['id'];
             $id = $session_data['id'];
             $photoid = $session_data['photoid'];
 
@@ -243,7 +258,7 @@ $resp = $this->profile_model->GetAns($par);
                 $sess_array = array(
                     'id' =>  $id,
                     'username' => $username,
-                    'photoid' => null
+                    'photoid' => $photoid
                 );
 
                 $this->session->set_userdata('logged_in', $sess_array);

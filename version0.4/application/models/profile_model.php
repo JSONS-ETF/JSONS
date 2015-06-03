@@ -1,4 +1,3 @@
-<!--Maja Zivkovic 528/12 Milos Kotlar 115/12-->
 <?php
 
 class Profile_model extends CI_Model
@@ -19,12 +18,13 @@ function GetAns($i){
     $q = $this->db->get();
 
     if ($q->num_rows() > 0) {
-        foreach ($q->result() as $row) {
+       /* foreach ($q->result() as $row) {
             $data[] = $row;
 
-        }
-        return $data;
+        }*/
+        return TRUE;
     }
+    return FALSE;
 }
 
     function getAbout($idU)
@@ -175,7 +175,35 @@ return $zavrsni;
 
     }
 
-   function isFriend($id,$idCurrent){
+    function  getIdUser1($idQ){
+        $this->db->select('questions.User1Id as User1Id');
+        $this->db->from('questions');
+        $this->db->where('questions.ID', $idQ);
+        $q = $this->db->get();
+//echo print_r($q->result());
+
+        $res = $q->result();
+
+        return array(
+            'User1Id' => $res[0]->User1Id
+        );
+
+        /*return array(
+          'User1Id' => $q->result()[0]['User1Id']
+        );*/
+
+        if ($q->num_rows() > 0) {
+            $maki = $q->result()[0];
+         /*   foreach ($q->result() as $row) {
+                $data[] = $row;
+*/
+            }
+            return $maki;
+
+
+    }
+
+   /*function isFriend($id,$idCurrent){
 
         $a1 = array('User1ID' => $id, 'User2ID' => $idCurrent);
         $a2 = array('User2ID' => $id, 'User1ID' => $idCurrent);
@@ -193,8 +221,8 @@ return $zavrsni;
             return $data;
         }
         return NULL;
-    }
-/*
+    }*/
+
     function isFriend($id,$idCurrent){
 
         $this->db->select('*');
@@ -217,7 +245,7 @@ return $zavrsni;
 
 
     }
-*/
+
     function getPhotos($idCurr){
         $photos=array();
         $this->db->select('*');
