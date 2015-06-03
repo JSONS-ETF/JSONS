@@ -29,6 +29,25 @@
 .header_resize input{color:black;  border: 2px solid #e0dcd7;font-family:Helvetica;font-size:16px; background: white;padding:10px;width:180px;margin:0 0 0 5px;border-radius: 10px;position:relative;float:left; text-align:center;margin-top:14px}
 
 </style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        <?php if ($err!='') {echo 'tempAlert("'.$err.'",4000);'; }?>
+
+    });
+
+    function tempAlert(msg,duration){
+        var el = document.createElement("div");
+        el.setAttribute("style","position:absolute;top:10%;left:0;right:0;margin:auto;background-color:#cc8980;padding:10px;color:white;font-weight:bold;font-size:22px;border-radius:5px;width:600px;text-align:center;height:200px;border:2px solid #FE2E2E;");
+        el.innerHTML = msg;
+        setTimeout(function(){
+            el.parentNode.removeChild(el);
+        },duration);
+        document.body.appendChild(el);
+    }
+
+</script>
 
  <div class="header">
     <div class="header_resize">
