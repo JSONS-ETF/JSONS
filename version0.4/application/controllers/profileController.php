@@ -252,7 +252,7 @@ echo $dt;
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
 
-            $username = $session_data['id'];
+            $username = $session_data['username'];
             $id = $session_data['id'];
             $photoid = $session_data['photoid'];
 
