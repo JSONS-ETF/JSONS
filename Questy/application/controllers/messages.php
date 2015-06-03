@@ -40,7 +40,7 @@ class messages extends CI_controller{
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 
@@ -58,7 +58,7 @@ class messages extends CI_controller{
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 
@@ -80,7 +80,7 @@ class messages extends CI_controller{
             echo json_encode($data['checkmessage']);
         }else
             {
-                redirect(site_url().'UserHome/logout', 'refresh');
+                redirect(site_url().'/UserHome/logout', 'refresh');
             }
     }
 }

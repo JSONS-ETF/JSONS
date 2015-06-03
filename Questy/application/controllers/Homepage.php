@@ -41,7 +41,7 @@ class Homepage extends CI_Controller
         else
         {
             //If no session, redirect to login page
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 
@@ -57,7 +57,7 @@ class Homepage extends CI_Controller
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 
@@ -74,7 +74,7 @@ class Homepage extends CI_Controller
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 
@@ -98,7 +98,7 @@ class Homepage extends CI_Controller
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
 
     }

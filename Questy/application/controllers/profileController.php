@@ -110,7 +110,7 @@ echo $dt;
        }
         else
             {
-                redirect(site_url().'UserHome/logout', 'refresh');
+                redirect(site_url().'/UserHome/logout', 'refresh');
             }
 
 
@@ -135,7 +135,7 @@ echo $dt;
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     } //END_CREATE_QUESTION
 
@@ -155,7 +155,7 @@ echo $dt;
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     } //END_BLOCK
 
@@ -178,7 +178,7 @@ echo $dt;
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
 
     } // END_CREATE_STATUS
@@ -193,7 +193,7 @@ echo $dt;
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }//END_REDIRECT
 
@@ -209,7 +209,7 @@ echo $dt;
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }//END_CUDDLE
     function slap()
@@ -224,7 +224,7 @@ echo $dt;
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }//END_SLAP
 
@@ -239,7 +239,7 @@ echo $dt;
             echo $this->profile_model->cuddlePhoto($idPhoto);
         } else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 
@@ -254,7 +254,7 @@ echo $dt;
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 
@@ -283,7 +283,7 @@ echo $dt;
             redirect('profileController/index/' . $id, 'refresh');
         } else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 
@@ -336,7 +336,7 @@ echo $dt;
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 

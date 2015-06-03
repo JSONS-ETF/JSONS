@@ -41,7 +41,7 @@ class conversations extends CI_controller{
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
     }
 
@@ -72,7 +72,7 @@ class conversations extends CI_controller{
         }
         else
         {
-            redirect(site_url().'UserHome/logout', 'refresh');
+            redirect(site_url().'/UserHome/logout', 'refresh');
         }
 
     }
