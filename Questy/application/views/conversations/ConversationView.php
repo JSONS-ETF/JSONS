@@ -1,7 +1,7 @@
 <!-- Milos Kotlar 115/12 -->
 <html>
 <head>
-    <title>Chat</title>
+    <title>Conversations</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <link href="../styles/styleConversations.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

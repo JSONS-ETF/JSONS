@@ -1,7 +1,7 @@
 <!--Stevan Milicic-->
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Simple Login with CodeIgniter - Private Area</title>
+        <title>Admin - Home</title>
         <link href="../styles/styleHomeAdmin.css" rel="stylesheet" type="text/css" />
     </head>
     <body>

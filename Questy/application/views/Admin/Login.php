@@ -3,7 +3,7 @@
 <link href="../styles/styleIndexAdmin.css" rel="stylesheet" type="text/css" />
 <html>
     <head>
-        <title>Simple login</title>
+        <title>Admin - Login</title>
     </head>
     <body>
 

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Chat</title>
+    <title>Messages</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <link href="<?php echo base_url();?>styles/styleMessages.css" rel="stylesheet" type="text/css" />
     <style>
