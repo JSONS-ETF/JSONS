@@ -80,4 +80,10 @@ Class Response extends CI_Model
         $this->db->where('QuestionID', $id);
         $this->db->delete('Responses');
     }
+
+    public function deleteBasicByUser($id)
+    {
+        $this->db->where('UserID', $id);
+        $this->db->delete('BaseResponses');
+    }
 }

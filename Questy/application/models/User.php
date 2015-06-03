@@ -70,8 +70,6 @@ Class User extends CI_Model
                 $id = $row->id;
             }
 
-            //$row = $query->result()[0];
-
             $responses = array();
 
             foreach ($questions as $question)
@@ -140,6 +138,7 @@ Class User extends CI_Model
         $this->conversation->deleteByUser($id);
         $this->question->deleteByUser($id);
         $this->photo->deleteByUser($id);
+        $this->response->deleteBasicByUser($id);
 
         $this->db->where('id', $id);
         $this->db->delete('users');
