@@ -44,7 +44,8 @@
         $(document).ready(function() {
         $(".c").click(function(event) {
             event.preventDefault();
-            var idQ = $(this).attr('id');
+            var id = $(this).attr('id');
+            var idQ =id.substring(0, id.length - 2);
             //alert(idQ);
             jQuery.ajax({
                 type: "POST",
@@ -52,7 +53,7 @@
                 data: {idQ: idQ},
                 success: function (res) {
                    // alert(res);
-                    document.getElementById(idQ+"C").innerHTML=res;
+                    document.getElementById(idQ+"C").innerHTML =  "<b>" + res + "</b>";
                 }
             });
 
@@ -64,7 +65,8 @@
         $(document).ready(function() {
             $(".s").click(function(event) {
                 event.preventDefault();
-                var idQ = $(this).attr('id');
+                var id = $(this).attr('id');
+                var idQ =id.substring(0, id.length - 2);
                 //alert(idQ);
                 jQuery.ajax({
                     type: "POST",
@@ -72,7 +74,7 @@
                     data: {idQ: idQ},
                     success: function (res) {
                         // alert(res);
-                        document.getElementById(idQ+"S").innerHTML=res;
+                        document.getElementById(idQ+"S").innerHTML =  "<b>" + res + "</b>";
                     }
                 });
 
@@ -237,9 +239,9 @@
 
           <div class="mark">
 
-              <div style="float:right;line-height: 35px;" class="s" id="<?php echo $qu['ID']; ?>">  <img src="<?php echo base_url();?>styles/images/slap.png"/></div>
+              <div style="float:right;line-height: 35px;" class="s" id="<?php echo $qu['ID']; ?>s1">  <img src="<?php echo base_url();?>styles/images/slap.png"/></div>
               <div style="float:right;line-height: 35px;" id="<?php echo $qu['ID'] ; ?>S"> <b><?php echo $qu['NumSlaps'] ; ?> </b></div>
-              <div style="float:right;line-height: 35px;" class="c" id="<?php echo $qu['ID']; ?>"><img src="<?php echo base_url();?>styles/images/cuddle.png"/></div>
+              <div style="float:right;line-height: 35px;" class="c" id="<?php echo $qu['ID']; ?>c1"><img src="<?php echo base_url();?>styles/images/cuddle.png"/></div>
               <div style="float:right;line-height: 35px;" id="<?php echo $qu['ID'] ; ?>C"> <b><?php echo $qu['NumCuddles'] ; ?></b></div>
 
 
