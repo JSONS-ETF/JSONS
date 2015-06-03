@@ -249,7 +249,7 @@
         <div class="questions">
 
         <div class="picture">
-        <a href=<?php echo'../../profileController/index/'.$qu['User1ID']; ?>>    <img src="<?php if($qu['PhotoID'] == null) {$photo="null";}else {$photo=$qu['ID'].'/'.$qu['PhotoID'];} echo base_url().'photos/'.$photo.'.jpg';?>"/></a>
+        <a href=<?php echo'../../profileController/index/'.$qu['User1ID']; ?>>    <img src="<?php if($qu['PhotoID'] == null) {$photo="null";}else {$photo=$qu['User1ID'].'/'.$qu['PhotoID'];} echo base_url().'photos/'.$photo.'.jpg';?>"/></a>
 
 
         </div>

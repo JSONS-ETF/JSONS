@@ -64,11 +64,11 @@ else {
         $this->load->helper('date');
             $idQA = $this->input->post("IdQA");
             $ans=$this->input->post('ans');
-
+$dt  = date('Y-m-d H:i:s');
         $pd = array(
 
             'QuestionID' => $idQA,
-            'Timestamp' => date('Y-m-d H:i:s'),
+            'Timestamp' =>$dt ,
             'Text' => $ans
         );
 $resp = $this->profile_model->GetAns($idQA);
@@ -95,12 +95,14 @@ $resp = $this->profile_model->GetAns($idQA);
         }
         $this->profile_model->addTableResponses($pd);
 
-
+echo $dt;
        }
         else
             {
                 redirect(site_url().'UserHome/logout', 'refresh');
             }
+
+
     }//END_CREATE
 
     function create_question($idCurr){
@@ -279,7 +281,7 @@ $resp = $this->profile_model->GetAns($idQA);
         if($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $idUser = $session_data['id'];
-            $username = $session_data['id'];
+            $username = $session_data['username'];
 
 
 
