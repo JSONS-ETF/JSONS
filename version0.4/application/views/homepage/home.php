@@ -19,7 +19,8 @@
         $(document).ready(function() {
             $(".c").click(function(event) {
                 event.preventDefault();
-                var idQ = $(this).attr('id');
+                var id = $(this).attr('id');
+                var idQ =id.substring(0, id.length - 2);
                // alert(idQ);
                 jQuery.ajax({
                     type: "POST",
@@ -27,7 +28,7 @@
                     data: {idQ: idQ},
                     success: function (res) {
                         // alert(res);
-                        document.getElementById(idQ+"C").innerHTML=res;
+                        document.getElementById(idQ+"C").innerHTML = "<b>" + res + "</b>";
                     }
                 });
 
@@ -39,7 +40,8 @@
         $(document).ready(function() {
             $(".s").click(function(event) {
                 event.preventDefault();
-                var idQ = $(this).attr('id');
+                var id = $(this).attr('id');
+                var idQ =id.substring(0, id.length - 2);
                 //alert(idQ);
                 jQuery.ajax({
                     type: "POST",
@@ -47,7 +49,7 @@
                     data: {idQ: idQ},
                     success: function (res) {
                         // alert(res);
-                        document.getElementById(idQ+"S").innerHTML=res;
+                        document.getElementById(idQ+"S").innerHTML =  "<b>" + res + "</b>";
                     }
                 });
 
@@ -94,10 +96,10 @@
 
             <div class="mark">
 
-                <div class="s" style="float:right;line-height: 35px;" id="<?php echo $row['ID']; ?>">  <img src="<?php echo base_url();?>styles/images/slap.png"/></div>
+                <div class="s" style="float:right;line-height: 35px;" id="<?php echo $row['ID']; ?>s1">  <img src="<?php echo base_url();?>styles/images/slap.png"/></div>
                 <div style="float:right;line-height: 35px;" id="<?php echo $row['ID'] ; ?>S"> <b><?php echo $row['NumSlaps'] ; ?> </b></div>
 
-                <div class="c" style="float:right;line-height: 35px;" id="<?php echo $row['ID']; ?>"><img src="<?php echo base_url();?>styles/images/cuddle.png"/></div>
+                <div class="c" style="float:right;line-height: 35px;" id="<?php echo $row['ID']; ?>c1"><img src="<?php echo base_url();?>styles/images/cuddle.png"/></div>
                 <div style="float:right;line-height: 35px;" id="<?php echo $row['ID'] ; ?>C"> <b><?php echo $row['NumCuddles'] ; ?></b></div>
 
 
