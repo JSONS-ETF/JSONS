@@ -193,7 +193,7 @@ return $zavrsni;
         );*/
 
         if ($q->num_rows() > 0) {
-            $maki = $q->result()[0];
+            //$maki = $q->result()[0];
          /*   foreach ($q->result() as $row) {
                 $data[] = $row;
 */

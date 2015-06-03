@@ -56,11 +56,11 @@ class MessagesModel extends CI_Model{
     function sendMessage($idConversation,$message,$idUser){
 
         $this->db->trans_start();
-        $data = [
+        $data = array (
             'ConversationID' =>$idConversation ,
             'Text' => $message ,
-            'UserID' => $idUser,
-        ];
+            'UserID' => $idUser
+        );
         $this->db->set('Timestamp', 'GETDATE()', FALSE);
         $this->db->insert('Messages', $data);
 
