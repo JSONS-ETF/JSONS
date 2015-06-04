@@ -323,25 +323,23 @@ echo $dt;
             // $config['max_height'] = '768';
             $config['file_name'] = $idPhoto;
 
+            $sess_array = array(
+                'id' =>  $idUser,
+                'username' => $username,
+                'photoid' => $idPhoto
+            );
+            $this->session->set_userdata('logged_in', $sess_array);
 
             $this->load->library('upload', $config);
 
             $this->upload->initialize($config);
 
             if (!$this->upload->do_upload()) {
-                $this->profile_model->deletePhoto($idPhoto);
+                $this->deletePhoto($idPhoto);
                 $sess_err="Greska!";
                 $this->session->set_userdata('err', $sess_err);
                 redirect('profileController/index/'.$idCurr,'refresh');
             } else {
-
-                $sess_array = array(
-                    'id' =>  $idUser,
-                    'username' => $username,
-                    'photoid' => $idPhoto
-                );
-
-                $this->session->set_userdata('logged_in', $sess_array);
                 redirect('profileController/index/' . $idCurr, 'refresh');
             }
         }
