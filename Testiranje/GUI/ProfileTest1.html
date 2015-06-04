@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://jsonsvm.cloudapp.net/" />
+<title>ProfileTest1</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ProfileTest1</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/index.php/UserLogin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>boka</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>asd123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@href='http://jsonsvm.cloudapp.net/index.php/profilecontroller/index/1']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=qest</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=div.ask &gt; form &gt; input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.statuses &gt; div.status</td>
+	<td>&quot;test&quot;04.06.2015 22:40</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@href='http://jsonsvm.cloudapp.net/index.php/UserHome/logout']</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
