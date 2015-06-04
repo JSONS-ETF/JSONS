@@ -123,16 +123,19 @@ echo $dt;
             $session_data = $this->session->userdata('logged_in');
             $id = $session_data['id'];
             $this->load->helper('date');
-            $pd = array(
-                'User1ID' => $id,
-                'User2ID' => $idCurr,
-                'Timestamp' => date('Y-m-d H:i:s'),
-                'Text' => $this->input->post('qest'),
-                'NumCuddles' => '0',
-                'NumSlaps' => '0'
+            $op =  $this->input->post('qest');
+            if($op!=""){
+                $pd = array(
+                    'User1ID' => $id,
+                    'User2ID' => $idCurr,
+                    'Timestamp' => date('Y-m-d H:i:s'),
+                    'Text' => $op,
+                    'NumCuddles' => '0',
+                    'NumSlaps' => '0'
 
-            );
-            $this->profile_model->addQuestion($pd);
+                );
+                $this->profile_model->addQuestion($pd);
+            }
             redirect('profileController/index/' . $idCurr, 'refresh');
         }
         else
@@ -140,6 +143,34 @@ echo $dt;
             redirect(site_url().'/UserHome/logout', 'refresh');
         }
     } //END_CREATE_QUESTION
+
+    function create_status(){
+
+        if($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $id = $session_data['id'];
+
+            $to = $this->input->post('qest');
+            if($to!="") {
+                $this->load->helper('date');
+                $pd = array(
+
+                    'Timestamp' => date('Y-m-d H:i:s'),
+                    'Text' => $to,
+                    'UserID' => $id
+                );
+
+                $this->profile_model->addStatus($pd);
+            }
+            redirect('profileController/index/' . $id, 'refresh');
+
+        }
+        else
+        {
+            redirect(site_url().'/UserHome/logout', 'refresh');
+        }
+
+    } // END_CREATE_STATUS
 
     function block($idCurr){
         if($this->session->userdata('logged_in')) {
@@ -161,29 +192,7 @@ echo $dt;
         }
     } //END_BLOCK
 
-    function create_status(){
 
-        if($this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            $id = $session_data['id'];
-
-            $this->load->helper('date');
-            $pd = array(
-
-                'Timestamp' => date('Y-m-d H:i:s'),
-                'Text' => $this->input->post('qest'),
-                'UserID' => $id
-            );
-
-            $this->profile_model->addStatus($pd);
-            redirect('profileController/index/' . $id, 'refresh');
-        }
-        else
-        {
-            redirect(site_url().'/UserHome/logout', 'refresh');
-        }
-
-    } // END_CREATE_STATUS
 
     function redirect($idCurr)
     {
