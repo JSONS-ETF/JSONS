@@ -18,10 +18,7 @@ function GetAns($i){
     $q = $this->db->get();
 
     if ($q->num_rows() > 0) {
-       /* foreach ($q->result() as $row) {
-            $data[] = $row;
 
-        }*/
         return TRUE;
     }
     return FALSE;
@@ -188,47 +185,23 @@ return $zavrsni;
             'User1Id' => $res[0]->User1Id
         );
 
-        /*return array(
-          'User1Id' => $q->result()[0]['User1Id']
-        );*/
+
 
         if ($q->num_rows() > 0) {
-            //$maki = $q->result()[0];
-         /*   foreach ($q->result() as $row) {
-                $data[] = $row;
-*/
+
             }
-            return $maki;
+            //return $maki;
 
 
     }
 
-   /*function isFriend($id,$idCurrent){
 
-        $a1 = array('User1ID' => $id, 'User2ID' => $idCurrent);
-        $a2 = array('User2ID' => $id, 'User1ID' => $idCurrent);
-            $this->db->select('*');
-            $this->db->from('Friendships');
-            $this->db->where($a1);
-            $this->db->or_where($a2);
-        $q = $this->db->get();
-
-
-        if ($q->num_rows() > 0) {
-            foreach ($q->result() as $m) {
-                $data[] = $m;
-            }
-            return $data;
-        }
-        return NULL;
-    }*/
 
     function isFriend($id,$idCurrent){
 
         $this->db->select('*');
         $this->db->from('Friendships');
-        //$this->db->where($a1);
-        //$this->db->or_where($a2);
+
         $this->db->where('User1ID', $id);
         $this->db->where('User2ID', $idCurrent);
         $this->db->or_where('User2ID', $id);
@@ -275,7 +248,7 @@ return $zavrsni;
             return $data;
 
         }
-     //   return NUll;
+
     }
 
 
@@ -368,8 +341,6 @@ $this->db->insert('Blocks',$pd);
         $a2 = array('Blockee' => $id, 'Blocker' => $id_User);
         $this->db->select('*');
         $this->db->from('Blocks');
-        //$this->db->where($a1);
-        //$this->db->or_where($a2);
         $this->db->where('Blocker', $id);
         $this->db->where('Blockee', $id_User);
         $this->db->or_where('Blockee', $id);
@@ -379,10 +350,7 @@ $this->db->insert('Blocks',$pd);
 
         if ($q->num_rows() > 0) {
             return TRUE;
-            /*foreach ($q->result() as $m) {
-                $data[] = $m;
-            }
-            return $data;*/
+
         }
         return FALSE;
 
@@ -415,7 +383,6 @@ function getBQ($idCurr){
     $this->db->from('Baseresponses');
     $this->db->where('Baseresponses.UserID',$idCurr);
     $this->db->join('BaseQuestions','BaseQuestions.ID = Baseresponses.QuestionID');
-   // $this->db->order_by('questions.Timestamp', 'DESC');
     $q = $this->db->get();
 
     if ($q->num_rows() > 0) {
