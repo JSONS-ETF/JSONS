@@ -92,18 +92,20 @@
                     data: {IdQA: IdQA,ans:ans},
                     success: function (res) {
                          //alert(IdQA);
-                        $( "#"+IdQA+"dodg").prepend(
-                            "<div class='response' id='"+IdQA+"A'>"+
-                            "<div class='datetime2'>"+
-                        "<img src='<?php echo base_url();?>styles/images/replay.png'/>"+
-                        "<span><?php echo $username;?> </span>"+
-                            (res.split(/[- :]/))[2]+'.'+(res.split(/[- :]/))[1]+'.'+(res.split(/[- :]/))[0]+' '+(res.split(/[- :]/))[3]+':'+(res.split(/[- :]/))[4]+
-                        "</div>"+
-                        "<div class='text'>"+
-                        ans+
-                        "</div>"+
-                        "</div>"
-                        );
+                        if(ans!="") {
+                            $("#" + IdQA + "dodg").prepend(
+                                "<div class='response' id='" + IdQA + "A'>" +
+                                "<div class='datetime2'>" +
+                                "<img src='<?php echo base_url();?>styles/images/replay.png'/>" +
+                                "<span><?php echo $username;?> </span>" +
+                                (res.split(/[- :]/))[2] + '.' + (res.split(/[- :]/))[1] + '.' + (res.split(/[- :]/))[0] + ' ' + (res.split(/[- :]/))[3] + ':' + (res.split(/[- :]/))[4] +
+                                "</div>" +
+                                "<div class='text'>" +
+                                ans +
+                                "</div>" +
+                                "</div>"
+                            );
+                        }
                     }
                 });
 
@@ -216,7 +218,17 @@
                         <?php endif ?>
 <?php endforeach ?>
             </div>
-
+      <?php   if($friends || ($idCurr==$id) ): ?>
+<div>
+    <a href=<?php echo'../../FriendsController/index/'.$idCurr; ?>>
+    <h2 align="center"> See
+        <?php if ($idCurr!=$id) :?>
+              <?php foreach($userInfo as $r){if($r) echo '<span>'. $r->Username.'</span>';} ?>'s friends</h2>
+              <?php endif ?>
+        <?php if ($idCurr==$id) echo "your friend list";?>
+        </a>
+</div>
+            <?php endif?>
         </div>
         <!--*****************************************************sidebarend-->
 

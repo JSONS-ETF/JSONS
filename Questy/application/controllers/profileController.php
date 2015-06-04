@@ -76,6 +76,7 @@ else {
             $idQA = $this->input->post("IdQA");
             $ans=$this->input->post('ans');
 $dt  = date('Y-m-d H:i:s');
+            if($ans !=""){
         $pd = array(
 
             'QuestionID' => $idQA,
@@ -107,6 +108,7 @@ $resp = $this->profile_model->GetAns($idQA);
         $this->profile_model->addTableResponses($pd);
 
 echo $dt;
+            }
        }
         else
             {
