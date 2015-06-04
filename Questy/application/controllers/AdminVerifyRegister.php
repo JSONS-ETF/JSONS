@@ -25,6 +25,7 @@ class AdminVerifyRegister extends CI_Controller
             redirect('AdminLogin', 'refresh');
         }
         else redirect('AdminRegister', 'refresh');*/
+        $this->admin->activate();
         redirect('AdminLogin', 'refresh');
     }
 }
