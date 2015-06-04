@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://jsonsvm.cloudapp.net/index.php/AdminHome" />
+<title>EditUser</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">EditUser</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/index.php/AdminHome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=h2</td>
+	<td>Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=boka</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=div.content_resize</td>
+	<td>Edit user: boka View notifications<br /> View statuses<br /> View conversations<br /> View photos<br /> View questions<br /> View responses<br /> Back</td>
+</tr>
+<tr>
+	<td>waitForTitle</td>
+	<td>Admin - Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[7]/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTitle</td>
+	<td>Admin - Home</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
