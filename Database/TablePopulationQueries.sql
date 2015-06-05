@@ -216,3 +216,31 @@ BEGIN
 		SET @i = @i + 1;
 	END
 END
+
+DECLARE @baseQuestionCount INT = 5;
+SET @i = 0;
+WHILE @i < @baseQuestionCount
+BEGIN
+	SET @timestamp = dbo.func_getRandDateTime();
+	SET @text = dbo.func_getRandString(64) + '?';
+	INSERT INTO BaseQuestions VALUES (@timestamp, @text);
+	DECLARE @baseQuestionID INT = @@IDENTITY;
+
+	SET @j = 0;
+	WHILE (@j < @userCount)
+	BEGIN
+		DECLARE @baseResponseCount INT = CAST(dbo.func_RandFn() * 0 + 1 as INT);
+		SET @k = 0;
+		WHILE @k < @baseResponseCount
+		BEGIN
+			SET @timestamp = dbo.func_getRandDateTime();
+			SET @text = dbo.func_getRandString(64) + '!';
+
+			INSERT INTO BaseResponses VALUES (@baseQuestionID, @j + @firstUserID, @timestamp, @text);
+
+			SET @k = @k + 1;
+		END
+		SET @j = @j + 1;
+	END
+	SET @i = @i + 1;
+END
